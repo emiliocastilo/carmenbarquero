@@ -149,7 +149,8 @@ footer {
     max-width: 400px;
   }
   .sobre-mi-contenedor .contenido h2{
-    color: rgb(197 209 255);
+    color: white;
+    /* color: rgb(197 209 255); */
   }
   .sobre-mi-contenedor .contenido {
     position: absolute;
