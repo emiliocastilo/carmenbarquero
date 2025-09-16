@@ -14,17 +14,30 @@
     <meta name="author" content="Carmen Barquero" />
 
     <title>Psicóloga Clínica - Carmen Barquero Macias</title>
-    <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/menu-superior.css" />
+  <link rel="stylesheet" href="css/whatsapp-float.css" />
+  <link rel="stylesheet" href="css/animacion-sobre-mi.css" />
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap"
     />
 
-    <!-- scripts.js -->
-    <script src="./scripts.js"></script>
+  <!-- animacion-sobre-mi.js -->
+  <script src="js/animacion-sobre-mi.js"></script>
+  <!-- scroll-menu.js -->
+  <script src="js/scroll-menu.js"></script>
   </head>
   <body>
+    <nav class="menu-superior">
+      <ul>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
     <header>
       <div class="icon-container">
         <img src="img/logo.png" alt="Logotipo Carmen Barquero" width="100" />
@@ -36,23 +49,26 @@
     </header>
 
     <main>
-      <section class="sobre-mi-contenedor">
+      <section class="info-contenedor" id="sobre-mi">
         <div class="foto">
-          <img src="img/carmen_fake.jpeg" alt="Carmen Barquero" width="100%" />
-          <!-- <img src="img/carmen.png" alt="Carmen Barquero" width="100%" /> -->
+          <!-- <img src="img/carmen_fake.jpeg" alt="Carmen Barquero" width="100%" /> -->
+          <img src="img/carmen.png" alt="Carmen Barquero" width="100%" />
         </div>
         <div class="contenido" id="sobreMiTexto">
           <h2>Sobre mí</h2>
           <p>
-            Soy Carmen Barquero, psicóloga especializada en neuropsicología
-            clínica. Mi objetivo es ofrecer un espacio terapéutico seguro,
-            profesional y cercano, donde puedas explorar tus emociones, trabajar
-            en tu bienestar y avanzar hacia una vida más equilibrada.
+            Soy Carmen Barquero, psicóloga clinica con especialidad en
+            neuropsicología. Acompaño a personas en su crecimiento personal para
+            alcanzar un bienestar emocional.
+            <br />
+            Mi forma de trabajo tiene como objetivo ofrecer un espacio
+            terapéutico seguro, donde puedas explorar tus emociones, basándome
+            en un enfoque cercano y personalizado.
           </p>
         </div>
       </section>
 
-      <section>
+      <section id="servicios">
         <h2>Servicios</h2>
         <ul>
           <li>Terapia individual para adultos</li>
@@ -69,6 +85,19 @@
         <h2>Contacto</h2>
         <p>Email: contacto@carmenbarquero.com</p>
         <p>WhatsApp: <a href="https://wa.me/34647855165">Enviar mensaje</a></p>
+      </section>
+
+      <section class="sobre-mi-contenedor">
+        <h2>Sobre mí</h2>
+        <p>
+          Soy Carmen Barquero, psicóloga clinica con especialidad en
+          neuropsicología. Acompaño a personas en su crecimiento personal para
+          alcanzar un bienestar emocional.
+          <br />
+          Mi forma de trabajo tiene como objetivo ofrecer un espacio terapéutico
+          seguro, donde puedas explorar tus emociones, basándome en un enfoque
+          cercano y personalizado.
+        </p>
       </section>
     </main>
 

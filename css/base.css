@@ -1,0 +1,42 @@
+/* base.css */
+:root {
+  --color-principal: #3a4a5a;
+  --color-secundario: #7d8a97;
+  --color-fondo: #ffecd2;
+  --color-texto: #2c2c2c;
+  --fuente-principal: 'Source Sans Pro', sans-serif;
+}
+body {
+  margin: 0;
+  font-family: var(--fuente-principal);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  line-height: 1.6;
+}
+h2 {
+  color: var(--color-principal);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+ul {
+  padding-left: 1.2rem;
+}
+li {
+  margin-bottom: 0.5rem;
+}
+a {
+  color: var(--color-principal);
+  text-decoration: underline;
+}
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-principal);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-top: 1rem;
+}
+.btn:hover {
+  background-color: #2d3a48;
+}

@@ -1,0 +1,40 @@
+/* layout.css */
+header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 2rem 1rem 1rem;
+}
+.icon-container img {
+  max-width: 100px;
+  height: auto;
+}
+.text-container {
+  flex: 1;
+  text-align: center;
+}
+.text-container h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: var(--color-principal);
+}
+.text-container p {
+  font-size: 1.1rem;
+  color: var(--color-secundario);
+  margin: 0.5rem 0 0;
+}
+main {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+section {
+  margin-bottom: 3rem;
+}
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 0.9rem;
+  color: #888;
+}
