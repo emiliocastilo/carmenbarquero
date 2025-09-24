@@ -1,13 +1,13 @@
 /* base.css */
 :root {
   /* --color-principal: #3a4a5a; */
-  --color-principal: #739CAA;
+  --color-principal: #739caa;
   --color-secundario: #7d8a97;
   --color-fondo: #ffffff;
   --color-texto: #2c2c2c;
-  --fuente-principal: 'Source Sans Pro', sans-serif;
-  --color-icono-azul: #739CAA;
-  --color-icono-marron: #D5BB96;
+  --fuente-principal: "Source Sans Pro", sans-serif;
+  --color-icono-azul: #739caa;
+  --color-icono-marron: #d5bb96;
 }
 body {
   margin: 0;
@@ -20,7 +20,7 @@ body {
 section:nth-of-type(2n - 1) {
   background: #f5f6f7;
 }
-h2 {
+h3 {
   color: var(--color-principal);
   font-size: 1.5rem;
   margin-bottom: 1rem;
@@ -46,17 +46,4 @@ a {
 }
 .btn:hover {
   background-color: #2d3a48;
-}
-
-/* Fuente Chetta Vissto */
-@font-face {
-  font-family: 'Chetta Vissto';
-  src: url('../fonts/ChettaVissto-Regular.woff2') format('woff2'),
-       url('../fonts/ChettaVissto-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-.font-chetta-vissto {
-  font-family: 'Chetta Vissto', cursive;
 }
