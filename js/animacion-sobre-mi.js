@@ -11,8 +11,6 @@ function mostrarTextoSobreMiScroll() {
   if (isMobile()) {
     if (window.scrollY >= 400) {
       texto.classList.add('visible');
-    } else {
-      texto.classList.remove('visible');
     }
   } else {
     texto.classList.add('visible');
