@@ -47,3 +47,16 @@ a {
 .btn:hover {
   background-color: #2d3a48;
 }
+
+/* Fuente Chetta Vissto */
+@font-face {
+  font-family: 'Chetta Vissto';
+  src: url('../fonts/ChettaVissto-Regular.woff2') format('woff2'),
+       url('../fonts/ChettaVissto-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+.font-chetta-vissto {
+  font-family: 'Chetta Vissto', cursive;
+}
