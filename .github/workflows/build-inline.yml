@@ -1,0 +1,47 @@
+name: Build & Inline to main
+
+on:
+  push:
+    branches: [ "source" ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Inliner convierte todo a un único HTML (CSS/JS/img inline como data URI)
+      # Luego rematamos con html-minifier-terser
+      - name: Build single HTML
+        run: |
+          mkdir -p dist
+          # Ajusta la ruta de tu HTML de entrada si no está en la raíz
+          npx --yes inliner ./index.html > dist/index.html
+          npx --yes html-minifier-terser \
+            --collapse-whitespace \
+            --remove-comments \
+            --remove-redundant-attributes \
+            --remove-script-type-attributes \
+            --remove-style-link-type-attributes \
+            --minify-css true \
+            --minify-js true \
+            -o dist/index.html dist/index.html
+
+      # Publicamos SOLO el contenido de dist/ en la rama main (sobrescribe los archivos)
+      - name: Push dist to main
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          force: true
+          directory: dist
