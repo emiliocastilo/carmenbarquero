@@ -1,0 +1,89 @@
+/* Cabecera tipo PDF con logo y texto */
+.cabecera-consentimiento {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.2rem;
+  border-bottom: 1px solid #d1d1d1;
+  padding-bottom: 1.2rem;
+}
+.logo-consentimiento {
+  height: 150px;
+  width: auto;
+  margin-right: 1.5rem;
+}
+.cabecera-texto {
+  flex: 1;
+  text-align: right;
+}
+.cabecera-texto h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.5rem;
+  color: var(--color-principal, #3a4a5a);
+}
+.cabecera-texto p {
+  margin: 0.2rem 0;
+  font-size: 1.05rem;
+  color: #444;
+}
+@media (max-width: 600px) {
+  .cabecera-consentimiento {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+  .cabecera-texto {
+    text-align: left;
+    margin-top: 0.7rem;
+  }
+  .logo-consentimiento {
+    height: 48px;
+    margin-right: 0;
+  }
+}
+/* consentimiento.css */
+.folio-consentimiento {
+  max-width: 600px;
+  margin: 3rem auto;
+  background: #fff;
+  border: 1.5px solid #d1d1d1;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(58,74,90,0.08);
+  padding: 2.5rem 2rem;
+  font-family: 'Source Sans Pro', serif;
+  color: #222;
+  position: relative;
+}
+.folio-consentimiento h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: var(--color-principal, #3a4a5a);
+}
+.folio-consentimiento ul {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+}
+.folio-consentimiento li {
+  margin-bottom: 0.8rem;
+  font-size: 1.08rem;
+}
+.folio-consentimiento p {
+  margin: 1.2rem 0;
+  font-size: 1.08rem;
+}
+.firma-clinica {
+  text-align: right;
+  font-weight: bold;
+  color: var(--color-secundario, #7d8a97);
+  margin-top: 2.5rem;
+}
+@media (max-width: 700px) {
+  .folio-consentimiento {
+    padding: 1.2rem 0.7rem;
+    font-size: 0.98rem;
+  }
+  .folio-consentimiento h2 {
+    font-size: 1.3rem;
+  }
+}
