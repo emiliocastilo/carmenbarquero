@@ -47,3 +47,25 @@ a {
 .btn:hover {
   background-color: #2d3a48;
 }
+/* Estilos para alinear los campos del formulario de contacto */
+form.form-contact {
+  max-width: 400px;
+}
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.form-group label {
+  min-width: 110px;
+  max-width: 110px;
+  margin-right: 1rem;
+  font-weight: 600;
+  color: var(--color-principal);
+}
+.form-group input {
+  flex: 1;  
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}

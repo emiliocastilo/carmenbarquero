@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/menu-superior.css" />
     <link rel="stylesheet" href="css/whatsapp-float.css" />
     <link rel="stylesheet" href="css/animacion-sobre-mi.css" />
+    <link rel="stylesheet" href="css/modal.css" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -49,6 +50,10 @@
     <script src="js/animacion-sobre-mi.js"></script>
     <!-- scroll-menu.js -->
     <script src="js/scroll-menu.js"></script>
+    <!-- contacto-form.js -->
+    <script src="js/contacto-form.js"></script>
+    <!-- modal.js -->
+    <script src="js/modal.js"></script>
   </head>
   <body>
     <header>
@@ -75,8 +80,8 @@
           <div class="info-contenido">
             <div id="sobreMiTexto" class="sobre-mi-texto-contenido">
               <p class="font-caviar-dreams">
-                Acompaño a personas en su crecimiento personal
-                para alcanzar un bienestar emocional.
+                Acompaño a personas en su crecimiento personal para alcanzar un
+                bienestar emocional.
                 <br />
                 Mi forma de trabajo tiene como objetivo ofrecer un espacio
                 terapéutico seguro, donde puedas explorar tus emociones,
@@ -105,6 +110,45 @@
           <a href="#contacto" class="btn">Reserva tu cita</a>
         </div>
       </section>
+
+      <section id="formulario-contacto">
+        <div class="contenido">
+          <h3>Formulario de contacto</h3>
+          <form class="form-contact">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" required />
+            </div>
+            <div class="form-group">
+              <label for="apellidos">Apellidos</label>
+              <input type="text" id="apellidos" name="apellidos" required />
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input
+                type="tel"
+                id="telefono"
+                name="telefono"
+                pattern="[0-9]{9}"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="edad">Edad</label>
+              <input
+                type="number"
+                id="edad"
+                name="edad"
+                min="1"
+                max="120"
+                required
+              />
+            </div>
+            <button class="btn">Enviar</button>
+          </form>
+        </div>
+      </section>
+
 
       <section id="contacto">
         <div class="contenido">
@@ -135,6 +179,15 @@
     <footer>
       <p>&copy; 2025 Carmen Barquero. Todos los derechos reservados.</p>
     </footer>
+
+    <!-- Modal de éxito -->
+    <div id="modal-exito" class="modal">
+      <div class="modal-content">
+        <h4>¡Formulario enviado correctamente!</h4>
+        <p>Gracias por ponerte en contacto. Te responderé lo antes posible.</p>
+        <button class="cerrar-modal">Cerrar</button>
+      </div>
+    </div>
 
     <!-- Botón flotante WhatsApp -->
     <a
