@@ -1,0 +1,50 @@
+name: Build & Inline to main
+
+on:
+  push:
+    branches: [ "source" ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build single HTML (inline CSS/JS) + minify
+        run: |
+          mkdir -p dist
+          # 1) Inlining de CSS/JS partiendo de index.html en la raíz
+          npx --yes inliner ./index.html > dist/index.html
+
+          # 2) Minificado del HTML (incluye CSS/JS ya embebidos)
+          npx --yes html-minifier-terser \
+            --collapse-whitespace \
+            --remove-comments \
+            --remove-redundant-attributes \
+            --remove-script-type-attributes \
+            --remove-style-link-type-attributes \
+            --minify-css true \
+            --minify-js true \
+            -o dist/index.html dist/index.html
+
+          # 3) Copia de assets que NO queremos perder (favicons, imágenes, fuentes)
+          [ -d img ] && cp -r img dist/img || true
+          [ -d fonts ] && cp -r fonts dist/fonts || true
+
+      - name: Push dist to main (root)
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          force: true
+          directory: dist
