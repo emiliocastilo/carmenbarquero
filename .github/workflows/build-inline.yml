@@ -20,13 +20,13 @@ jobs:
         with:
           node-version: '20'
 
-      # Inliner convierte todo a un único HTML (CSS/JS/img inline como data URI)
-      # Luego rematamos con html-minifier-terser
-      - name: Build single HTML
+      - name: Build single HTML (inline CSS/JS) + minify
         run: |
           mkdir -p dist
-          # Ajusta la ruta de tu HTML de entrada si no está en la raíz
+          # 1) Inlining de CSS/JS partiendo de index.html en la raíz
           npx --yes inliner ./index.html > dist/index.html
+
+          # 2) Minificado del HTML (incluye CSS/JS ya embebidos)
           npx --yes html-minifier-terser \
             --collapse-whitespace \
             --remove-comments \
@@ -37,8 +37,11 @@ jobs:
             --minify-js true \
             -o dist/index.html dist/index.html
 
-      # Publicamos SOLO el contenido de dist/ en la rama main (sobrescribe los archivos)
-      - name: Push dist to main
+          # 3) Copia de assets que NO queremos perder (favicons, imágenes, fuentes)
+          [ -d img ] && cp -r img dist/img || true
+          [ -d fonts ] && cp -r fonts dist/fonts || true
+
+      - name: Push dist to main (root)
         uses: ad-m/github-push-action@v0.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
