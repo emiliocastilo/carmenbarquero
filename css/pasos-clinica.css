@@ -1,0 +1,61 @@
+/* pasos-clinica.css */
+.pasos-clinica-contenido {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.pasos-clinica-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.paso-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.paso-circulo {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: #e0e4ea;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.paso-circulo-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #3a4a5a 80%, #7d8a97 100%);
+  border-radius: 50%;
+  transition: width 1s cubic-bezier(.77,0,.18,1);
+  z-index: 1;
+}
+.paso-col h4 {
+  margin: 0.5rem 0 0.5rem 0;
+  color: var(--color-principal);
+}
+.paso-col p {
+  font-size: 0.98rem;
+  color: var(--color-secundario);
+}
+@media (max-width: 900px) {
+  .pasos-clinica-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .pasos-clinica-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .paso-circulo {
+    width: 50px;
+    height: 50px;
+  }
+}
