@@ -2,9 +2,9 @@
 
 /* Fuente Chetta Vissto */
 @font-face {
-  font-family: 'Chetta Vissto';
-  src: url('../fonts/chetta-vissto/ChettaVissto.woff2') format('woff2'),
-       url('../fonts/chetta-vissto/ChettaVissto.woff') format('woff');
+  font-family: "Chetta Vissto";
+  src: url("../fonts/chetta-vissto/ChettaVissto.woff2") format("woff2"),
+    url("../fonts/chetta-vissto/ChettaVissto.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
