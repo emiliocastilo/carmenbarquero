@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var form = document.querySelector("#formulario-contacto form");
   if (!form) return;
 
-  var btn = form ? form.querySelector('button[type="submit"]') : null;
+  var btn = form ? form.querySelector('button.btn-enviar-formulario') : null;
   if (!form || !btn) return;
 
   btn.addEventListener("click", function (e) {
