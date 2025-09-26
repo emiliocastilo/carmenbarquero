@@ -1,49 +1,15 @@
-// PDFLib debe estar incluido como <script src="lib/pdf-lib.min.js"></script> en el HTML
-const { PDFDocument } = window.PDFLib;
+function generatePDF() {
+  // const form = document.getElementById("form-datos-paciente");
+  // html2pdf(form);
+    const element = document.getElementById('form-datos-paciente');
 
-document.getElementById('form-datos-paciente').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  
+  // Genera y descarga el PDF
+  html2pdf().set({
+    margin: 10,
+    filename: 'consentimiento.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  }).from(element).save();
 
-  const formData = new FormData(e.target);
-  const nombreApellidos = formData.get('nombre-apellidos');
-  const dni = formData.get('dni');
-  const fechaNacimiento = formData.get('fecha-nacimiento');
-  const telefono = formData.get('telefono');
-  const direccion = formData.get('direccion');
-  const lugar = formData.get('lugar');
-  const dia = formData.get('dia');
-  const mes = formData.get('mes');
-  const anio = formData.get('anio');
-  const firma = formData.get('firma');
-  const fecha = formData.get('fecha');
-
-  // Cargar plantilla PDF
-  const existingPdfBytes = await fetch('formulario.pdf').then(res => res.arrayBuffer());
-  const pdfDoc = await PDFDocument.load(existingPdfBytes);
-
-  // Acceder a los campos del formulario PDF
-  const form = pdfDoc.getForm();
-  form.getTextField('nombre-apellidos').setText(nombreApellidos || '');
-  form.getTextField('dni').setText(dni || '');
-  form.getTextField('fecha-nacimiento').setText(fechaNacimiento || '');
-  form.getTextField('telefono').setText(telefono || '');
-  form.getTextField('direccion').setText(direccion || '');
-  form.getTextField('lugar').setText(lugar || '');
-  form.getTextField('dia').setText(dia || '');
-  form.getTextField('mes').setText(mes || '');
-  form.getTextField('anio').setText(anio || '');
-  form.getTextField('firma').setText(firma || '');
-  form.getTextField('fecha').setText(fecha || '');
-
-  // Serializar PDF
-  const pdfBytes = await pdfDoc.save();
-
-  // Descargar
-  const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = "resultado.pdf";
-  a.click();
-});
+}

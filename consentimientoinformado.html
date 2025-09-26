@@ -6,11 +6,20 @@
     <title>Consentimiento Informado | Clínica Carmen Barquero</title>
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/consentimiento.css" />
+    <!-- <script src="lib/html2canvas.min.js"></script>
+    <script src="lib/jspdf.umd.min.js"></script>
+    <script src="lib/html2pdf.bundle.min.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="js/export-pdf.js"></script>
   </head>
   <body>
     <main>
       <form id="form-datos-paciente">
-  <div class="folio-consentimiento">
+        <div class="folio-consentimiento">
           <div class="cabecera-consentimiento">
             <img
               src="img/carmen-barquero-psicologa-transp.png"
@@ -27,12 +36,7 @@
             <h3>Datos del paciente</h3>
             <div class="campo-dato">
               <label for="nombre-apellidos">Nombre y apellidos:</label>
-              <input
-                type="text"
-                id="nombre-apellidos"
-                name="nombre-apellidos"
-                placeholder="Nombre y apellidos"
-              />
+              <input type="text" id="nombre-apellidos" name="nombre-apellidos" placeholder="Nombre y apellidos" />
             </div>
             <div class="campo-dato">
               <label for="dni">DNI/NIE:</label>
@@ -40,30 +44,15 @@
             </div>
             <div class="campo-dato">
               <label for="fecha-nacimiento">Fecha de nacimiento:</label>
-              <input
-                type="text"
-                id="fecha-nacimiento"
-                name="fecha-nacimiento"
-                placeholder="dd / mm / aaaa"
-              />
+              <input type="text" id="fecha-nacimiento" name="fecha-nacimiento" placeholder="dd / mm / aaaa" />
             </div>
             <div class="campo-dato">
               <label for="telefono">Teléfono de contacto:</label>
-              <input
-                type="text"
-                id="telefono"
-                name="telefono"
-                placeholder="Teléfono"
-              />
+              <input type="text" id="telefono" name="telefono" placeholder="Teléfono" />
             </div>
             <div class="campo-dato">
               <label for="direccion">Dirección:</label>
-              <input
-                type="text"
-                id="direccion"
-                name="direccion"
-                placeholder="Dirección"
-              />
+              <input type="text" id="direccion" name="direccion" placeholder="Dirección" />
             </div>
           </div>
           <p>
@@ -154,61 +143,23 @@
             style="width: 100%; text-align: center; margin-bottom: 1rem"
           >
             En
-            <input
-              type="text"
-              name="lugar"
-              id="lugar"
-              placeholder="Ciudad"
-              style="width: 120px; display: inline-block"
-            />, a
-            <input
-              type="text"
-              name="dia"
-              id="dia"
-              placeholder="día"
-              style="width: 40px; display: inline-block"
-            />
-            de
-            <input
-              type="text"
-              name="mes"
-              id="mes"
-              placeholder="mes"
-              style="width: 80px; display: inline-block"
-            />
-            de
-            <input
-              type="text"
-              name="anio"
-              id="anio"
-              placeholder="año"
-              style="width: 60px; display: inline-block"
-            />
+            <input type="text" name="lugar" id="lugar" placeholder="Ciudad" style="width: 120px; display: inline-block" />,
+            a <input type="text" name="dia" id="dia" placeholder="día" style="width: 40px; display: inline-block" />
+            de <input type="text" name="mes" id="mes" placeholder="mes" style="width: 80px; display: inline-block" />
+            de <input type="text" name="anio" id="anio" placeholder="año" style="width: 60px; display: inline-block" />
           </div>
           <label for="firma">Firma del paciente:</label>
-          <input
-            type="text"
-            id="firma"
-            name="firma"
-            placeholder="Nombre y apellidos"
-            style="width: 60%; margin-bottom: 1rem"
-          />
+          <input type="text" id="firma" name="firma" placeholder="Nombre y apellidos" style="width: 60%; margin-bottom: 1rem" />
           <br />
           <label for="fecha">Fecha:</label>
-          <input
-            type="text"
-            id="fecha"
-            name="fecha"
-            placeholder="dd / mm / aaaa"
-            style="width: 40%"
-          />
+          <input type="text" id="fecha" name="fecha" placeholder="dd / mm / aaaa" style="width: 40%" />
           <p class="firma-clinica">Clínica de Psicología Carmen Barquero</p>
-        <div style="text-align:center; margin-top:2rem;">
-          <button type="submit" id="btn-confirmar" class="btn-confirmar">Confirmar y generar PDF</button>
         </div>
       </form>
-    </main>
-    <script src="lib/pdf-lib.min.js"></script>
-    <script src="js/export-pdf.js"></script>
+      <div style="text-align: center; margin-top: 2rem">
+        <button id="btn-confirmar" class="btn-confirmar" onclick="generatePDF()">
+          Confirmar y generar PDF
+        </button>
+      </div>
   </body>
 </html>
