@@ -42,6 +42,7 @@
   }
 }
 /* consentimiento.css */
+/* Estilos normales */
 .folio-consentimiento {
   max-width: 600px;
   margin: 3rem auto;
@@ -53,6 +54,18 @@
   font-family: 'Source Sans Pro', serif;
   color: #222;
   position: relative;
+}
+
+/* Quitar estilos al imprimir/PDF */
+@media print {
+  .folio-consentimiento {
+    max-width: none !important;
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
 }
 .folio-consentimiento h2 {
   text-align: center;
