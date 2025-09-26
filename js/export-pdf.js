@@ -73,12 +73,12 @@ function generatePDF() {
 
   // Genera y descarga el PDF
   html2pdf().set({
-    margin: 10,
-    filename: 'consentimiento.pdf',
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  }).from(clone).save().then(() => {
+  margin: [10, 10, 10, 10], // arriba, derecha, abajo, izquierda
+  filename: 'consentimiento.pdf',
+  image: { type: 'jpeg', quality: 0.98 },
+  html2canvas: { scale: 1, scrollY: 0 },
+  jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+}).from(clone).save().then(() => {
     // Eliminar el clon temporal
     document.body.removeChild(tempDiv);
   });
