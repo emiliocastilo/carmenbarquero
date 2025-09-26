@@ -36,7 +36,7 @@
             <h3>Datos del paciente</h3>
             <div class="campo-dato">
               <label for="nombre-apellidos">Nombre y apellidos:</label>
-              <input type="text" id="nombre-apellidos" name="nombre-apellidos" placeholder="Nombre y apellidos" />
+              <input type="text" id="nombre-apellidos" name="nombre-apellidos" placeholder="Nombre y apellidos" style="width: 65%;" />
             </div>
             <div class="campo-dato">
               <label for="dni">DNI/NIE:</label>
@@ -50,10 +50,10 @@
               <label for="telefono">Teléfono de contacto:</label>
               <input type="text" id="telefono" name="telefono" placeholder="Teléfono" />
             </div>
-            <div class="campo-dato">
+            <!-- <div class="campo-dato">
               <label for="direccion">Dirección:</label>
               <input type="text" id="direccion" name="direccion" placeholder="Dirección" />
-            </div>
+            </div> -->
           </div>
           <p>
             Por la presente, <strong>el/la paciente</strong> declara haber sido
@@ -153,6 +153,12 @@
           <br />
           <label for="fecha">Fecha:</label>
           <input type="text" id="fecha" name="fecha" placeholder="dd / mm / aaaa" style="width: 40%" />
+          <div style="margin: 2rem 0;">
+            <label for="canvas-firma">Firma manuscrita:</label><br>
+            <canvas id="canvas-firma" width="400" height="120" style="border:1px solid #ccc; background:#fff; cursor:crosshair;"></canvas>
+            <br>
+            <button type="button" id="limpiar-firma" style="margin-top:8px">Limpiar firma</button>
+          </div>
           <p class="firma-clinica">Clínica de Psicología Carmen Barquero</p>
         </div>
       </form>
