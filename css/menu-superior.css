@@ -12,8 +12,10 @@
   z-index: 2000;
   padding: 0.3rem 0;
   font-family: var(--fuente-principal);
+  justify-content: center;
 }
-.menu-superior ul {
+.desktop-menu {
+  display: flex;
   justify-content: center;
   height: 100%;
   gap: 2.5rem;
@@ -30,7 +32,7 @@
   color: #fff;
   text-decoration: none;
   font-size: 1rem;
-  padding: 0.3rem 0.7rem;
+  padding: 0.3rem 0.7rem 0.3rem 0.7rem;
   padding-top: 0.8rem;
   border-radius: 4px;
   transition: background 0.2s, color 0.2s;
@@ -39,14 +41,19 @@
   background: var(--color-icono-marron);
   color: #fff;
 }
-body {
-  scroll-behavior: smooth;
-  /* padding-top: 48px; */
+
+/* Responsive */
+@media screen and (min-width: 769px) {
+  .mobile-menu {
+    display: none;
+  }
 }
 
-/* Centrar contenido del menú en desktop */
-@media screen and (min-width: 769px) {
-  .menu-superior {
-    justify-content: center;
+@media screen and (max-width: 768px) {
+  .desktop-menu {
+    display: none;
+  }
+  .mobile-menu {
+    display: block;
   }
 }
