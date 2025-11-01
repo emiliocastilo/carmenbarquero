@@ -54,6 +54,7 @@
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/menu-superior.css" />
+    <link rel="stylesheet" href="css/menu-responsive.css" />
     <link rel="stylesheet" href="css/whatsapp-float.css" />
     <link rel="stylesheet" href="css/animacion-sobre-mi.css" />
     <link rel="stylesheet" href="css/modal.css" />
@@ -78,6 +79,8 @@
     <script src="js/contacto-form.js"></script>
     <!-- modal.js -->
     <script src="js/modal.js"></script>
+    <!-- menu-responsive.js -->
+    <script src="js/menu-responsive.js"></script>
   </head>
   <body>
     <header>
@@ -91,12 +94,27 @@
       </div>
     </header>
     <nav class="menu-superior">
-      <ul>
-  <li><a href="#sobre-mi">Sobre mí</a></li>
-  <li><a href="#servicios">Servicios</a></li>
-  <li><a href="#formulario-contacto">Formulario</a></li>
-  <!-- <li><a href="#contacto">Contacto</a></li> -->
+      <ul class="desktop-menu">
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#formulario-contacto">Formulario</a></li>
       </ul>
+      <div class="mobile-menu">
+        <button id="menu-open" class="menu-open-button" aria-label="Abrir menú">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        <div id="menu-overlay" class="menu-overlay"></div>
+        <div id="mobile-menu-container" class="mobile-menu-container">
+          <button id="menu-close" class="menu-close-button" aria-label="Cerrar menú"></button>
+          <ul id="mobile-menu-list" class="mobile-menu-list">
+            <li><a href="#sobre-mi">Sobre mí</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#formulario-contacto">Formulario</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
     <main>
       <section>
@@ -129,9 +147,7 @@
           <ul>
             <li>Terapia individual para adultos</li>
             <li>Evaluación y rehabilitación neuropsicológica</li>
-            <li>
-              Intervención en ansiedad, autoestima y dificultades emocionales
-            </li>
+            <li></li>
             <li>Sesiones online y presenciales</li>
           </ul>
         </div>

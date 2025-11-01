@@ -1,5 +1,7 @@
 /* menu-superior.css */
 .menu-superior {
+  display: flex;
+  align-items: center;
   position: sticky;
   top: 0;
   left: 0;
@@ -12,7 +14,6 @@
   font-family: var(--fuente-principal);
 }
 .menu-superior ul {
-  display: flex;
   justify-content: center;
   height: 100%;
   gap: 2.5rem;
@@ -41,4 +42,11 @@
 body {
   scroll-behavior: smooth;
   /* padding-top: 48px; */
+}
+
+/* Centrar contenido del menú en desktop */
+@media screen and (min-width: 769px) {
+  .menu-superior {
+    justify-content: center;
+  }
 }

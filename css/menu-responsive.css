@@ -1,0 +1,131 @@
+/* Menú móvil - oculto por defecto */
+.mobile-menu {
+  display: none;
+  position: relative;
+}
+
+/* Botón de abrir menú (hamburguesa) */
+.menu-open-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-open-button .bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 1px;
+}
+
+/* Botón de cerrar menú (X) */
+.menu-close-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 1rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 2rem;
+  color: var(--color-principal, #3a4a5a);
+  z-index: 1001;
+}
+
+.menu-close-button:before {
+  content: '×';
+}
+
+/* Contenedor del menú móvil */
+.mobile-menu-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 80%;
+  max-width: 300px;
+  height: 100vh;
+  background: white;
+  z-index: 1000;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu-container.show {
+  transform: translateX(0);
+}
+
+/* Lista del menú móvil */
+ul.mobile-menu-list {
+  list-style: none;
+  margin-top: 100px;
+  padding: 4rem 0 1rem 0;
+  height: 100%;
+}
+
+.mobile-menu-list li {
+  margin: 0;
+}
+
+.mobile-menu-list li a {
+  display: block;
+  text-decoration: none;
+  color: var(--color-principal, #3a4a5a);
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.mobile-menu-list li a:hover {
+  background-color: #f5f5f5;
+  color: var(--color-accent, #e8b665);
+}
+
+/* Overlay de fondo oscuro */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.menu-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Media queries para responsive */
+
+/* Tablets y pantallas medianas */
+@media screen and (max-width: 768px) {
+  .desktop-menu {
+    display: none;
+  }
+  
+  .mobile-menu {
+    display: block;
+    margin-left: auto;
+    margin-right: 1rem;
+  }
+}
+
+/* Pantallas grandes - solo desktop */
+@media screen and (min-width: 769px) {
+  .desktop-menu {
+    display: flex;
+  }
+  
+  .mobile-menu {
+    display: none;
+  }
+}
