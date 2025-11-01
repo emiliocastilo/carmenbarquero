@@ -76,7 +76,7 @@ ul.mobile-menu-list {
   text-decoration: none;
   color: var(--color-principal, #3a4a5a);
   padding: 0.75rem 1.5rem;
-  font-size: 1rem;
+  font-size: x-large;
   transition: background-color 0.3s ease;
 }
 
