@@ -74,11 +74,39 @@ jobs:
             done
           fi
           
-          echo "📁 Copiando assets..."
-          # Copiar todos los assets
-          [ -d img ] && cp -r img dist/ || true
-          [ -d fonts ] && cp -r fonts dist/ || true
-          [ -d lib ] && cp -r lib dist/ || true
+          echo "📁 Copiando solo assets de producción..."
+          # Crear estructura de directorios para assets
+          mkdir -p dist/img dist/fonts dist/lib
+          
+          # Copiar solo imágenes de producción (excluir .DS_Store y carpetas de desarrollo)
+          if [ -d img ]; then
+            # Copiar imágenes principales
+            find img -maxdepth 1 -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.webp" -o -name "*.gif" -o -name "*.svg" | while read file; do
+              cp "$file" "dist/$file"
+            done
+            
+            # Copiar solo favicon principal (no las carpetas de prueba)
+            [ -d img/favicon ] && cp -r img/favicon dist/img/ || true
+            [ -d img/social ] && cp -r img/social dist/img/ || true
+            
+            echo "✅ Imágenes copiadas (excluyendo archivos de desarrollo)"
+          fi
+          
+          # Copiar solo fuentes necesarias
+          if [ -d fonts ]; then
+            find fonts -name "*.ttf" -o -name "*.otf" -o -name "*.woff" -o -name "*.woff2" | while read file; do
+              mkdir -p "dist/$(dirname "$file")"
+              cp "$file" "dist/$file"
+            done
+          fi
+          
+          # Copiar solo librerías minificadas de producción
+          if [ -d lib ]; then
+            find lib -name "*.min.js" -o -name "*.min.css" | while read file; do
+              cp "$file" "dist/$file"
+            done
+            echo "✅ Librerías minificadas copiadas: $(find lib -name "*.min.*" | wc -l) archivos"
+          fi
           
           # Copiar archivos de configuración
           [ -f robots.txt ] && cp robots.txt dist/ || true
@@ -86,11 +114,16 @@ jobs:
           [ -f CNAME ] && cp CNAME dist/ || true
           [ -f favicon.ico ] && cp favicon.ico dist/ || true
           
-          echo "📊 Build completado:"
-          echo "- CSS: $(find dist/css -name "*.css" 2>/dev/null | wc -l) archivos"
-          echo "- JS: $(find dist/js -name "*.js" 2>/dev/null | wc -l) archivos"
-          echo "- HTML: $(find dist -name "*.html" 2>/dev/null | wc -l) páginas"
-          echo "- Tamaño total: $(du -sh dist/ | cut -f1)"
+          echo "📊 Build de producción completado:"
+          echo "✅ CSS minificados: $(find dist/css -name "*.css" 2>/dev/null | wc -l) archivos"
+          echo "✅ JS minificados: $(find dist/js -name "*.js" 2>/dev/null | wc -l) archivos"  
+          echo "✅ HTML optimizados: $(find dist -name "*.html" 2>/dev/null | wc -l) páginas"
+          echo "✅ Imágenes de producción: $(find dist/img -type f 2>/dev/null | wc -l) archivos"
+          echo "✅ Fuentes: $(find dist/fonts -type f 2>/dev/null | wc -l) archivos"
+          echo "✅ Librerías: $(find dist/lib -type f 2>/dev/null | wc -l) archivos"
+          echo "📏 Tamaño total optimizado: $(du -sh dist/ | cut -f1)"
+          echo ""
+          echo "🚀 Solo archivos de producción - Sin duplicados ni archivos de desarrollo"
 
       - name: Deploy to main branch
         uses: ad-m/github-push-action@v0.8.0
