@@ -1,0 +1,104 @@
+name: Build & Deploy Multi-page Site
+
+on:
+  push:
+    branches: [ "source" ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build and minify multi-page site
+        run: |
+          mkdir -p dist
+          
+          # Crear estructura de directorios
+          mkdir -p dist/css dist/js dist/servicios dist/img dist/fonts dist/lib
+          
+          # Minificar CSS
+          echo "Minificando CSS..."
+          for file in css/*.css; do
+            if [ -f "$file" ]; then
+              npx --yes clean-css-cli -o "dist/$file" "$file"
+              echo "Minificado: $file -> dist/$file"
+            fi
+          done
+          
+          # Minificar JavaScript
+          echo "Minificando JavaScript..."
+          for file in js/*.js; do
+            if [ -f "$file" ]; then
+              npx --yes terser "$file" -o "dist/$file" --compress --mangle
+              echo "Minificado: $file -> dist/$file"
+            fi
+          done
+          
+          # Copiar librerías sin minificar (ya están optimizadas)
+          [ -d lib ] && cp -r lib/* dist/lib/ || true
+          
+          # Minificar HTML de páginas principales
+          echo "Minificando HTML..."
+          for file in *.html; do
+            if [ -f "$file" ]; then
+              npx --yes html-minifier-terser \
+                --collapse-whitespace \
+                --remove-comments \
+                --remove-redundant-attributes \
+                --remove-script-type-attributes \
+                --remove-style-link-type-attributes \
+                --minify-css false \
+                --minify-js false \
+                -o "dist/$file" "$file"
+              echo "Minificado: $file -> dist/$file"
+            fi
+          done
+          
+          # Minificar HTML de servicios
+          if [ -d servicios ]; then
+            for file in servicios/*.html; do
+              if [ -f "$file" ]; then
+                npx --yes html-minifier-terser \
+                  --collapse-whitespace \
+                  --remove-comments \
+                  --remove-redundant-attributes \
+                  --remove-script-type-attributes \
+                  --remove-style-link-type-attributes \
+                  --minify-css false \
+                  --minify-js false \
+                  -o "dist/$file" "$file"
+                echo "Minificado: $file -> dist/$file"
+              fi
+            done
+          fi
+          
+          # Copiar assets
+          [ -d img ] && cp -r img dist/img || true
+          [ -d fonts ] && cp -r fonts dist/fonts || true
+          
+          # Copiar archivos de configuración
+          [ -f robots.txt ] && cp robots.txt dist/ || true
+          [ -f sitemap.xml ] && cp sitemap.xml dist/ || true
+          [ -f CNAME ] && cp CNAME dist/ || true
+          
+          echo "Build completado. Archivos en dist/:"
+          ls -la dist/
+
+      - name: Push to main branch
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          force: true
+          directory: dist
