@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Reserva tu cita con Carmen Barquero - Psicóloga General Sanitaria en Mérida. Formulario online para agendar consulta presencial u online. Respuesta en 24h."
+    />
+    <meta
+      name="keywords"
+      content="reservar cita psicóloga Mérida, agendar consulta psicología, Carmen Barquero cita, formulario cita psicólogo"
+    />
+    <meta name="author" content="Carmen Barquero" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.carmenbarqueropsicologia.es/reserva-cita.html" />
+    
+    <!-- Open Graph para redes sociales -->
+    <meta property="og:title" content="Reserva tu cita - Carmen Barquero Psicóloga" />
+    <meta property="og:description" content="Agenda tu consulta psicológica de forma rápida y sencilla." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.carmenbarqueropsicologia.es/reserva-cita.html" />
+    
+    <title>Reserva tu cita - Carmen Barquero Psicóloga</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="img/favicon/site.webmanifest" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/menu-superior.css" />
+    <link rel="stylesheet" href="css/menu-responsive.css" />
+    <link rel="stylesheet" href="css/whatsapp-float.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+
+    <!-- JavaScript -->
+    <script defer src="js/scripts.js"></script>
+    <script defer src="js/contacto-form.js"></script>
+    <script defer src="js/modal.js"></script>
+    <script defer src="js/menu-responsive.js"></script>
+
+    <!-- Schema.org para SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Reserva de Cita Psicológica",
+        "provider": {
+          "@type": "Person",
+          "name": "Carmen Barquero",
+          "jobTitle": "Psicóloga General Sanitaria"
+        },
+        "areaServed": "Mérida, Extremadura",
+        "availableChannel": {
+          "@type": "ServiceChannel",
+          "serviceType": "Consulta Psicológica",
+          "availableLanguage": "Spanish"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1 style="position: absolute; left: -9999px;">Reserva tu cita - Carmen Barquero Psicóloga en Mérida</h1>
+      <div class="icon-container">
+        <a href="index.html" title="Volver al inicio">
+          <picture>
+            <!-- Formato WebP optimizado -->
+            <source 
+              srcset="img/carmen-barquero-psicologa-op.webp" 
+              type="image/webp"
+            />
+            <!-- Fallback PNG para navegadores que no soportan WebP -->
+            <img
+              src="img/carmen-barquero-psicologa-op.jpg"
+              alt="Carmen Barquero - Psicóloga General Sanitaria en Mérida"
+              fetchpriority="high"
+            />
+          </picture>
+        </a>
+      </div>
+    </header>
+
+    <!-- Menú superior -->
+    <nav class="menu-superior">
+      <!-- Menú desktop -->
+      <ul class="desktop-menu">
+        <li><a href="index.html">Inicio</a></li>
+        <li class="desktop-dropdown">
+          <span>Servicios</span>
+          <ul class="desktop-submenu">
+            <li><a href="servicios/terapia-individual.html">Terapia Individual</a></li>
+            <li><a href="servicios/terapia-pareja.html">Terapia de Pareja</a></li>
+            <li><a href="servicios/neuropsicologia-clinica.html">Neuropsicología Clínica</a></li>
+          </ul>
+        </li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="reserva-cita.html" class="cta-button active">Reserva tu cita</a></li>
+      </ul>
+
+      <!-- Menú móvil -->
+      <div class="mobile-menu">
+        <button class="menu-open-button" aria-label="Abrir menú de navegación">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Overlay del menú móvil -->
+    <div class="menu-overlay" id="menu-overlay">
+      <div class="mobile-menu-container">
+        <button class="menu-close-button" aria-label="Cerrar menú">&times;</button>
+        <ul class="mobile-menu-list">
+          <li><a href="index.html">Inicio</a></li>
+          <li class="menu-item-with-submenu">
+            <button class="menu-toggle" id="servicios-toggle">
+              Servicios 
+              <div class="arrow-down"></div>
+            </button>
+            <ul class="submenu" id="servicios-submenu">
+              <li><a href="servicios/terapia-individual.html">Terapia Individual</a></li>
+              <li><a href="servicios/terapia-pareja.html">Terapia de Pareja</a></li>
+              <li><a href="servicios/neuropsicologia-clinica.html">Neuropsicología Clínica</a></li>
+            </ul>
+          </li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="reserva-cita.html" class="cta-button active">Reserva tu cita</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <main>
+      <section id="reserva-cita-principal">
+        <div class="contenido">
+          <h1>Reserva tu cita</h1>
+          
+          <div class="info-cita">
+            <div class="beneficios">
+              <h2>¿Por qué elegir una consulta conmigo?</h2>
+              <ul>
+                <li>🎯 <strong>Atención personalizada</strong> - Cada terapia se adapta a tus necesidades específicas</li>
+                <li>🏠 <strong>Modalidad flexible</strong> - Consulta presencial en Mérida u online</li>
+                <li>⏰ <strong>Respuesta rápida</strong> - Te contacto en menos de 24 horas</li>
+                <li>🔒 <strong>Total confidencialidad</strong> - Ambiente seguro y profesional</li>
+              </ul>
+            </div>
+            
+            <div class="proceso">
+              <h2>¿Cómo funciona?</h2>
+              <div class="pasos">
+                <div class="paso">
+                  <span class="numero">1</span>
+                  <p>Completa el formulario con tus datos</p>
+                </div>
+                <div class="paso">
+                  <span class="numero">2</span>
+                  <p>Me pongo en contacto contigo en 24h</p>
+                </div>
+                <div class="paso">
+                  <span class="numero">3</span>
+                  <p>Acordamos día y hora que mejor te convenga</p>
+                </div>
+                <div class="paso">
+                  <span class="numero">4</span>
+                  <p>Comenzamos el trabajo terapéutico</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="formulario-container">
+            <h2>Solicitar cita</h2>
+            <form class="form-contact" id="form-reserva">
+              <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required />
+              </div>
+              
+              <div class="form-group">
+                <label for="apellidos">Apellidos</label>
+                <input type="text" id="apellidos" name="apellidos" required />
+              </div>
+              
+              <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input
+                  type="tel"
+                  id="telefono"
+                  name="telefono"
+                  pattern="[0-9]{9}"
+                  required
+                />
+              </div>
+              
+              <div class="form-group">
+                <label for="edad">Edad (opcional)</label>
+                <input
+                  type="number"
+                  id="edad"
+                  name="edad"
+                  min="1"
+                  max="120"
+                />
+              </div>
+
+              <div class="form-group checkbox-group">
+                <input 
+                  type="checkbox" 
+                  id="aceptar-privacidad" 
+                  name="aceptar-privacidad" 
+                  required 
+                />
+                <label for="aceptar-privacidad" class="checkbox-label">
+                  He leído y acepto la 
+                  <a href="politica-privacidad.html" target="_blank" rel="noopener">
+                    Política de Privacidad
+                  </a>
+                </label>
+              </div>
+
+              <button type="submit" class="btn btn-enviar-formulario">
+                Enviar
+              </button>
+            </form>
+          </div>
+
+          <div class="contacto-alternativo">
+            <h3>¿Prefieres contactar directamente?</h3>
+            <div class="contacto-directo">
+              <a href="https://wa.me/34647855165" class="btn btn-whatsapp" target="_blank" rel="noopener">
+                📱 WhatsApp: 647 855 165
+              </a>
+              <a href="tel:+34647855165" class="btn btn-telefono">
+                📞 Llamar: 647 855 165
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Carmen Barquero. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Modal de éxito -->
+    <div id="modal-exito" class="modal">
+      <div class="modal-content">
+        <h4>¡Solicitud enviada correctamente!</h4>
+        <p>Gracias por confiar en mí. Te contactaré en menos de 24 horas para acordar el día y hora de tu cita.</p>
+        <p><strong>¡El primer paso hacia tu bienestar ya está dado!</strong></p>
+        <button class="cerrar-modal">Cerrar</button>
+      </div>
+    </div>
+
+    <!-- Botón flotante WhatsApp -->
+    <a
+      href="https://wa.me/34647855165"
+      class="whatsapp-float"
+      target="_blank"
+      rel="noopener"
+      aria-label="WhatsApp"
+    >
+      <img src="img/social/whatsapp.png" alt="WhatsApp" width="50" />
+    </a>
+  </body>
+</html>

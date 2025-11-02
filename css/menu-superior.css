@@ -27,8 +27,10 @@
   margin: 0;
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
-.menu-superior a {
+.menu-superior a,
+.menu-superior .desktop-dropdown > span {
   color: #fff;
   text-decoration: none;
   font-size: 1rem;
@@ -36,11 +38,94 @@
   padding-top: 0.8rem;
   border-radius: 4px;
   transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  display: block;
 }
-.menu-superior a:hover {
+.menu-superior a:hover,
+.menu-superior .desktop-dropdown > span:hover {
   background: var(--color-icono-marron);
   color: #fff;
 }
+
+/* Elemento activo - página actual */
+.menu-superior a.active,
+.menu-superior .desktop-dropdown.active > span {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: currentColor;
+}
+
+/* Submenú desktop */
+.desktop-dropdown {
+  position: relative;
+}
+
+.desktop-submenu {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  background: white;
+  min-width: 220px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  padding: 0.5rem 0;
+  margin: 0;
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 3000;
+}
+
+/* Puente invisible para mejorar usabilidad del hover */
+.desktop-dropdown::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 10px;
+  z-index: 2999;
+}
+
+.desktop-dropdown:hover .desktop-submenu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.desktop-submenu li {
+  margin: 0;
+  transition: background-color 0.2s ease;
+}
+
+.desktop-submenu li:hover {
+  background: #f8f9fa;
+}
+
+.desktop-submenu li a {
+  display: block;
+  color: var(--color-principal, #3a4a5a) !important;
+  background: transparent !important;
+  padding: 0.75rem 1.5rem !important;
+  font-size: 0.95rem;
+  border-radius: 0;
+  transition: none; /* Removemos la transición del enlace ya que está en el li */
+}
+
+.desktop-submenu li:hover a {
+  background: transparent !important;
+  color: var(--color-principal, #3a4a5a) !important;
+}
+
+/* Separador visual */
+.desktop-submenu li:not(:last-child) {
+  border-bottom: 1px solid #e9ecef;
+}
+
+/* Ocultar menú móvil en desktop */
 
 /* Responsive */
 @media screen and (min-width: 769px) {

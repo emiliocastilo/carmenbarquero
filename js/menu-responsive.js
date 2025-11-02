@@ -1,11 +1,11 @@
 // Menu Responsive JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
-    const menuOpenButton = document.getElementById('menu-open');
-    const menuCloseButton = document.getElementById('menu-close');
-    const mobileMenuContainer = document.getElementById('mobile-menu-container');
-    const mobileMenuList = document.getElementById('mobile-menu-list');
-    const menuOverlay = document.getElementById('menu-overlay');
+    const menuOpenButton = document.querySelector('.menu-open-button');
+    const menuCloseButton = document.querySelector('.menu-close-button');
+    const mobileMenuContainer = document.querySelector('.mobile-menu-container');
+    const mobileMenuList = document.querySelector('.mobile-menu-list');
+    const menuOverlay = document.querySelector('.menu-overlay');
     
     if (menuOpenButton && menuCloseButton && mobileMenuContainer && mobileMenuList && menuOverlay) {
         
@@ -48,6 +48,31 @@ document.addEventListener('DOMContentLoaded', function() {
             if (event.key === 'Escape' && mobileMenuContainer.classList.contains('show')) {
                 closeMenu();
             }
+        });
+    }
+
+    // Funcionalidad del submenú
+    const serviciosToggle = document.getElementById('servicios-toggle');
+    const serviciosSubmenu = document.getElementById('servicios-submenu');
+
+    if (serviciosToggle && serviciosSubmenu) {
+        serviciosToggle.addEventListener('click', function(event) {
+            event.stopPropagation(); // Evitar que se cierre el menú principal
+
+            // Toggle del submenú
+            serviciosToggle.classList.toggle('active');
+            serviciosSubmenu.classList.toggle('show');
+        });
+
+        // Manejar clicks en enlaces del submenú
+        const submenuLinks = serviciosSubmenu.querySelectorAll('a');
+        submenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                // Cerrar el submenú y el menú principal cuando se hace click en un enlace del submenú
+                serviciosToggle.classList.remove('active');
+                serviciosSubmenu.classList.remove('show');
+                // El menú principal se cerrará por el event listener ya existente
+            });
         });
     }
 });

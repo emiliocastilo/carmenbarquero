@@ -144,8 +144,7 @@
 
     <!-- animacion-sobre-mi.js -->
     <script src="js/animacion-sobre-mi.js"></script>
-    <!-- scroll-menu.js -->
-    <script src="js/scroll-menu.js"></script>
+
     <!-- contacto-form.js -->
     <script src="js/contacto-form.js"></script>
     <!-- modal.js -->
@@ -174,10 +173,17 @@
     </header>
     <nav class="menu-superior">
       <ul class="desktop-menu">
-        <li><a href="#sobre-mi">Sobre mí</a></li>
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#cita-previa">Reserva tu cita</a></li>
-        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="index.html" class="active">Inicio</a></li>
+        <li class="desktop-dropdown">
+          <span>Servicios</span>
+          <ul class="desktop-submenu">
+            <li><a href="servicios/terapia-individual.html">Terapia Individual</a></li>
+            <li><a href="servicios/terapia-pareja.html">Terapia de Pareja</a></li>
+            <li><a href="servicios/neuropsicologia-clinica.html">Neuropsicología Clínica</a></li>
+          </ul>
+        </li>
+        <li><a href="contacto.html">Contacto</a></li>
+        <li><a href="reserva-cita.html" class="cta-button">Reserva tu cita</a></li>
       </ul>
       <div class="mobile-menu">
         <button id="menu-open" class="menu-open-button" aria-label="Abrir menú">
@@ -189,10 +195,20 @@
         <div id="mobile-menu-container" class="mobile-menu-container">
           <button id="menu-close" class="menu-close-button" aria-label="Cerrar menú"></button>
           <ul id="mobile-menu-list" class="mobile-menu-list">
-            <li><a href="#sobre-mi">Sobre mí</a></li>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#cita-previa">Revisa tu cita</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="index.html" class="active">Inicio</a></li>
+            <li class="menu-item-with-submenu">
+              <button class="menu-toggle" id="servicios-toggle">
+                Servicios 
+                <div class="arrow-down"></div>
+              </button>
+              <ul class="submenu" id="servicios-submenu">
+                <li><a href="servicios/terapia-individual.html">Terapia Individual</a></li>
+                <li><a href="servicios/terapia-pareja.html">Terapia de Pareja</a></li>
+                <li><a href="servicios/neuropsicologia-clinica.html">Neuropsicología Clínica</a></li>
+              </ul>
+            </li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="reserva-cita.html" class="cta-button">Reserva tu cita</a></li>
           </ul>
         </div>
       </div>
@@ -236,82 +252,6 @@
         </div>
       </section>
 
-      <section id="servicios">
-        <div class="contenido">
-          <h3>Servicios</h3>
-          <ul>
-            <li>Terapia individual para adultos y adolescentes</li>
-            <li>Terapia de pareja</li>
-            <li>Evaluación y rehabilitación neuropsicológica</li>
-            <li>Sesiones online y presenciales</li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="cita-previa">
-        <div class="contenido">
-          <h3>Reserva tu cita</h3>
-          <form class="form-contact">
-            <div class="form-group">
-              <label for="nombre">Nombre</label>
-              <input type="text" id="nombre" name="nombre" required />
-            </div>
-            <div class="form-group">
-              <label for="apellidos">Apellidos</label>
-              <input type="text" id="apellidos" name="apellidos" required />
-            </div>
-            <div class="form-group">
-              <label for="telefono">Teléfono</label>
-              <input
-                type="tel"
-                id="telefono"
-                name="telefono"
-                pattern="[0-9]{9}"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="edad">Edad</label>
-              <input
-                type="number"
-                id="edad"
-                name="edad"
-                min="1"
-                max="120"
-                required
-              />
-            </div>
-            <button class="btn btn-enviar-formulario">Enviar</button>
-          </form>
-        </div>
-      </section>
-
-      <section id="contacto">
-        <div class="contenido">
-          <h3>Contacto</h3>
-          <p>Email: carmenbarqueropsicologia@gmail.com</p>
-          <p>
-            WhatsApp: <a href="https://wa.me/34647855165">Enviar mensaje</a>
-          </p>
-          <p>Telefono: <a href="tel:+34647855165">+34 647 855 165</a></p>
-        </div>
-      </section>
-
-      <!-- <section class="sobre-mi-contenedor">
-        <div class="contenido">
-          <h3>Sobre mí</h3>
-          <p>
-            Soy Carmen Barquero, psicóloga clinica con especialidad en
-            neuropsicología. Acompaño a personas en su crecimiento personal para
-            alcanzar un bienestar emocional.
-            <br />
-            Mi forma de trabajo tiene como objetivo ofrecer un espacio
-            terapéutico seguro, donde puedas explorar tus emociones, basándome
-            en un enfoque cercano y personalizado.
-          </p>
-        </div>
-      </section>
-    </main> -->
 
     <footer>
       <p>&copy; 2025 Carmen Barquero. Todos los derechos reservados.</p>
