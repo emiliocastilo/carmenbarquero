@@ -1,4 +1,4 @@
-name: SEO Optimized Production Build
+name: Production Build - Simple & Reliable
 
 on:
   push:
@@ -20,42 +20,28 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Advanced build with optimization
+      - name: Build and minify website
         run: |
           mkdir -p dist
           
-          # Crear estructura
+          # Crear estructura de directorios
           mkdir -p dist/css dist/js dist/servicios dist/img dist/fonts dist/lib
           
-          echo "🎨 Minificando y optimizando CSS..."
+          echo "🎨 Minificando CSS..."
           for file in css/*.css; do
             if [ -f "$file" ]; then
-              # Minificar CSS con opciones avanzadas
-              npx --yes clean-css-cli \
-                --s0 \
-                --compatibility ie8 \
-                --source-map \
-                -o "dist/$file" "$file"
-              echo "✅ CSS: $file -> dist/$file"
+              npx --yes clean-css-cli -o "dist/$file" "$file" || cp "$file" "dist/$file"
+              echo "✅ CSS procesado: $file"
             fi
           done
           
           echo "⚡ Minificando JavaScript..."
           for file in js/*.js; do
             if [ -f "$file" ]; then
-              # Minificar JS con opciones avanzadas
-              npx --yes terser "$file" \
-                -o "dist/$file" \
-                --compress \
-                --mangle \
-                --source-map \
-                --comments false
-              echo "✅ JS: $file -> dist/$file"
+              npx --yes terser "$file" -o "dist/$file" --compress --mangle || cp "$file" "dist/$file"
+              echo "✅ JS procesado: $file"
             fi
           done
-          
-          # Copiar librerías
-          [ -d lib ] && cp -r lib/* dist/lib/ || true
           
           echo "📄 Minificando HTML..."
           # Páginas principales
@@ -65,17 +51,10 @@ jobs:
                 --collapse-whitespace \
                 --remove-comments \
                 --remove-redundant-attributes \
-                --remove-script-type-attributes \
-                --remove-style-link-type-attributes \
-                --use-short-doctype \
-                --remove-empty-attributes \
-                --remove-optional-tags \
                 --minify-css false \
                 --minify-js false \
-                --sort-attributes \
-                --sort-class-name \
-                -o "dist/$file" "$file"
-              echo "✅ HTML: $file -> dist/$file"
+                -o "dist/$file" "$file" || cp "$file" "dist/$file"
+              echo "✅ HTML procesado: $file"
             fi
           done
           
@@ -87,96 +66,33 @@ jobs:
                   --collapse-whitespace \
                   --remove-comments \
                   --remove-redundant-attributes \
-                  --remove-script-type-attributes \
-                  --remove-style-link-type-attributes \
-                  --use-short-doctype \
-                  --remove-empty-attributes \
-                  --remove-optional-tags \
                   --minify-css false \
                   --minify-js false \
-                  --sort-attributes \
-                  --sort-class-name \
-                  -o "dist/$file" "$file"
-                echo "✅ HTML: $file -> dist/$file"
+                  -o "dist/$file" "$file" || cp "$file" "dist/$file"
+                echo "✅ HTML procesado: $file"
               fi
             done
           fi
           
-          echo "🖼️ Optimizando imágenes WebP..."
-          # Copiar y optimizar imágenes
-          if [ -d img ]; then
-            cp -r img dist/img
-            # Optimizar imágenes PNG/JPG si existen
-            find dist/img -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" | while read file; do
-              npx --yes imagemin-cli "$file" --out-dir="$(dirname "$file")" --plugin=imagemin-mozjpeg --plugin=imagemin-pngquant || true
-            done
-          fi
+          echo "📁 Copiando assets..."
+          # Copiar todos los assets
+          [ -d img ] && cp -r img dist/ || true
+          [ -d fonts ] && cp -r fonts dist/ || true
+          [ -d lib ] && cp -r lib dist/ || true
           
-          # Copiar fuentes optimizadas
-          [ -d fonts ] && cp -r fonts dist/fonts || true
-          
-          echo "🔍 Configurando archivos SEO..."
-          # Copiar archivos SEO críticos
+          # Copiar archivos de configuración
           [ -f robots.txt ] && cp robots.txt dist/ || true
           [ -f sitemap.xml ] && cp sitemap.xml dist/ || true
           [ -f CNAME ] && cp CNAME dist/ || true
+          [ -f favicon.ico ] && cp favicon.ico dist/ || true
           
-          # Generar archivo .htaccess para mejor SEO (si se usa Apache)
-          cat > dist/.htaccess << 'EOF'
-          # Compresión GZIP
-          <IfModule mod_deflate.c>
-            AddOutputFilterByType DEFLATE text/plain
-            AddOutputFilterByType DEFLATE text/html
-            AddOutputFilterByType DEFLATE text/xml
-            AddOutputFilterByType DEFLATE text/css
-            AddOutputFilterByType DEFLATE application/xml
-            AddOutputFilterByType DEFLATE application/xhtml+xml
-            AddOutputFilterByType DEFLATE application/rss+xml
-            AddOutputFilterByType DEFLATE application/javascript
-            AddOutputFilterByType DEFLATE application/x-javascript
-          </IfModule>
-          
-          # Cache headers para mejor performance
-          <IfModule mod_expires.c>
-            ExpiresActive on
-            ExpiresByType text/css "access plus 1 year"
-            ExpiresByType application/javascript "access plus 1 year"
-            ExpiresByType image/png "access plus 1 year"
-            ExpiresByType image/jpg "access plus 1 year"
-            ExpiresByType image/jpeg "access plus 1 year"
-            ExpiresByType image/gif "access plus 1 year"
-            ExpiresByType image/webp "access plus 1 year"
-            ExpiresByType font/woff "access plus 1 year"
-            ExpiresByType font/woff2 "access plus 1 year"
-          </IfModule>
-          
-          # Redirecciones SEO
-          RewriteEngine On
-          RewriteCond %{HTTPS} off
-          RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-          EOF
-          
-          echo "📊 Estadísticas del build SEO optimizado:"
-          echo "✅ Archivos CSS procesados: $(find dist/css -name "*.css" | wc -l)"
-          echo "✅ Archivos JS procesados: $(find dist/js -name "*.js" | wc -l)"  
-          echo "✅ Archivos HTML procesados: $(find dist -name "*.html" | wc -l)"
-          echo "✅ Sitemap: $([ -f dist/sitemap.xml ] && echo "Generado" || echo "No encontrado")"
-          echo "✅ Robots.txt: $([ -f dist/robots.txt ] && echo "Configurado" || echo "No encontrado")"
-          echo "✅ CNAME: $([ -f dist/CNAME ] && echo "Configurado" || echo "No encontrado")"
-          
-          # Mostrar tamaños y optimización
-          echo "📏 Tamaño total antes: $(du -sh . --exclude='.git' --exclude='dist' | cut -f1)"
-          echo "📏 Tamaño total después: $(du -sh dist/ | cut -f1)"
-          
-          # Verificación SEO
-          echo "🔍 Verificación SEO:"
-          echo "- Páginas principales: $(find dist -maxdepth 1 -name "*.html" | wc -l)"
-          echo "- Páginas de servicios: $(find dist/servicios -name "*.html" 2>/dev/null | wc -l || echo "0")"
-          echo "- Meta tags verificados en todas las páginas"
-          echo "- Estructura de URLs optimizada"
-          echo "- Compresión y cache headers configurados"
+          echo "📊 Build completado:"
+          echo "- CSS: $(find dist/css -name "*.css" 2>/dev/null | wc -l) archivos"
+          echo "- JS: $(find dist/js -name "*.js" 2>/dev/null | wc -l) archivos"
+          echo "- HTML: $(find dist -name "*.html" 2>/dev/null | wc -l) páginas"
+          echo "- Tamaño total: $(du -sh dist/ | cut -f1)"
 
-      - name: Push optimized site to main
+      - name: Deploy to main branch
         uses: ad-m/github-push-action@v0.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
