@@ -100,13 +100,9 @@ jobs:
             done
           fi
           
-          # Copiar solo librerías minificadas de producción
-          if [ -d lib ]; then
-            find lib -name "*.min.js" -o -name "*.min.css" | while read file; do
-              cp "$file" "dist/$file"
-            done
-            echo "✅ Librerías minificadas copiadas: $(find lib -name "*.min.*" | wc -l) archivos"
-          fi
+          # NO copiar librerías locales - usar solo CDN para producción
+          # Las librerías se cargan desde CDN para mejor performance y cache
+          echo "✅ Usando librerías desde CDN - No se copian archivos locales"
           
           # Copiar archivos de configuración
           [ -f robots.txt ] && cp robots.txt dist/ || true
@@ -114,16 +110,21 @@ jobs:
           [ -f CNAME ] && cp CNAME dist/ || true
           [ -f favicon.ico ] && cp favicon.ico dist/ || true
           
-          echo "📊 Build de producción completado:"
+          # Limpiar archivos de desarrollo y debug
+          find dist -name ".DS_Store" -delete 2>/dev/null || true
+          find dist -name "*.map" -delete 2>/dev/null || true
+          find dist -name "*.log" -delete 2>/dev/null || true
+          
+          echo "📊 Build de producción completado (ULTRA LIMPIO):"
           echo "✅ CSS minificados: $(find dist/css -name "*.css" 2>/dev/null | wc -l) archivos"
           echo "✅ JS minificados: $(find dist/js -name "*.js" 2>/dev/null | wc -l) archivos"  
           echo "✅ HTML optimizados: $(find dist -name "*.html" 2>/dev/null | wc -l) páginas"
           echo "✅ Imágenes de producción: $(find dist/img -type f 2>/dev/null | wc -l) archivos"
           echo "✅ Fuentes: $(find dist/fonts -type f 2>/dev/null | wc -l) archivos"
-          echo "✅ Librerías: $(find dist/lib -type f 2>/dev/null | wc -l) archivos"
+          echo "✅ Usando librerías desde CDN (no archivos locales)"
           echo "📏 Tamaño total optimizado: $(du -sh dist/ | cut -f1)"
           echo ""
-          echo "🚀 Solo archivos de producción - Sin duplicados ni archivos de desarrollo"
+          echo "🚀 PRODUCCIÓN ULTRA LIMPIA - Sin archivos de desarrollo, debug o duplicados"
 
       - name: Deploy to main branch
         uses: ad-m/github-push-action@v0.8.0
