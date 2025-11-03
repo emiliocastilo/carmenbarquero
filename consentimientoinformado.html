@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consentimiento Informado | Clínica Carmen Barquero</title>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/consentimiento.css" />
+    <!-- Librerías para generar PDF desde CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/export-pdf.js"></script>
+  </head>
+  <body>
+    <main>
+      <form id="form-datos-paciente">
+        <div class="folio-consentimiento">
+          <div class="cabecera-consentimiento">
+            <img
+              src="img/carmen-barquero-psicologa-transp.png"
+              alt="Logo Carmen Barquero"
+              class="logo-consentimiento"
+            />
+            <div class="cabecera-texto">
+              <h2>Consentimiento Informado</h2>
+              <p>Clínica de Psicología Carmen Barquero</p>
+              <p>Psicóloga Sanitaria - Colegiada EXXXXX</p>
+            </div>
+          </div>
+          <div class="datos-paciente">
+            <h3>Datos del paciente</h3>
+            <div class="campo-dato">
+              <label for="nombre-apellidos">Nombre y apellidos:</label>
+              <input type="text" id="nombre-apellidos" name="nombre-apellidos" placeholder="Nombre y apellidos" style="width: 65%;" />
+            </div>
+            <div class="campo-dato">
+              <label for="dni">DNI/NIE:</label>
+              <input type="text" id="dni" name="dni" placeholder="DNI/NIE" />
+            </div>
+            <div class="campo-dato">
+              <label for="fecha-nacimiento">Fecha de nacimiento:</label>
+              <input type="text" id="fecha-nacimiento" name="fecha-nacimiento" placeholder="dd / mm / aaaa" />
+            </div>
+            <div class="campo-dato">
+              <label for="telefono">Teléfono de contacto:</label>
+              <input type="text" id="telefono" name="telefono" placeholder="Teléfono" />
+            </div>
+            <!-- <div class="campo-dato">
+              <label for="direccion">Dirección:</label>
+              <input type="text" id="direccion" name="direccion" placeholder="Dirección" />
+            </div> -->
+          </div>
+          <p>
+            Por la presente, <strong>el/la paciente</strong> declara haber sido
+            informado/a de los aspectos relevantes del proceso terapéutico, así
+            como de sus derechos y deberes en la Clínica de Psicología Carmen
+            Barquero.
+          </p>
+          <ul>
+            <li>
+              <strong>Naturaleza de la intervención:</strong> La atención
+              psicológica online consiste en un proceso de evaluación,
+              intervención clínica realizado a través de plataformas de
+              videoconferencia seguras y confidenciales.
+            </li>
+            <li>
+              <strong>Objetivos:</strong> Mejorar el bienestar emocional,
+              prevenir o reducir síntomas psicológicos y favorecer recursos
+              personales de afrontamiento.
+            </li>
+            <li>
+              <strong>Procedimiento:</strong> Las sesiones se llevarán a cabo de
+              forma telemática, mediante programas de videollamada (ej. Zoom,
+              Google Meet u otras plataformas acordadas con el/la paciente). La
+              frecuencia y duración serán pactadas previamente.
+            </li>
+            <li>
+              <strong>Beneficios esperados:</strong> Facilita el acceso a la
+              atención psicológica desde cualquier lugar, con los mismos
+              objetivos terapéuticos que la modalidad presencial.
+            </li>
+            <li>
+              <strong>Posibles riesgos o limitaciones:</strong>
+              <ul>
+                <li>
+                  Pueden producirse interrupciones por fallos técnicos
+                  (internet, dispositivos).
+                </li>
+                <li>
+                  La confidencialidad puede verse comprometida si el/la paciente
+                  no garantiza un entorno privado durante las sesiones.
+                </li>
+                <li>
+                  Existen limitaciones en la intervención en casos de urgencia o
+                  crisis grave, por lo que se recomienda contar con recursos de
+                  emergencia locales.
+                </li>
+              </ul>
+            </li>
+            <li>
+              <strong>Alternativas:</strong> El/la paciente tiene derecho a
+              solicitar atención presencial o derivación a otros profesionales o
+              servicios de salud.
+            </li>
+            <li>
+              <strong>Confidencialidad:</strong> Toda la información recabada
+              será tratada con absoluta confidencialidad, conforme a la LOPD y
+              al RGPD. Las sesiones no serán grabadas sin consentimiento expreso
+              de la persona usuaria.
+            </li>
+            <li>
+              <strong>Derecho a revocar el consentimiento:</strong> La persona
+              usuaria podrá interrumpir la intervención o retirar su
+              consentimiento en cualquier momento, sin que ello suponga
+              perjuicio alguno ni obligación de justificar su decisión.
+            </li>
+            <li>
+              <strong>Datos de contacto:</strong> Para cualquier duda o
+              aclaración podrá dirigirse a la consulta en el teléfono y correo
+              electrónico facilitados por el/la profesional.
+            </li>
+          </ul>
+          <div class="bloque-consentimiento">
+            <h3>Consentimiento</h3>
+            <p>
+              Declaro haber recibido la información suficiente y comprensible
+              respecto al proceso de atención psicológica online. He podido
+              formular preguntas y entiendo las explicaciones que se me han
+              ofrecido.
+            </p>
+            <p>
+              Manifiesto mi conformidad para iniciar la intervención psicológica
+              en modalidad online en las condiciones expuestas.
+            </p>
+          </div>
+          <div
+            class="linea-fecha-completa"
+            style="width: 100%; text-align: center; margin-bottom: 1rem"
+          >
+            En
+            <input type="text" name="lugar" id="lugar" placeholder="Ciudad" style="width: 120px; display: inline-block" />,
+            a <input type="text" name="dia" id="dia" placeholder="día" style="width: 40px; display: inline-block" />
+            de <input type="text" name="mes" id="mes" placeholder="mes" style="width: 80px; display: inline-block" />
+            de <input type="text" name="anio" id="anio" placeholder="año" style="width: 60px; display: inline-block" />
+          </div>
+          <label for="firma">Firma del paciente:</label>
+          <input type="text" id="firma" name="firma" placeholder="Nombre y apellidos" style="width: 60%; margin-bottom: 1rem" />
+          <br />
+          <label for="fecha">Fecha:</label>
+          <input type="text" id="fecha" name="fecha" placeholder="dd / mm / aaaa" style="width: 40%" />
+          <div style="margin: 2rem 0;">
+            <label for="canvas-firma">Firma manuscrita:</label><br>
+            <canvas id="canvas-firma" width="400" height="120" style="border:1px solid #ccc; background:#fff; cursor:crosshair;"></canvas>
+            <br>
+            <button type="button" id="limpiar-firma" style="margin-top:8px">Limpiar firma</button>
+          </div>
+          <p class="firma-clinica">Clínica de Psicología Carmen Barquero</p>
+        </div>
+      </form>
+      <div style="text-align: center; margin-top: 2rem">
+        <button id="btn-confirmar" class="btn-confirmar" onclick="generatePDF()">
+          Confirmar y generar PDF
+        </button>
+      </div>
+  </body>
+</html>

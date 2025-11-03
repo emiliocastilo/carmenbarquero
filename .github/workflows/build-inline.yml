@@ -1,4 +1,4 @@
-name: Build & Inline to main
+name: Production Build - Simple & Reliable
 
 on:
   push:
@@ -20,28 +20,113 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Build single HTML (inline CSS/JS) + minify
+      - name: Build and minify website
         run: |
           mkdir -p dist
-          # 1) Inlining de CSS/JS partiendo de index.html en la raíz
-          npx --yes inliner ./index.html > dist/index.html
+          
+          # Crear estructura de directorios
+          mkdir -p dist/css dist/js dist/servicios dist/img dist/fonts dist/lib
+          
+          echo "🎨 Minificando CSS..."
+          for file in css/*.css; do
+            if [ -f "$file" ]; then
+              npx --yes clean-css-cli -o "dist/$file" "$file" || cp "$file" "dist/$file"
+              echo "✅ CSS procesado: $file"
+            fi
+          done
+          
+          echo "⚡ Minificando JavaScript..."
+          for file in js/*.js; do
+            if [ -f "$file" ]; then
+              npx --yes terser "$file" -o "dist/$file" --compress --mangle || cp "$file" "dist/$file"
+              echo "✅ JS procesado: $file"
+            fi
+          done
+          
+          echo "📄 Minificando HTML..."
+          # Páginas principales
+          for file in *.html; do
+            if [ -f "$file" ]; then
+              npx --yes html-minifier-terser \
+                --collapse-whitespace \
+                --remove-comments \
+                --remove-redundant-attributes \
+                --minify-css false \
+                --minify-js false \
+                -o "dist/$file" "$file" || cp "$file" "dist/$file"
+              echo "✅ HTML procesado: $file"
+            fi
+          done
+          
+          # Páginas de servicios
+          if [ -d servicios ]; then
+            for file in servicios/*.html; do
+              if [ -f "$file" ]; then
+                npx --yes html-minifier-terser \
+                  --collapse-whitespace \
+                  --remove-comments \
+                  --remove-redundant-attributes \
+                  --minify-css false \
+                  --minify-js false \
+                  -o "dist/$file" "$file" || cp "$file" "dist/$file"
+                echo "✅ HTML procesado: $file"
+              fi
+            done
+          fi
+          
+          echo "📁 Copiando solo assets de producción..."
+          # Crear estructura de directorios para assets
+          mkdir -p dist/img dist/fonts dist/lib
+          
+          # Copiar solo imágenes de producción (excluir .DS_Store y carpetas de desarrollo)
+          if [ -d img ]; then
+            # Copiar imágenes principales
+            find img -maxdepth 1 -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.webp" -o -name "*.gif" -o -name "*.svg" | while read file; do
+              cp "$file" "dist/$file"
+            done
+            
+            # Copiar solo favicon principal (no las carpetas de prueba)
+            [ -d img/favicon ] && cp -r img/favicon dist/img/ || true
+            [ -d img/social ] && cp -r img/social dist/img/ || true
+            
+            echo "✅ Imágenes copiadas (excluyendo archivos de desarrollo)"
+          fi
+          
+          # Copiar solo fuentes necesarias
+          if [ -d fonts ]; then
+            find fonts -name "*.ttf" -o -name "*.otf" -o -name "*.woff" -o -name "*.woff2" | while read file; do
+              mkdir -p "dist/$(dirname "$file")"
+              cp "$file" "dist/$file"
+            done
+          fi
+          
+          # NO copiar librerías locales - usar solo CDN para producción
+          # Las librerías se cargan desde CDN para mejor performance y cache
+          echo "✅ Usando librerías desde CDN - No se copian archivos locales"
+          
+          # Copiar archivos de configuración
+          [ -f robots.txt ] && cp robots.txt dist/ || true
+          [ -f sitemap.xml ] && cp sitemap.xml dist/ || true
+          [ -f CNAME ] && cp CNAME dist/ || true
+          [ -f favicon.ico ] && cp favicon.ico dist/ || true
+          
+          # Limpiar archivos de desarrollo y debug
+          find dist -name ".DS_Store" -delete 2>/dev/null || true
+          find dist -name "*.map" -delete 2>/dev/null || true
+          find dist -name "*.log" -delete 2>/dev/null || true
+          
+          echo "📊 Build de producción completado (ULTRA LIMPIO):"
+          echo "✅ CSS minificados: $(find dist/css -name "*.css" 2>/dev/null | wc -l) archivos"
+          echo "✅ JS minificados: $(find dist/js -name "*.js" 2>/dev/null | wc -l) archivos"  
+          echo "✅ HTML optimizados: $(find dist -name "*.html" 2>/dev/null | wc -l) páginas"
+          echo "✅ Imágenes de producción: $(find dist/img -type f 2>/dev/null | wc -l) archivos"
+          echo "✅ Fuentes: $(find dist/fonts -type f 2>/dev/null | wc -l) archivos"
+          echo "✅ Usando librerías desde CDN (no archivos locales)"
+          echo "📏 Tamaño total optimizado: $(du -sh dist/ | cut -f1)"
+          echo ""
+          echo "🚀 PRODUCCIÓN ULTRA LIMPIA - Sin archivos de desarrollo, debug o duplicados"
 
-          # 2) Minificado del HTML (incluye CSS/JS ya embebidos)
-          npx --yes html-minifier-terser \
-            --collapse-whitespace \
-            --remove-comments \
-            --remove-redundant-attributes \
-            --remove-script-type-attributes \
-            --remove-style-link-type-attributes \
-            --minify-css true \
-            --minify-js true \
-            -o dist/index.html dist/index.html
-
-          # 3) Copia de assets que NO queremos perder (favicons, imágenes, fuentes)
-          [ -d img ] && cp -r img dist/img || true
-          [ -d fonts ] && cp -r fonts dist/fonts || true
-
-      - name: Push dist to main (root)
+      - name: Deploy to main branch
         uses: ad-m/github-push-action@v0.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

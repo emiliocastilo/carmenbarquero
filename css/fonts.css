@@ -9,7 +9,7 @@
   font-style: normal;
   font-display: swap;
 }
-/* Fuente Caviar Dreams */
+/* Fuente Caviar Dreams - solo variante normal */
 @font-face {
   font-family: "Caviar Dreams";
   src: url("../fonts/caviar_dreams/CaviarDreams.ttf") format("truetype"),
@@ -18,34 +18,9 @@
   font-style: normal;
   font-display: swap;
 }
-@font-face {
-  font-family: "Caviar Dreams";
-  src: url("../fonts/caviar_dreams/CaviarDreams_Bold.ttf") format("truetype"),
-    url("../fonts/caviar_dreams/CaviarDreams_Bold.woff") format("woff");
-  font-weight: bold;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Caviar Dreams";
-  src: url("../fonts/caviar_dreams/CaviarDreams_Italic.ttf") format("truetype"),
-    url("../fonts/caviar_dreams/CaviarDreams_Italic.woff") format("woff");
-  font-weight: normal;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Caviar Dreams";
-  src: url("../fonts/caviar_dreams/CaviarDreams_BoldItalic.ttf")
-      format("truetype"),
-    url("../fonts/caviar_dreams/CaviarDreams_BoldItalic.woff") format("woff");
-  font-weight: bold;
-  font-style: italic;
-  font-display: swap;
-}
 .font-caviar-dreams {
   font-family: "Caviar Dreams", sans-serif;
-  font-weight: 100;
+  font-weight: normal;
 }
 .font-chetta-vissto {
   font-family: "Chetta Vissto", cursive;
