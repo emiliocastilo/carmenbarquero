@@ -58,6 +58,118 @@
   }
 }
 
+/* Sección Servicios */
+.servicios-section {
+  padding: 4rem 0;
+  background-color: #f8f9fa;
+}
+
+.servicios-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--color-principal);
+  margin-bottom: 3rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.servicios-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.servicio-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e9ecef;
+}
+
+.servicio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.servicio-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.5rem;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--color-principal), #5a8aa0);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.servicio-icon svg {
+  width: 30px;
+  height: 30px;
+  color: white;
+}
+
+.servicio-titulo {
+  font-size: 1.5rem;
+  color: var(--color-principal);
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+}
+
+.servicio-descripcion {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.servicio-link {
+  display: inline-block;
+  color: var(--color-principal);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--color-principal);
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+
+.servicio-link:hover {
+  background-color: var(--color-principal);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Responsive para dispositivos móviles */
+@media (max-width: 768px) {
+  .servicios-section {
+    padding: 3rem 0;
+  }
+  
+  .servicios-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .servicios-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .servicio-card {
+    padding: 1.5rem;
+  }
+  
+  .servicio-titulo {
+    font-size: 1.3rem;
+  }
+}
+
 section {
   width: 100%;
 }
