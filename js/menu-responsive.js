@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenuContainer.classList.add('show');
             menuOverlay.classList.add('show');
             document.body.style.overflow = 'hidden'; // Prevenir scroll del body
+            
+            // Auto-abrir submenu de servicios siempre que se abra el menú móvil
+            autoOpenServiciosSubmenu();
         }
         
         function closeMenu() {
@@ -49,6 +52,20 @@ document.addEventListener('DOMContentLoaded', function() {
                 closeMenu();
             }
         });
+    }
+    
+    // Función para abrir automáticamente el submenu de servicios
+    function autoOpenServiciosSubmenu() {
+        const serviciosToggle = document.getElementById('servicios-toggle');
+        const serviciosSubmenu = document.getElementById('servicios-submenu');
+        
+        if (serviciosToggle && serviciosSubmenu) {
+            // Pequeño delay para que la animación del menú principal se vea primero
+            setTimeout(() => {
+                serviciosToggle.classList.add('active');
+                serviciosSubmenu.classList.add('show');
+            }, 700);
+        }
     }
 
     // Funcionalidad del submenú
