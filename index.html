@@ -116,15 +116,106 @@
       }
     </script>
 
+    <!-- PERFORMANCE OPTIMIZATIONS -->
+    <!-- Preload imagen crítica del hero -->
+    <link rel="preload" as="image" href="img/home.jpeg" />
+    
+    <!-- Critical CSS inline para hero section y layout básico -->
+    <style>
+      /* Critical CSS - Hero Section y layout básico */
+      .hero-section {
+        width: 100vw;
+        height: 70vh;
+        min-height: 500px;
+        background-image: url('img/home.jpeg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+        position: relative;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      .hero-content {
+        max-width: 800px;
+        padding: 2rem;
+        z-index: 2;
+      }
+      .hero-title {
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        font-weight: 700;
+        margin: 0 0 1rem 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        letter-spacing: 1px;
+      }
+      .hero-slogan {
+        font-size: clamp(1.2rem, 4vw, 2.5rem);
+        margin: 0;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        font-style: italic;
+      }
+      @media (max-width: 768px) {
+        .hero-section {
+          height: 40vh;
+          min-height: 300px;
+          background-attachment: scroll;
+        }
+        .hero-content {
+          padding: 1.5rem;
+        }
+      }
+      /* Basic layout para evitar FOUC */
+      body {
+        margin: 0;
+        font-family: "Source Sans Pro", sans-serif;
+        background-color: #ffffff;
+        color: #2c2c2c;
+        line-height: 1.6;
+        scroll-behavior: smooth;
+      }
+    </style>
+
     <title>Carmen Barquero - Psicóloga General Sanitaria Mérida</title>
-    <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/layout.css" />
-    <link rel="stylesheet" href="css/menu-superior.css" />
-    <link rel="stylesheet" href="css/menu-responsive.css" />
-    <link rel="stylesheet" href="css/whatsapp-float.css" />
-    <link rel="stylesheet" href="css/animacion-sobre-mi.css" />
-    <link rel="stylesheet" href="css/modal.css" />
+    <!-- CSS no crítico con async loading -->
+    <link rel="preload" as="style" href="css/fonts.css">
+    <link rel="stylesheet" href="css/fonts.css" media="print" onload="this.media='all'">
+    
+    <link rel="preload" as="style" href="css/base.css">
+    <link rel="stylesheet" href="css/base.css" media="print" onload="this.media='all'">
+    
+    <link rel="preload" as="style" href="css/layout.css">
+    <link rel="stylesheet" href="css/layout.css" media="print" onload="this.media='all'">
+    
+    <link rel="preload" as="style" href="css/menu-superior.css">
+    <link rel="stylesheet" href="css/menu-superior.css" media="print" onload="this.media='all'">
+    
+    <link rel="preload" as="style" href="css/menu-responsive.css">
+    <link rel="stylesheet" href="css/menu-responsive.css" media="print" onload="this.media='all'">
+    
+    <link rel="preload" as="style" href="css/whatsapp-float.css">
+    <link rel="stylesheet" href="css/whatsapp-float.css" media="print" onload="this.media='all'">
+    
+    <link rel="preload" as="style" href="css/animacion-sobre-mi.css">
+    <link rel="stylesheet" href="css/animacion-sobre-mi.css" media="print" onload="this.media='all'">
+    
+    <link rel="preload" as="style" href="css/modal.css">
+    <link rel="stylesheet" href="css/modal.css" media="print" onload="this.media='all'">
+    
+    <noscript>
+      <link rel="stylesheet" href="css/fonts.css" />
+      <link rel="stylesheet" href="css/base.css" />
+      <link rel="stylesheet" href="css/layout.css" />
+      <link rel="stylesheet" href="css/menu-superior.css" />
+      <link rel="stylesheet" href="css/menu-responsive.css" />
+      <link rel="stylesheet" href="css/whatsapp-float.css" />
+      <link rel="stylesheet" href="css/animacion-sobre-mi.css" />
+      <link rel="stylesheet" href="css/modal.css" />
+    </noscript>
     <!-- Favicon completo con todas las resoluciones -->
     <link rel="icon" type="image/x-icon" href="./img/favicon/favicon.ico" />
     <link rel="shortcut icon" href="./img/favicon/favicon.ico" />
@@ -145,33 +236,34 @@
     <!-- <link rel="manifest" href="./img/favicon/site.webmanifest" /> -->
     <meta name="apple-mobile-web-app-title" content="Carmen Barquero Psicología" />
 
-    <!-- <link rel="icon" type="image/png"  href="img/favicon/favicon-sin-fondo.png"> -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap"
-    />
+    <!-- Google Fonts optimizado con async loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap">
+    </noscript>
 
-    <!-- animacion-sobre-mi.js -->
-    <script src="js/animacion-sobre-mi.js"></script>
-
-    <!-- contacto-form.js -->
-    <script src="js/contacto-form.js"></script>
-    <!-- modal.js -->
-    <script src="js/modal.js"></script>
-    <!-- menu-responsive.js -->
-    <script src="js/menu-responsive.js"></script>
+    <!-- Performance Loader - Carga recursos de forma optimizada -->
+    <script src="js/performance-loader.js"></script>
     
-    <!-- Detección de soporte WebP -->
+    <!-- Scripts no críticos con defer para mejor performance -->
+    <script src="js/animacion-sobre-mi.js" defer></script>
+    <script src="js/contacto-form.js" defer></script>
+    <script src="js/modal.js" defer></script>
+    <script src="js/menu-responsive.js" defer></script>
+    
+    <!-- Detección optimizada de soporte WebP -->
     <script>
-      (function() {
-        var webP = new Image();
-        webP.onload = webP.onerror = function () {
-          if (webP.height == 2) {
-            document.documentElement.classList.add('webp');
-          }
-        };
-        webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
-      })();
+      // Detección WebP más eficiente
+      !function(){
+        var e=new Image;
+        e.onload=e.onerror=function(){
+          2===e.height&&document.documentElement.classList.add('webp')
+        },
+        e.src='data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA'
+      }();
     </script>
   </head>
   <body>
