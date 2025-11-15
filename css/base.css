@@ -16,10 +16,6 @@ body {
   line-height: 1.6;
   scroll-behavior: smooth;
 }
-/* Fondo gris para sections pares */
-section:nth-of-type(2n - 1) {
-  background: #f5f6f7;
-}
 h3 {
   color: var(--color-principal);
   font-size: 1.5rem;
