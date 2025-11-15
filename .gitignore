@@ -6,3 +6,7 @@
 # System
 .DS_Store
 /cache/
+img/.DS_Store
+
+# Performance
+/lighthouse/
