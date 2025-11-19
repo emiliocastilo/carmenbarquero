@@ -44,18 +44,22 @@
     <link rel="preload" as="style" href="css/base.css" />
     <link rel="preload" as="style" href="css/layout.css" />
     <link rel="preload" as="style" href="css/modal.css" />
+    <link rel="preload" as="style" href="css/menu-superior.css" />
+    <link rel="preload" as="style" href="css/menu-responsive.css" />
     
     <!-- Carga síncrona de CSS crítico -->
     <link rel="stylesheet" href="css/fonts.css" />
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/modal.css" />
+    <link rel="stylesheet" href="css/menu-superior.css" />
+    <link rel="stylesheet" href="css/menu-responsive.css" />
     
     <!-- CSS crítico inline para FCP más rápido -->
     <style>
       /* CSS crítico inline */
-      @font-face{font-family:"Chetta Vissto";src:url("fonts/chetta-vissto/ChettaVissto.woff2") format("woff2");font-weight:normal;font-style:normal;font-display:swap}
-      @font-face{font-family:"Caviar Dreams";src:url("fonts/caviar_dreams/CaviarDreams.woff2") format("woff2");font-weight:normal;font-style:normal;font-display:swap}
+      @font-face{font-family:"Chetta Vissto";src:url("fonts/chetta-vissto/ChettaVissto.woff2") format("woff2"),url("fonts/chetta-vissto/ChettaVissto.woff") format("woff");font-weight:normal;font-style:normal;font-display:swap}
+      @font-face{font-family:"Caviar Dreams";src:url("fonts/caviar_dreams/CaviarDreams.ttf") format("truetype");font-weight:normal;font-style:normal;font-display:swap}
       :root{--color-principal:#3a4a5a;--color-secundario:#e8f4fd;--color-acento:#00bcd4;--color-texto:#333;--color-blanco:#ffffff}
       *{margin:0;padding:0;box-sizing:border-box}
       body{font-family:"Caviar Dreams",sans-serif;line-height:1.6;color:var(--color-texto);background-color:var(--color-blanco)}
@@ -219,13 +223,11 @@
 
     <title>Carmen Barquero - Psicóloga General Sanitaria Mérida</title>
     <!-- CSS no crítico con media queries -->
-    <link rel="stylesheet" href="css/menu-superior.css" media="print" onload="this.media='all'" />
     <link rel="stylesheet" href="css/whatsapp-float.css" media="print" onload="this.media='all'" />
     <link rel="stylesheet" href="css/animacion-sobre-mi.css" media="print" onload="this.media='all'" />
     
     <!-- Fallback para navegadores sin JS -->
     <noscript>
-      <link rel="stylesheet" href="css/menu-superior.css" />
       <link rel="stylesheet" href="css/whatsapp-float.css" />
       <link rel="stylesheet" href="css/animacion-sobre-mi.css" />
     </noscript>
