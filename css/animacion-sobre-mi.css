@@ -11,8 +11,11 @@
 .info-contenido p {
   width: 50%;
   margin: 0 auto;
-  
-  @media (min-width: 768px) {
+}
+
+/* Media query para info-contenido p */
+@media (min-width: 768px) {
+  .info-contenido p {
     width: 70%;
   }
 }
@@ -99,6 +102,7 @@
     }
   }
 }
+
 /* Estilos generales para el contenido */
 .info-contenido {
   display: flex;
