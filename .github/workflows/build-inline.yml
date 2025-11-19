@@ -1,4 +1,4 @@
-name: Production Build - Simple & Reliable
+name: Production Build - URLs Fixed
 
 on:
   push:
@@ -22,126 +22,69 @@ jobs:
 
       - name: Build and minify website
         run: |
-          mkdir -p dist
+          mkdir -p dist/css dist/js dist/servicios dist/img dist/fonts
           
-          # Crear estructura de directorios
-          mkdir -p dist/css dist/js dist/servicios dist/img dist/fonts dist/lib
+          echo "🔗 PASO 1: Convertir URLs en archivos HTML (ANTES de minificar)"
           
-          echo "🎨 Minificando CSS..."
-          for file in css/*.css; do
-            if [ -f "$file" ]; then
-              npx --yes clean-css-cli -o "dist/$file" "$file" || cp "$file" "dist/$file"
-              echo "✅ CSS procesado: $file"
-            fi
-          done
-          
-          echo "⚡ Minificando JavaScript..."
-          for file in js/*.js; do
-            if [ -f "$file" ]; then
-              npx --yes terser "$file" -o "dist/$file" --compress --mangle || cp "$file" "dist/$file"
-              echo "✅ JS procesado: $file"
-            fi
-          done
-          
-          echo "🔗 Convirtiendo URLs a absolutas y sin .html..."
-          
-          # Función para convertir URLs en archivos HTML
+          # Función para convertir URLs
           convert_urls_in_file() {
             local file="$1"
-            echo "🔄 Procesando URLs en: $file"
+            echo "🔧 Procesando URLs en: $file"
             
-            # Convertir recursos (CSS, JS, imágenes) a URLs absolutas
+            # URLs absolutas para recursos
             sed -i 's|href="css/|href="https://www.carmenbarqueropsicologia.es/css/|g' "$file"
-            sed -i 's|href="../css/|href="https://www.carmenbarqueropsicologia.es/css/|g' "$file"
             sed -i 's|src="js/|src="https://www.carmenbarqueropsicologia.es/js/|g' "$file"
-            sed -i 's|src="../js/|src="https://www.carmenbarqueropsicologia.es/js/|g' "$file"
             sed -i 's|src="img/|src="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
-            sed -i 's|src="../img/|src="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
             sed -i 's|srcset="img/|srcset="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
-            sed -i 's|srcset="../img/|srcset="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
+            sed -i 's|href="./img/favicon/|href="https://www.carmenbarqueropsicologia.es/img/favicon/|g' "$file"
             
-            # Convertir favicons y meta content
-            sed -i 's|href="img/favicon/|href="https://www.carmenbarqueropsicologia.es/img/favicon/|g' "$file"
-            sed -i 's|href="../img/favicon/|href="https://www.carmenbarqueropsicologia.es/img/favicon/|g' "$file"
-            sed -i 's|content="img/|content="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
-            sed -i 's|content="../img/|content="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
-            sed -i 's|content="./img/|content="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
-            
-            # CSS inline backgrounds
-            sed -i "s|background-image: url('img/|background-image: url('https://www.carmenbarqueropsicologia.es/img/|g" "$file"
-            sed -i 's|background-image: url("img/|background-image: url("https://www.carmenbarqueropsicologia.es/img/|g' "$file"
-            
-            # Convertir navegación a URLs absolutas SIN .html
-            # Inicio - tanto index.html como ../index.html van a la raíz
+            # Navegación SIN .html
             sed -i 's|href="index\.html"|href="https://www.carmenbarqueropsicologia.es/"|g' "$file"
-            sed -i 's|href="../index\.html"|href="https://www.carmenbarqueropsicologia.es/"|g' "$file"
-            
-            # Páginas principales SIN .html
             sed -i 's|href="contacto\.html"|href="https://www.carmenbarqueropsicologia.es/contacto"|g' "$file"
-            sed -i 's|href="../contacto\.html"|href="https://www.carmenbarqueropsicologia.es/contacto"|g' "$file"
             sed -i 's|href="reserva-cita\.html"|href="https://www.carmenbarqueropsicologia.es/reserva-cita"|g' "$file"
-            sed -i 's|href="../reserva-cita\.html"|href="https://www.carmenbarqueropsicologia.es/reserva-cita"|g' "$file"
-            sed -i 's|href="politica-privacidad\.html"|href="https://www.carmenbarqueropsicologia.es/politica-privacidad"|g' "$file"
-            sed -i 's|href="../politica-privacidad\.html"|href="https://www.carmenbarqueropsicologia.es/politica-privacidad"|g' "$file"
-            sed -i 's|href="consentimientoinformado\.html"|href="https://www.carmenbarqueropsicologia.es/consentimientoinformado"|g' "$file"
-            sed -i 's|href="../consentimientoinformado\.html"|href="https://www.carmenbarqueropsicologia.es/consentimientoinformado"|g' "$file"
-            
-            # Servicios SIN .html
             sed -i 's|href="servicios/terapia-individual\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/terapia-individual"|g' "$file"
             sed -i 's|href="servicios/terapia-pareja\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/terapia-pareja"|g' "$file"
             sed -i 's|href="servicios/neuropsicologia-clinica\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/neuropsicologia-clinica"|g' "$file"
-            sed -i 's|href="terapia-individual\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/terapia-individual"|g' "$file"
-            sed -i 's|href="terapia-pareja\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/terapia-pareja"|g' "$file"
-            sed -i 's|href="neuropsicologia-clinica\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/neuropsicologia-clinica"|g' "$file"
+            sed -i 's|href="politica-privacidad\.html"|href="https://www.carmenbarqueropsicologia.es/politica-privacidad"|g' "$file"
+            sed -i 's|href="consentimientoinformado\.html"|href="https://www.carmenbarqueropsicologia.es/consentimientoinformado"|g' "$file"
             
-            # Enlaces generales a servicios/
-            sed -i 's|href="servicios/|href="https://www.carmenbarqueropsicologia.es/servicios/|g' "$file"
+            # Rutas relativas desde servicios/
+            sed -i 's|href="../contacto\.html"|href="https://www.carmenbarqueropsicologia.es/contacto"|g' "$file"
+            sed -i 's|href="../index\.html"|href="https://www.carmenbarqueropsicologia.es/"|g' "$file"
+            sed -i 's|href="../css/|href="https://www.carmenbarqueropsicologia.es/css/|g' "$file"
+            sed -i 's|src="../js/|src="https://www.carmenbarqueropsicologia.es/js/|g' "$file"
+            sed -i 's|src="../img/|src="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
             
             echo "✅ URLs convertidas en: $file"
           }
           
-          # Convertir URLs en páginas principales
-          for file in dist/*.html; do
+          # Convertir URLs en archivos principales
+          for file in *.html; do
+            [ -f "$file" ] && convert_urls_in_file "$file"
+          done
+          
+          # Convertir URLs en servicios
+          for file in servicios/*.html; do
+            [ -f "$file" ] && convert_urls_in_file "$file"
+          done
+          
+          echo "🎨 PASO 2: Minificar CSS"
+          for file in css/*.css; do
             if [ -f "$file" ]; then
-              convert_urls_in_file "$file"
+              npx --yes clean-css-cli -o "dist/$file" "$file" || cp "$file" "dist/$file"
+              echo "✅ CSS: $file"
             fi
           done
           
-          # Convertir URLs en páginas de servicios
-          for file in dist/servicios/*.html; do
+          echo "⚡ PASO 3: Minificar JavaScript"
+          for file in js/*.js; do
             if [ -f "$file" ]; then
-              convert_urls_in_file "$file"
+              npx --yes terser "$file" -o "dist/$file" --compress --mangle || cp "$file" "dist/$file"
+              echo "✅ JS: $file"
             fi
           done
           
-          echo "🎯 URLs convertidas:"
-          echo "✅ Recursos: URLs absolutas (CSS, JS, imágenes)"
-          echo "✅ Navegación: URLs absolutas sin .html"
-          echo "✅ Inicio: https://www.carmenbarqueropsicologia.es/"
-
-          # Convertir URLs del sitemap.xml
-          if [ -f sitemap.xml ]; then
-            echo "📄 Convirtiendo URLs del sitemap a formato limpio..."
-            sed -i 's|contacto\.html|contacto|g' sitemap.xml
-            sed -i 's|reserva-cita\.html|reserva-cita|g' sitemap.xml
-            sed -i 's|terapia-individual\.html|terapia-individual|g' sitemap.xml
-            sed -i 's|terapia-pareja\.html|terapia-pareja|g' sitemap.xml
-            sed -i 's|neuropsicologia-clinica\.html|neuropsicologia-clinica|g' sitemap.xml
-            sed -i 's|politica-privacidad\.html|politica-privacidad|g' sitemap.xml
-            sed -i 's|consentimientoinformado\.html|consentimientoinformado|g' sitemap.xml
-            cp sitemap.xml dist/
-            echo "✅ Sitemap actualizado con URLs limpias"
-          fi
-
-          # Copiar robots.txt
-          if [ -f robots.txt ]; then
-            cp robots.txt dist/
-            echo "✅ Robots.txt copiado"
-          fi
-          echo "✅ Servicios: https://www.carmenbarqueropsicologia.es/servicios/terapia-individual"
-          
-          echo "📄 Minificando HTML..."
-          # Páginas principales
+          echo "📄 PASO 4: Minificar HTML (ya con URLs convertidas)"
           for file in *.html; do
             if [ -f "$file" ]; then
               npx --yes html-minifier-terser \
@@ -151,45 +94,36 @@ jobs:
                 --minify-css false \
                 --minify-js false \
                 -o "dist/$file" "$file" || cp "$file" "dist/$file"
-              echo "✅ HTML procesado: $file"
+              echo "✅ HTML: $file"
             fi
           done
           
-          # Páginas de servicios
-          if [ -d servicios ]; then
-            for file in servicios/*.html; do
-              if [ -f "$file" ]; then
-                npx --yes html-minifier-terser \
-                  --collapse-whitespace \
-                  --remove-comments \
-                  --remove-redundant-attributes \
-                  --minify-css false \
-                  --minify-js false \
-                  -o "dist/$file" "$file" || cp "$file" "dist/$file"
-                echo "✅ HTML procesado: $file"
-              fi
-            done
-          fi
+          # Minificar HTML de servicios
+          for file in servicios/*.html; do
+            if [ -f "$file" ]; then
+              npx --yes html-minifier-terser \
+                --collapse-whitespace \
+                --remove-comments \
+                --remove-redundant-attributes \
+                --minify-css false \
+                --minify-js false \
+                -o "dist/$file" "$file" || cp "$file" "dist/$file"
+              echo "✅ HTML servicios: $file"
+            fi
+          done
           
-          echo "📁 Copiando solo assets de producción..."
-          # Crear estructura de directorios para assets
-          mkdir -p dist/img dist/fonts dist/lib
-          
-          # Copiar solo imágenes de producción (excluir .DS_Store y carpetas de desarrollo)
+          echo "📁 PASO 5: Copiar assets"
+          # Imágenes
           if [ -d img ]; then
-            # Copiar imágenes principales
-            find img -maxdepth 1 -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.webp" -o -name "*.gif" -o -name "*.svg" | while read file; do
+            find img -name "*.jpg" -o -name "*.jpeg" -o -name "*.png" -o -name "*.webp" -o -name "*.gif" | while read file; do
+              mkdir -p "dist/$(dirname "$file")"
               cp "$file" "dist/$file"
             done
-            
-            # Copiar solo favicon principal (no las carpetas de prueba)
             [ -d img/favicon ] && cp -r img/favicon dist/img/ || true
             [ -d img/social ] && cp -r img/social dist/img/ || true
-            
-            echo "✅ Imágenes copiadas (excluyendo archivos de desarrollo)"
           fi
           
-          # Copiar solo fuentes necesarias
+          # Fuentes
           if [ -d fonts ]; then
             find fonts -name "*.ttf" -o -name "*.otf" -o -name "*.woff" -o -name "*.woff2" | while read file; do
               mkdir -p "dist/$(dirname "$file")"
@@ -197,31 +131,28 @@ jobs:
             done
           fi
           
-          # NO copiar librerías locales - usar solo CDN para producción
-          # Las librerías se cargan desde CDN para mejor performance y cache
-          echo "✅ Usando librerías desde CDN - No se copian archivos locales"
+          echo "🗺️ PASO 6: Actualizar sitemap"
+          if [ -f sitemap.xml ]; then
+            sed -i 's|contacto\.html|contacto|g' sitemap.xml
+            sed -i 's|reserva-cita\.html|reserva-cita|g' sitemap.xml
+            sed -i 's|terapia-individual\.html|terapia-individual|g' sitemap.xml
+            sed -i 's|terapia-pareja\.html|terapia-pareja|g' sitemap.xml
+            sed -i 's|neuropsicologia-clinica\.html|neuropsicologia-clinica|g' sitemap.xml
+            sed -i 's|politica-privacidad\.html|politica-privacidad|g' sitemap.xml
+            sed -i 's|consentimientoinformado\.html|consentimientoinformado|g' sitemap.xml
+            cp sitemap.xml dist/
+            echo "✅ Sitemap actualizado"
+          fi
           
           # Copiar archivos de configuración
-          [ -f robots.txt ] && cp robots.txt dist/ || true
-          [ -f sitemap.xml ] && cp sitemap.xml dist/ || true
-          [ -f CNAME ] && cp CNAME dist/ || true
-          [ -f favicon.ico ] && cp favicon.ico dist/ || true
+          [ -f robots.txt ] && cp robots.txt dist/
+          [ -f CNAME ] && cp CNAME dist/
+          [ -f favicon.ico ] && cp favicon.ico dist/
           
-          # Limpiar archivos de desarrollo y debug
-          find dist -name ".DS_Store" -delete 2>/dev/null || true
-          find dist -name "*.map" -delete 2>/dev/null || true
-          find dist -name "*.log" -delete 2>/dev/null || true
-          
-          echo "📊 Build de producción completado (ULTRA LIMPIO):"
-          echo "✅ CSS minificados: $(find dist/css -name "*.css" 2>/dev/null | wc -l) archivos"
-          echo "✅ JS minificados: $(find dist/js -name "*.js" 2>/dev/null | wc -l) archivos"  
-          echo "✅ HTML optimizados: $(find dist -name "*.html" 2>/dev/null | wc -l) páginas"
-          echo "✅ Imágenes de producción: $(find dist/img -type f 2>/dev/null | wc -l) archivos"
-          echo "✅ Fuentes: $(find dist/fonts -type f 2>/dev/null | wc -l) archivos"
-          echo "✅ Usando librerías desde CDN (no archivos locales)"
-          echo "📏 Tamaño total optimizado: $(du -sh dist/ | cut -f1)"
-          echo ""
-          echo "🚀 PRODUCCIÓN ULTRA LIMPIA - Sin archivos de desarrollo, debug o duplicados"
+          echo "🎉 BUILD COMPLETADO"
+          echo "✅ URLs convertidas a formato limpio (sin .html)"
+          echo "✅ Recursos con URLs absolutas" 
+          echo "✅ Archivos minificados"
 
       - name: Configure Git
         run: |
@@ -230,20 +161,10 @@ jobs:
 
       - name: Deploy to main branch
         run: |
-          # Crear rama main si no existe
           git checkout --orphan main || git checkout main
-          
-          # Limpiar rama main
           git rm -rf . 2>/dev/null || true
-          
-          # Copiar archivos optimizados
           cp -r dist/* .
-          
-          # Hacer commit
           git add .
-          git commit -m "🚀 Deploy optimizado desde source - $(date '+%Y-%m-%d %H:%M:%S')" || exit 0
-          
-          # Push con force para sobrescribir
+          git commit -m "🚀 Deploy con URLs optimizadas - $(date '+%Y-%m-%d %H:%M:%S')" || exit 0
           git push origin main --force
-          
-          echo "✅ Sitio desplegado exitosamente en rama main"
+          echo "✅ Sitio desplegado exitosamente"
