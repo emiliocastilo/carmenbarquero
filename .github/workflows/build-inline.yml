@@ -43,6 +43,103 @@ jobs:
             fi
           done
           
+          echo "🔗 Convirtiendo URLs a absolutas y sin .html..."
+          
+          # Función para convertir URLs en archivos HTML
+          convert_urls_in_file() {
+            local file="$1"
+            echo "🔄 Procesando URLs en: $file"
+            
+            # Convertir recursos (CSS, JS, imágenes) a URLs absolutas
+            sed -i 's|href="css/|href="https://www.carmenbarqueropsicologia.es/css/|g' "$file"
+            sed -i 's|href="../css/|href="https://www.carmenbarqueropsicologia.es/css/|g' "$file"
+            sed -i 's|src="js/|src="https://www.carmenbarqueropsicologia.es/js/|g' "$file"
+            sed -i 's|src="../js/|src="https://www.carmenbarqueropsicologia.es/js/|g' "$file"
+            sed -i 's|src="img/|src="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
+            sed -i 's|src="../img/|src="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
+            sed -i 's|srcset="img/|srcset="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
+            sed -i 's|srcset="../img/|srcset="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
+            
+            # Convertir favicons y meta content
+            sed -i 's|href="img/favicon/|href="https://www.carmenbarqueropsicologia.es/img/favicon/|g' "$file"
+            sed -i 's|href="../img/favicon/|href="https://www.carmenbarqueropsicologia.es/img/favicon/|g' "$file"
+            sed -i 's|content="img/|content="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
+            sed -i 's|content="../img/|content="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
+            sed -i 's|content="./img/|content="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
+            
+            # CSS inline backgrounds
+            sed -i "s|background-image: url('img/|background-image: url('https://www.carmenbarqueropsicologia.es/img/|g" "$file"
+            sed -i 's|background-image: url("img/|background-image: url("https://www.carmenbarqueropsicologia.es/img/|g' "$file"
+            
+            # Convertir navegación a URLs absolutas SIN .html
+            # Inicio - tanto index.html como ../index.html van a la raíz
+            sed -i 's|href="index\.html"|href="https://www.carmenbarqueropsicologia.es/"|g' "$file"
+            sed -i 's|href="../index\.html"|href="https://www.carmenbarqueropsicologia.es/"|g' "$file"
+            
+            # Páginas principales SIN .html
+            sed -i 's|href="contacto\.html"|href="https://www.carmenbarqueropsicologia.es/contacto"|g' "$file"
+            sed -i 's|href="../contacto\.html"|href="https://www.carmenbarqueropsicologia.es/contacto"|g' "$file"
+            sed -i 's|href="reserva-cita\.html"|href="https://www.carmenbarqueropsicologia.es/reserva-cita"|g' "$file"
+            sed -i 's|href="../reserva-cita\.html"|href="https://www.carmenbarqueropsicologia.es/reserva-cita"|g' "$file"
+            sed -i 's|href="politica-privacidad\.html"|href="https://www.carmenbarqueropsicologia.es/politica-privacidad"|g' "$file"
+            sed -i 's|href="../politica-privacidad\.html"|href="https://www.carmenbarqueropsicologia.es/politica-privacidad"|g' "$file"
+            sed -i 's|href="consentimientoinformado\.html"|href="https://www.carmenbarqueropsicologia.es/consentimientoinformado"|g' "$file"
+            sed -i 's|href="../consentimientoinformado\.html"|href="https://www.carmenbarqueropsicologia.es/consentimientoinformado"|g' "$file"
+            
+            # Servicios SIN .html
+            sed -i 's|href="servicios/terapia-individual\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/terapia-individual"|g' "$file"
+            sed -i 's|href="servicios/terapia-pareja\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/terapia-pareja"|g' "$file"
+            sed -i 's|href="servicios/neuropsicologia-clinica\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/neuropsicologia-clinica"|g' "$file"
+            sed -i 's|href="terapia-individual\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/terapia-individual"|g' "$file"
+            sed -i 's|href="terapia-pareja\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/terapia-pareja"|g' "$file"
+            sed -i 's|href="neuropsicologia-clinica\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/neuropsicologia-clinica"|g' "$file"
+            
+            # Enlaces generales a servicios/
+            sed -i 's|href="servicios/|href="https://www.carmenbarqueropsicologia.es/servicios/|g' "$file"
+            
+            echo "✅ URLs convertidas en: $file"
+          }
+          
+          # Convertir URLs en páginas principales
+          for file in dist/*.html; do
+            if [ -f "$file" ]; then
+              convert_urls_in_file "$file"
+            fi
+          done
+          
+          # Convertir URLs en páginas de servicios
+          for file in dist/servicios/*.html; do
+            if [ -f "$file" ]; then
+              convert_urls_in_file "$file"
+            fi
+          done
+          
+          echo "🎯 URLs convertidas:"
+          echo "✅ Recursos: URLs absolutas (CSS, JS, imágenes)"
+          echo "✅ Navegación: URLs absolutas sin .html"
+          echo "✅ Inicio: https://www.carmenbarqueropsicologia.es/"
+
+          # Convertir URLs del sitemap.xml
+          if [ -f sitemap.xml ]; then
+            echo "📄 Convirtiendo URLs del sitemap a formato limpio..."
+            sed -i '' 's|<loc>https://www\.carmenbarqueropsicologia\.es/contacto\.html</loc>|<loc>https://www.carmenbarqueropsicologia.es/contacto</loc>|g' sitemap.xml
+            sed -i '' 's|<loc>https://www\.carmenbarqueropsicologia\.es/reserva-cita\.html</loc>|<loc>https://www.carmenbarqueropsicologia.es/reserva-cita</loc>|g' sitemap.xml
+            sed -i '' 's|<loc>https://www\.carmenbarqueropsicologia\.es/servicios/terapia-individual\.html</loc>|<loc>https://www.carmenbarqueropsicologia.es/servicios/terapia-individual</loc>|g' sitemap.xml
+            sed -i '' 's|<loc>https://www\.carmenbarqueropsicologia\.es/servicios/terapia-pareja\.html</loc>|<loc>https://www.carmenbarqueropsicologia.es/servicios/terapia-pareja</loc>|g' sitemap.xml
+            sed -i '' 's|<loc>https://www\.carmenbarqueropsicologia\.es/servicios/neuropsicologia-clinica\.html</loc>|<loc>https://www.carmenbarqueropsicologia.es/servicios/neuropsicologia-clinica</loc>|g' sitemap.xml
+            sed -i '' 's|<loc>https://www\.carmenbarqueropsicologia\.es/politica-privacidad\.html</loc>|<loc>https://www.carmenbarqueropsicologia.es/politica-privacidad</loc>|g' sitemap.xml
+            sed -i '' 's|<loc>https://www\.carmenbarqueropsicologia\.es/consentimientoinformado\.html</loc>|<loc>https://www.carmenbarqueropsicologia.es/consentimientoinformado</loc>|g' sitemap.xml
+            cp sitemap.xml dist/
+            echo "✅ Sitemap actualizado con URLs limpias"
+          fi
+
+          # Copiar robots.txt
+          if [ -f robots.txt ]; then
+            cp robots.txt dist/
+            echo "✅ Robots.txt copiado"
+          fi
+          echo "✅ Servicios: https://www.carmenbarqueropsicologia.es/servicios/terapia-individual"
+          
           echo "📄 Minificando HTML..."
           # Páginas principales
           for file in *.html; do
