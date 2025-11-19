@@ -122,13 +122,13 @@ jobs:
           # Convertir URLs del sitemap.xml
           if [ -f sitemap.xml ]; then
             echo "📄 Convirtiendo URLs del sitemap a formato limpio..."
-            sed -i '' 's|<loc>https://www\.carmenbarqueropsicologia\.es/contacto\.html</loc>|<loc>https://www.carmenbarqueropsicologia.es/contacto</loc>|g' sitemap.xml
-            sed -i '' 's|<loc>https://www\.carmenbarqueropsicologia\.es/reserva-cita\.html</loc>|<loc>https://www.carmenbarqueropsicologia.es/reserva-cita</loc>|g' sitemap.xml
-            sed -i '' 's|<loc>https://www\.carmenbarqueropsicologia\.es/servicios/terapia-individual\.html</loc>|<loc>https://www.carmenbarqueropsicologia.es/servicios/terapia-individual</loc>|g' sitemap.xml
-            sed -i '' 's|<loc>https://www\.carmenbarqueropsicologia\.es/servicios/terapia-pareja\.html</loc>|<loc>https://www.carmenbarqueropsicologia.es/servicios/terapia-pareja</loc>|g' sitemap.xml
-            sed -i '' 's|<loc>https://www\.carmenbarqueropsicologia\.es/servicios/neuropsicologia-clinica\.html</loc>|<loc>https://www.carmenbarqueropsicologia.es/servicios/neuropsicologia-clinica</loc>|g' sitemap.xml
-            sed -i '' 's|<loc>https://www\.carmenbarqueropsicologia\.es/politica-privacidad\.html</loc>|<loc>https://www.carmenbarqueropsicologia.es/politica-privacidad</loc>|g' sitemap.xml
-            sed -i '' 's|<loc>https://www\.carmenbarqueropsicologia\.es/consentimientoinformado\.html</loc>|<loc>https://www.carmenbarqueropsicologia.es/consentimientoinformado</loc>|g' sitemap.xml
+            sed -i '' 's|contacto\.html|contacto|g' sitemap.xml
+            sed -i '' 's|reserva-cita\.html|reserva-cita|g' sitemap.xml
+            sed -i '' 's|terapia-individual\.html|terapia-individual|g' sitemap.xml
+            sed -i '' 's|terapia-pareja\.html|terapia-pareja|g' sitemap.xml
+            sed -i '' 's|neuropsicologia-clinica\.html|neuropsicologia-clinica|g' sitemap.xml
+            sed -i '' 's|politica-privacidad\.html|politica-privacidad|g' sitemap.xml
+            sed -i '' 's|consentimientoinformado\.html|consentimientoinformado|g' sitemap.xml
             cp sitemap.xml dist/
             echo "✅ Sitemap actualizado con URLs limpias"
           fi
