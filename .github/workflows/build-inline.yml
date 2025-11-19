@@ -48,25 +48,58 @@ jobs:
             sed -i 's|href="politica-privacidad\.html"|href="https://www.carmenbarqueropsicologia.es/politica-privacidad"|g' "$file"
             sed -i 's|href="consentimientoinformado\.html"|href="https://www.carmenbarqueropsicologia.es/consentimientoinformado"|g' "$file"
             
-            # Rutas relativas desde servicios/
+            # Rutas relativas desde servicios/ - TODAS las variantes
             sed -i 's|href="../contacto\.html"|href="https://www.carmenbarqueropsicologia.es/contacto"|g' "$file"
+            sed -i 's|href="../reserva-cita\.html"|href="https://www.carmenbarqueropsicologia.es/reserva-cita"|g' "$file"
+            sed -i 's|href="../consentimientoinformado\.html"|href="https://www.carmenbarqueropsicologia.es/consentimientoinformado"|g' "$file"
+            sed -i 's|href="../politica-privacidad\.html"|href="https://www.carmenbarqueropsicologia.es/politica-privacidad"|g' "$file"
             sed -i 's|href="../index\.html"|href="https://www.carmenbarqueropsicologia.es/"|g' "$file"
+            
+            # Enlaces entre servicios (desde servicios/ a servicios/)
+            sed -i 's|href="terapia-individual\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/terapia-individual"|g' "$file"
+            sed -i 's|href="terapia-pareja\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/terapia-pareja"|g' "$file"
+            sed -i 's|href="neuropsicologia-clinica\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/neuropsicologia-clinica"|g' "$file"
+            
+            # Canonical links - remover .html
+            sed -i 's|/contacto\.html"|/contacto"|g' "$file"
+            sed -i 's|/reserva-cita\.html"|/reserva-cita"|g' "$file"
+            sed -i 's|/consentimientoinformado\.html"|/consentimientoinformado"|g' "$file"
+            sed -i 's|/politica-privacidad\.html"|/politica-privacidad"|g' "$file"
+            sed -i 's|/servicios/terapia-individual\.html"|/servicios/terapia-individual"|g' "$file"
+            sed -i 's|/servicios/terapia-pareja\.html"|/servicios/terapia-pareja"|g' "$file"
+            sed -i 's|/servicios/neuropsicologia-clinica\.html"|/servicios/neuropsicologia-clinica"|g' "$file"
+            
+            # Recursos desde servicios/
             sed -i 's|href="../css/|href="https://www.carmenbarqueropsicologia.es/css/|g' "$file"
             sed -i 's|src="../js/|src="https://www.carmenbarqueropsicologia.es/js/|g' "$file"
             sed -i 's|src="../img/|src="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
+            sed -i 's|srcset="../img/|srcset="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
+            sed -i 's|href="../img/|href="https://www.carmenbarqueropsicologia.es/img/|g' "$file"
             
             echo "✅ URLs convertidas en: $file"
           }
           
-          # Convertir URLs en archivos principales
+          # Convertir URLs en archivos principales (TODAS las páginas HTML)
+          echo "📄 Procesando páginas principales:"
           for file in *.html; do
-            [ -f "$file" ] && convert_urls_in_file "$file"
+            if [ -f "$file" ] && [ "$file" != "google37cf596a386f6881.html" ]; then
+              echo "🔧 Aplicando conversión URL a: $file"
+              convert_urls_in_file "$file"
+            else
+              echo "⏭️  Saltando: $file"
+            fi
           done
           
           # Convertir URLs en servicios
+          echo "📁 Procesando páginas de servicios:"
           for file in servicios/*.html; do
-            [ -f "$file" ] && convert_urls_in_file "$file"
+            if [ -f "$file" ]; then
+              echo "🔧 Aplicando conversión URL a: $file"
+              convert_urls_in_file "$file"
+            fi
           done
+          
+          echo "✅ Conversión de URLs completada en TODAS las páginas"
           
           echo "🎨 PASO 2: Minificar CSS"
           for file in css/*.css; do
@@ -84,9 +117,13 @@ jobs:
             fi
           done
           
-          echo "📄 PASO 4: Minificar HTML (ya con URLs convertidas)"
+          echo "📄 PASO 4: Minificar TODOS los archivos HTML (ya con URLs convertidas)"
+          echo "📋 Archivos HTML encontrados en raíz:"
+          ls -la *.html | grep -v google37cf596a386f6881.html || echo "No se encontraron archivos HTML"
+          
           for file in *.html; do
-            if [ -f "$file" ]; then
+            if [ -f "$file" ] && [ "$file" != "google37cf596a386f6881.html" ]; then
+              echo "📄 Minificando: $file"
               npx --yes html-minifier-terser \
                 --collapse-whitespace \
                 --remove-comments \
@@ -99,8 +136,13 @@ jobs:
           done
           
           # Minificar HTML de servicios
+          echo "📋 Archivos HTML en servicios:"
+          ls -la servicios/*.html 2>/dev/null || echo "No se encontraron archivos en servicios/"
+          
+          mkdir -p dist/servicios
           for file in servicios/*.html; do
             if [ -f "$file" ]; then
+              echo "📄 Minificando: $file"
               npx --yes html-minifier-terser \
                 --collapse-whitespace \
                 --remove-comments \
