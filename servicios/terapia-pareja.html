@@ -1,15 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-079KKFQZL5"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-079KKFQZL5');
-    </script>
+    <!-- ⚠️ IMPORTANTE: Cookie Consent ANTES de GTM para Consent Mode v2 -->
+    <script src="../js/cookie-consent.js"></script>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -65,6 +58,8 @@
     <link rel="stylesheet" href="../css/menu-superior.css" />
     <link rel="stylesheet" href="../css/menu-responsive.css" />
     <link rel="stylesheet" href="../css/whatsapp-float.css" />
+    <!-- Cookie Consent CSS -->
+    <link rel="stylesheet" href="../css/cookie-consent.css" />
     
     <!-- Favicon completo con todas las resoluciones -->
     <link rel="icon" type="image/x-icon" href="../img/favicon/favicon.ico" />
@@ -194,5 +189,82 @@
     >
       <img src="../img/social/whatsapp.png" alt="WhatsApp" width="50" />
     </a>
+
+    <!-- Banner de Consentimiento de Cookies - RGPD Compliant -->
+    <div id="cookieConsentBanner" class="cookie-consent-banner">
+      <div class="cookie-consent-content">
+        <div class="cookie-consent-text">
+          <strong>🍪 Este sitio web utiliza cookies</strong>
+          <p>
+            Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación, 
+            analizar el tráfico del sitio web y personalizar el contenido. Al hacer clic en 
+            <strong>"Aceptar todas"</strong>, consientes el uso de todas las cookies. 
+            Puedes gestionar tus preferencias en 
+            <strong>"Configurar cookies"</strong> o consultar más información en nuestra 
+            <a href="../politica-cookies.html" target="_blank">política de cookies</a>.
+          </p>
+        </div>
+        <div class="cookie-consent-buttons">
+          <button id="acceptAllCookies" class="cookie-consent-btn cookie-consent-btn-accept">
+            Aceptar todas
+          </button>
+          <button id="rejectAllCookies" class="cookie-consent-btn cookie-consent-btn-reject">
+            Rechazar opcionales
+          </button>
+          <button id="cookieSettings" class="cookie-consent-btn cookie-consent-btn-settings">
+            Configurar cookies
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Configuración de Cookies -->
+    <div id="cookieSettingsModal" class="cookie-settings-modal">
+      <div class="cookie-settings-content">
+        <div class="cookie-settings-header">
+          <h2>Configuración de Cookies</h2>
+          <button id="closeSettingsModal" class="cookie-settings-close" aria-label="Cerrar">×</button>
+        </div>
+
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <h3 class="cookie-category-title">Cookies Necesarias</h3>
+            <label class="cookie-toggle">
+              <input type="checkbox" checked disabled>
+              <span class="cookie-toggle-slider"></span>
+            </label>
+          </div>
+          <p class="cookie-category-description">
+            Estas cookies son esenciales para el funcionamiento básico del sitio web. 
+            No pueden ser desactivadas. Se utilizan para mantener la sesión y recordar 
+            tus preferencias de consentimiento.
+          </p>
+        </div>
+
+        <div class="cookie-category">
+          <div class="cookie-category-header">
+            <h3 class="cookie-category-title">
+              Cookies Analíticas (Google Analytics)
+              <span class="cookie-info-icon" title="Ayudan a entender cómo interactúan los usuarios con el sitio">i</span>
+            </h3>
+            <label class="cookie-toggle">
+              <input type="checkbox" id="cookie_analytics">
+              <span class="cookie-toggle-slider"></span>
+            </label>
+          </div>
+          <p class="cookie-category-description">
+            Recopilan información sobre cómo utilizas el sitio web (páginas visitadas, 
+            tiempo de permanencia). Estos datos nos ayudan a mejorar el rendimiento y 
+            la experiencia del usuario. Proveedor: Google Analytics.
+          </p>
+        </div>
+
+        <div class="cookie-settings-footer">
+          <button id="saveCustomPreferences" class="cookie-consent-btn cookie-consent-btn-accept">
+            Guardar preferencias
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
