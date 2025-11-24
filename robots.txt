@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.carmenbarqueropsicologia.es/sitemap.xml
+
+# Disallow admin or development files (if any)
+Disallow: /.git/
+Disallow: /.github/
+
+# Allow important pages
+Allow: /index.html
+Allow: /contacto.html
+Allow: /reserva-cita.html
+Allow: /servicios/
+Allow: /css/
+Allow: /js/
+Allow: /img/
+Allow: /fonts/
