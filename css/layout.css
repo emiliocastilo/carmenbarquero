@@ -509,6 +509,146 @@ footer {
   font-weight: normal;
 }
 
+/* Sección FAQ */
+.faq-section {
+  padding: 3rem 0;
+  background: white;
+}
+
+.faq-section h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: var(--color-principal, #8B6B63);
+}
+
+.faq-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: #f9f7f4;
+  padding: 2rem;
+  border-radius: 8px;
+  border-left: 4px solid #00bcd4;
+}
+
+.faq-item h3 {
+  color: var(--color-principal, #8B6B63);
+  font-size: 1.1rem;
+  margin: 0 0 1rem 0;
+}
+
+.faq-item p {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Sección CTA */
+.cta-section {
+  padding: 3rem 0;
+  background: white;
+  color: var(--color-principal, #3a4a5a);
+  text-align: center;
+  border-top: 2px solid #f0f0f0;
+}
+
+.cta-section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: var(--color-principal, #3a4a5a);
+}
+
+.cta-section p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #666;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-button-primary,
+.cta-button-secondary {
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+  border: 2px solid transparent;
+}
+
+.cta-button-primary {
+  background: #00bcd4;
+  color: #fff;
+}
+
+.cta-button-primary:hover {
+  background: #0099b3;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 188, 212, 0.3);
+}
+
+.cta-button-secondary {
+  background: transparent;
+  color: var(--color-principal, #3a4a5a);
+  border-color: var(--color-principal, #3a4a5a);
+}
+
+.cta-button-secondary:hover {
+  background: var(--color-principal, #3a4a5a);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .faq-section h2,
+  .cta-section h2 {
+    font-size: 1.8rem;
+  }
+
+  .faq-container {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-section {
+    padding: 2rem 0;
+  }
+
+  .cta-section p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0 0.75rem;
+  }
+
+  .cta-button-primary,
+  .cta-button-secondary {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
 .paso p {
   color: #666;
   line-height: 1.6;

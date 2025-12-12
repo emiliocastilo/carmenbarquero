@@ -66,6 +66,26 @@ footer > div {
   text-decoration: underline;
 }
 
+/* Social Links */
+.social-links {
+  margin-top: 1rem !important;
+  padding-top: 1rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.social-links a {
+  color: #00e5ff;
+  text-decoration: none;
+  transition: color 0.3s;
+  display: inline-block;
+  margin: 0 0.5rem;
+}
+
+.social-links a:hover {
+  color: #00bcd4;
+  text-decoration: underline;
+}
+
 /* Responsive para móviles */
 @media (max-width: 768px) {
   .footer-links {
