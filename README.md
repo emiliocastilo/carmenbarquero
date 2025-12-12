@@ -195,7 +195,7 @@ git push origin source
 
 ## 📞 Contacto Profesional
 
-**Carmen Barquero Macias**  
+**Carmen Barquero Macías**  
 🎓 *Psicóloga General Sanitaria*  
 📍 *Mérida, Extremadura*
 
