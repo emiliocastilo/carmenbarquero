@@ -38,6 +38,34 @@ footer > div {
   font-size: 0.9rem;
 }
 
+/* NAP - Name, Address, Phone */
+.footer-nap {
+  margin: 1.5rem 0;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.footer-nap p {
+  margin: 0.5rem 0;
+}
+
+.footer-nap strong {
+  color: #00bcd4;
+}
+
+.footer-nap a {
+  color: #00e5ff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-nap a:hover {
+  color: #00bcd4;
+  text-decoration: underline;
+}
+
 /* Responsive para móviles */
 @media (max-width: 768px) {
   .footer-links {
