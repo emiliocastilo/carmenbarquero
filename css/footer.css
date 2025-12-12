@@ -1,0 +1,51 @@
+/* Footer principal */
+footer {
+  background: #3a4a5a;
+  color: white;
+  padding: 2rem 1rem;
+  margin-top: 3rem;
+}
+
+footer > div {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Contenedor de enlaces legales */
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.footer-links a {
+  color: #00bcd4;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: #00e5ff;
+}
+
+/* Texto de copyright */
+.footer-copyright {
+  margin: 0;
+  color: #e8f4fd;
+  font-size: 0.9rem;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .footer-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  footer {
+    padding: 1.5rem 1rem;
+  }
+}
