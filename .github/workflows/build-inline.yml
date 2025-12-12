@@ -45,7 +45,7 @@ jobs:
             sed -i 's|href="servicios/terapia-individual\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/terapia-individual"|g' "$file"
             sed -i 's|href="servicios/terapia-pareja\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/terapia-pareja"|g' "$file"
             sed -i 's|href="servicios/neuropsicologia-clinica\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/neuropsicologia-clinica"|g' "$file"
-            sed -i 's|href="politica-privacidad\.html"|href="https://www.carmenbarqueropsicologia.es/politica-privacidad"|g' "$file"
+            sed -i 's|href="politica-de-privacidad\.html"|href="https://www.carmenbarqueropsicologia.es/politica-de-privacidad"|g' "$file"
             sed -i 's|href="politica-cookies\.html"|href="https://www.carmenbarqueropsicologia.es/politica-cookies"|g' "$file"
             sed -i 's|href="aviso-legal\.html"|href="https://www.carmenbarqueropsicologia.es/aviso-legal"|g' "$file"
             sed -i 's|href="consentimientoinformado\.html"|href="https://www.carmenbarqueropsicologia.es/consentimientoinformado"|g' "$file"
@@ -66,7 +66,7 @@ jobs:
             sed -i 's|/contacto\.html"|/contacto"|g' "$file"
             sed -i 's|/reserva-cita\.html"|/reserva-cita"|g' "$file"
             sed -i 's|/consentimientoinformado\.html"|/consentimientoinformado"|g' "$file"
-            sed -i 's|/politica-privacidad\.html"|/politica-privacidad"|g' "$file"
+            sed -i 's|/politica-de-privacidad\.html"|/politica-de-privacidad"|g' "$file"
             sed -i 's|/politica-cookies\.html"|/politica-cookies"|g' "$file"
             sed -i 's|/aviso-legal\.html"|/aviso-legal"|g' "$file"
             sed -i 's|/servicios/terapia-individual\.html"|/servicios/terapia-individual"|g' "$file"
@@ -184,7 +184,7 @@ jobs:
             sed -i 's|terapia-individual\.html|terapia-individual|g' sitemap.xml
             sed -i 's|terapia-pareja\.html|terapia-pareja|g' sitemap.xml
             sed -i 's|neuropsicologia-clinica\.html|neuropsicologia-clinica|g' sitemap.xml
-            sed -i 's|politica-privacidad\.html|politica-privacidad|g' sitemap.xml
+            sed -i 's|politica-de-privacidad\.html|politica-de-privacidad|g' sitemap.xml
             sed -i 's|politica-cookies\.html|politica-cookies|g' sitemap.xml
             sed -i 's|aviso-legal\.html|aviso-legal|g' sitemap.xml
             sed -i 's|consentimientoinformado\.html|consentimientoinformado|g' sitemap.xml
