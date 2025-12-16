@@ -46,22 +46,24 @@
     <header>
       <h1 style="position: absolute; left: -9999px;">Política de Cookies - Carmen Barquero Psicóloga en Mérida</h1>
       <div class="icon-container">
-        <picture>
-          <!-- Formato WebP optimizado -->
-          <source 
-            srcset="img/carmen-barquero-psicologa-op.webp" 
-            type="image/webp"
-          />
-          <!-- Fallback PNG para navegadores que no soportan WebP -->
-          <img
-            src="img/carmen-barquero-psicologa-op.jpg"
-            alt="Carmen Barquero - Psicóloga General Sanitaria en Mérida"
-            fetchpriority="high"
-            width="400"
-            height="400"
-            loading="eager"
-          />
-        </picture>
+        <a href="index.html" title="Volver al inicio">
+          <picture>
+            <!-- Formato WebP optimizado -->
+            <source 
+              srcset="img/carmen-barquero-psicologa-op.webp" 
+              type="image/webp"
+            />
+            <!-- Fallback PNG para navegadores que no soportan WebP -->
+            <img
+              src="img/carmen-barquero-psicologa-op.jpg"
+              alt="Carmen Barquero - Psicóloga General Sanitaria en Mérida"
+              fetchpriority="high"
+              width="400"
+              height="400"
+              loading="eager"
+            />
+          </picture>
+        </a>
       </div>
     </header>
     
@@ -98,9 +100,10 @@
           <li><a href="index.html">Inicio</a></li>
           <li class="menu-item-with-submenu">
             <button class="menu-toggle" id="servicios-toggle">
-              Servicios <span class="arrow">▼</span>
+              Servicios 
+              <div class="arrow-down"></div>
             </button>
-            <ul class="mobile-submenu" id="servicios-submenu">
+            <ul class="submenu" id="servicios-submenu">
               <li><a href="servicios/terapia-individual.html">Terapia Individual</a></li>
               <li><a href="servicios/terapia-pareja.html">Terapia de Pareja</a></li>
               <li><a href="servicios/neuropsicologia-clinica.html">Neuropsicología Clínica</a></li>
