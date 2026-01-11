@@ -320,47 +320,60 @@ async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
       const color = rgb(0, 0, 0);
       
       console.log("📐 Página 1 - Dimensiones:", { width: w1, height: h1 });
+      console.log("📍 Usando coordenadas:", coordenadas);
       
       if (datos.nombreApellidos) {
         page1.drawText(datos.nombreApellidos, {
-          x: 120, y: h1 - 258, size: fontSize, font: font, color: color
+          x: coordenadas.nombre.x, 
+          y: h1 - coordenadas.nombre.y, 
+          size: fontSize, font: font, color: color
         });
-        console.log("✓ Nombre escrito:", datos.nombreApellidos);
+        console.log("✓ Nombre escrito:", datos.nombreApellidos, "en", coordenadas.nombre);
       }
       
       if (datos.dni) {
         page1.drawText(datos.dni, {
-          x: 100, y: h1 - 277, size: fontSize, font: font, color: color
+          x: coordenadas.dni.x, 
+          y: h1 - coordenadas.dni.y, 
+          size: fontSize, font: font, color: color
         });
-        console.log("✓ DNI escrito:", datos.dni);
+        console.log("✓ DNI escrito:", datos.dni, "en", coordenadas.dni);
       }
       
       if (fechaParsed.dia) {
         page1.drawText(fechaParsed.dia, {
-          x: 100, y: h1 - 289, size: fontSize, font: font, color: color
+          x: coordenadas.dia.x, 
+          y: h1 - coordenadas.dia.y, 
+          size: fontSize, font: font, color: color
         });
-        console.log("✓ Día escrito:", fechaParsed.dia);
+        console.log("✓ Día escrito:", fechaParsed.dia, "en", coordenadas.dia);
       }
       
       if (fechaParsed.mes) {
         page1.drawText(fechaParsed.mes, {
-          x: 145, y: h1 - 289, size: fontSize, font: font, color: color
+          x: coordenadas.mes.x, 
+          y: h1 - coordenadas.mes.y, 
+          size: fontSize, font: font, color: color
         });
-        console.log("✓ Mes escrito:", fechaParsed.mes);
+        console.log("✓ Mes escrito:", fechaParsed.mes, "en", coordenadas.mes);
       }
       
       if (fechaParsed.anio) {
         page1.drawText(fechaParsed.anio, {
-          x: 185, y: h1 - 289, size: fontSize, font: font, color: color
+          x: coordenadas.anio.x, 
+          y: h1 - coordenadas.anio.y, 
+          size: fontSize, font: font, color: color
         });
-        console.log("✓ Año escrito:", fechaParsed.anio);
+        console.log("✓ Año escrito:", fechaParsed.anio, "en", coordenadas.anio);
       }
       
       if (datos.telefono) {
         page1.drawText(datos.telefono, {
-          x: 130, y: h1 - 307, size: fontSize, font: font, color: color
+          x: coordenadas.telefono.x, 
+          y: h1 - coordenadas.telefono.y, 
+          size: fontSize, font: font, color: color
         });
-        console.log("✓ Teléfono escrito:", datos.telefono);
+        console.log("✓ Teléfono escrito:", datos.telefono, "en", coordenadas.telefono);
       }
       
       console.log("✓ Página 1 completada");
@@ -375,25 +388,38 @@ async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
       
       if (datos.lugar) {
         page3.drawText(datos.lugar, {
-          x: 115, y: h3 - 274, size: fontSize, font: font, color: color
+          x: coordenadas.lugar.x, 
+          y: h3 - coordenadas.lugar.y, 
+          size: fontSize, font: font, color: color
         });
-        console.log("✓ Lugar escrito:", datos.lugar);
+        console.log("✓ Lugar escrito:", datos.lugar, "en", coordenadas.lugar);
       }
       
       const hoy = new Date();
-      page3.drawText(hoy.getDate().toString(), {
-        x: 115, y: h3 - 282, size: fontSize, font: font, color: color
-      });
+      const diaActual = hoy.getDate().toString().padStart(2, '0');
+      const mesActual = (hoy.getMonth() + 1).toString().padStart(2, '0');
+      const anioActual = hoy.getFullYear().toString();
       
-      const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", 
-                     "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-      page3.drawText(meses[hoy.getMonth()], {
-        x: 160, y: h3 - 282, size: fontSize, font: font, color: color
+      page3.drawText(diaActual, {
+        x: coordenadas.firmaFechaDia.x, 
+        y: h3 - coordenadas.firmaFechaDia.y, 
+        size: fontSize, font: font, color: color
       });
+      console.log("✓ Día firma escrito:", diaActual, "en", coordenadas.firmaFechaDia);
       
-      page3.drawText(hoy.getFullYear().toString(), {
-        x: 280, y: h3 - 282, size: fontSize, font: font, color: color
+      page3.drawText(mesActual, {
+        x: coordenadas.firmaFechaMes.x, 
+        y: h3 - coordenadas.firmaFechaMes.y, 
+        size: fontSize, font: font, color: color
       });
+      console.log("✓ Mes firma escrito:", mesActual, "en", coordenadas.firmaFechaMes);
+      
+      page3.drawText(anioActual, {
+        x: coordenadas.firmaFechaAnio.x, 
+        y: h3 - coordenadas.firmaFechaAnio.y, 
+        size: fontSize, font: font, color: color
+      });
+      console.log("✓ Año firma escrito:", anioActual, "en", coordenadas.firmaFechaAnio);
       
       console.log("✓ Página 3 completada");
     }
@@ -430,13 +456,13 @@ async function anadirFirma(pdfDoc) {
       const firmaHeight = firmaImage.height * ratio;
       
       page3.drawImage(firmaImage, {
-        x: 115,
-        y: h3 - 347,
+        x: coordenadas.firmaImagen.x,
+        y: h3 - coordenadas.firmaImagen.y,
         width: firmaWidth,
         height: firmaHeight,
       });
       
-      console.log("✓ Firma añadida al PDF");
+      console.log("✓ Firma añadida al PDF en", coordenadas.firmaImagen);
     }
   } catch (error) {
     console.log("❌ Error al añadir firma:", error);
