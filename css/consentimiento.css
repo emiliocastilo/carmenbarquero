@@ -100,3 +100,326 @@
     font-size: 1.3rem;
   }
 }
+
+/* Campos de datos del paciente */
+.datos-paciente {
+  margin-bottom: 1.5rem;
+}
+
+.datos-paciente h3 {
+  margin-bottom: 1rem;
+  color: var(--color-principal, #3a4a5a);
+}
+
+.campo-dato {
+  margin-bottom: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.campo-dato label {
+  font-weight: 600;
+  min-width: 160px;
+  color: #333;
+}
+
+.campo-dato input {
+  flex: 1;
+  min-width: 150px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.campo-dato input:focus {
+  outline: none;
+  border-color: var(--color-principal, #3a4a5a);
+  box-shadow: 0 0 0 3px rgba(58, 74, 90, 0.15);
+}
+
+.campo-dato input::placeholder {
+  color: #999;
+}
+
+/* Línea de fecha completa */
+.linea-fecha-completa {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+.linea-fecha-completa input {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+}
+
+.linea-fecha-completa input:focus {
+  outline: none;
+  border-color: var(--color-principal, #3a4a5a);
+}
+
+/* Bloque de firma mejorado */
+.bloque-firma {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.bloque-firma label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--color-principal, #3a4a5a);
+}
+
+.firma-instruccion {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem !important;
+  font-style: italic;
+}
+
+.canvas-container {
+  background: #fff;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 4px;
+  display: inline-block;
+  width: 100%;
+  max-width: 408px;
+  box-sizing: border-box;
+}
+
+#canvas-firma {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  height: 150px;
+  cursor: crosshair;
+  touch-action: none;
+  border-radius: 4px;
+}
+
+.btn-limpiar-firma {
+  margin-top: 1rem;
+  padding: 8px 16px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #666;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-limpiar-firma:hover {
+  background: #f0f0f0;
+  border-color: #999;
+  color: #333;
+}
+
+/* Botón confirmar mejorado */
+.btn-confirmar {
+  background: linear-gradient(135deg, var(--color-principal, #3a4a5a) 0%, #4a5a6a 100%);
+  color: #fff;
+  border: none;
+  padding: 14px 32px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(58, 74, 90, 0.3);
+}
+
+.btn-confirmar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(58, 74, 90, 0.4);
+}
+
+.btn-confirmar:disabled {
+  background: #999;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Mensaje de éxito */
+.mensaje-exito {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease;
+}
+
+.mensaje-exito-content {
+  background: #fff;
+  padding: 2.5rem 3rem;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  animation: slideUp 0.3s ease;
+}
+
+.mensaje-exito-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background: #4CAF50;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.mensaje-exito-content p {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.mensaje-exito-sub {
+  font-size: 0.95rem !important;
+  color: #666 !important;
+}
+
+.mensaje-exito-fade {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bloque de consentimiento */
+.bloque-consentimiento {
+  background: #f0f4f8;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  border-left: 4px solid var(--color-principal, #3a4a5a);
+}
+
+.bloque-consentimiento h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--color-principal, #3a4a5a);
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .campo-dato {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .campo-dato label {
+    min-width: auto;
+    margin-bottom: 4px;
+  }
+  
+  .campo-dato input {
+    width: 100%;
+  }
+  
+  .linea-fecha-completa {
+    font-size: 0.95rem;
+  }
+  
+  .linea-fecha-completa input {
+    width: auto;
+    min-width: 50px;
+  }
+  
+  #canvas-firma {
+    height: 120px;
+  }
+  
+  .btn-confirmar {
+    width: 100%;
+    padding: 16px;
+  }
+}
+
+/* Validación visual - Campos en rojo */
+.campo-dato input.error {
+  border: 2px solid #dc3545 !important;
+  background-color: #fff5f5;
+}
+
+.errores-validacion {
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  color: #721c24;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.errores-validacion h4 {
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+
+.errores-validacion ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.errores-validacion li {
+  margin: 5px 0;
+}
+
+/* Spinner de carga */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 0.8s ease-in-out infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
