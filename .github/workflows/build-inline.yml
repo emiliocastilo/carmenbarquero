@@ -121,6 +121,14 @@ jobs:
             fi
           done
           
+          # PASO 3.5: Copiar archivos JS sin minificar también para depuración
+          echo "📋 Copiando archivos JS sin minificar (backup para depuración)"
+          for file in js/*.js; do
+            if [ -f "$file" ]; then
+              cp "$file" "dist/${file%.js}.debug.js"
+            fi
+          done
+          
           echo "📄 PASO 4: Minificar TODOS los archivos HTML (ya con URLs convertidas)"
           echo "📋 Archivos HTML encontrados en raíz:"
           ls -la *.html | grep -v google37cf596a386f6881.html || echo "No se encontraron archivos HTML"
