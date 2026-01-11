@@ -97,17 +97,12 @@ function parsearFecha(fechaStr) {
   
   const partes = fechaStr.split('/');
   if (partes.length === 3) {
-    const dia = partes[0].trim();
-    const mesNum = partes[1].trim();
+    const dia = partes[0].trim().padStart(2, '0');
+    const mes = partes[1].trim().padStart(2, '0');
     const anio = partes[2].trim();
     
-    const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", 
-                   "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-    const mesIdx = parseInt(mesNum) - 1;
-    const mesNombre = (mesIdx >= 0 && mesIdx < 12) ? meses[mesIdx] : mesNum;
-    
-    console.log("✓ Fecha parseada:", { dia, mes: mesNombre, anio });
-    return { dia, mes: mesNombre, anio };
+    console.log("✓ Fecha parseada:", { dia, mes, anio });
+    return { dia, mes, anio };
   }
   
   console.warn("⚠️ No se pudo parsear la fecha");
@@ -315,42 +310,42 @@ async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
       
       if (datos.nombreApellidos) {
         page1.drawText(datos.nombreApellidos, {
-          x: 170, y: h1 - 258, size: fontSize, font: font, color: color
+          x: 85, y: h1 - 258, size: fontSize, font: font, color: color
         });
         console.log("✓ Nombre escrito:", datos.nombreApellidos);
       }
       
       if (datos.dni) {
         page1.drawText(datos.dni, {
-          x: 120, y: h1 - 277, size: fontSize, font: font, color: color
+          x: 70, y: h1 - 277, size: fontSize, font: font, color: color
         });
         console.log("✓ DNI escrito:", datos.dni);
       }
       
       if (fechaParsed.dia) {
         page1.drawText(fechaParsed.dia, {
-          x: 120, y: h1 - 289, size: fontSize, font: font, color: color
+          x: 85, y: h1 - 289, size: fontSize, font: font, color: color
         });
         console.log("✓ Día escrito:", fechaParsed.dia);
       }
       
       if (fechaParsed.mes) {
         page1.drawText(fechaParsed.mes, {
-          x: 170, y: h1 - 289, size: fontSize, font: font, color: color
+          x: 125, y: h1 - 289, size: fontSize, font: font, color: color
         });
         console.log("✓ Mes escrito:", fechaParsed.mes);
       }
       
       if (fechaParsed.anio) {
         page1.drawText(fechaParsed.anio, {
-          x: 270, y: h1 - 289, size: fontSize, font: font, color: color
+          x: 160, y: h1 - 289, size: fontSize, font: font, color: color
         });
         console.log("✓ Año escrito:", fechaParsed.anio);
       }
       
       if (datos.telefono) {
         page1.drawText(datos.telefono, {
-          x: 170, y: h1 - 307, size: fontSize, font: font, color: color
+          x: 120, y: h1 - 307, size: fontSize, font: font, color: color
         });
         console.log("✓ Teléfono escrito:", datos.telefono);
       }
