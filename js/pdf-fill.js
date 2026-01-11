@@ -2,17 +2,17 @@
 // Rellena el PDF original con los datos del formulario
 // Coordenadas calibradas para escribir datos en el PDF
 const coordenadas = {
-  nombre: { x: 210, y: 580 },
-  dni: { x: 158, y: 565 },
-  dia: { x: 212, y: 549 },
-  mes: { x: 242, y: 549 },
-  anio: { x: 272, y: 549 },
+  nombre: { x: 210, y: 581 },
+  dni: { x: 158, y: 566 },
+  dia: { x: 212, y: 550 },
+  mes: { x: 242, y: 550 },
+  anio: { x: 272, y: 550 },
   telefono: { x: 215, y: 535 },
-  lugar: { x: 124, y: 564 },
-  firmaFechaDia: { x: 238, y: 564 },
-  firmaFechaMes: { x: 275, y: 564 },
-  firmaFechaAnio: { x: 365, y: 564 },
-  firmaImagen: { x: 115, y: 502 }
+  lugar: { x: 124, y: 565 },
+  firmaFechaDia: { x: 238, y: 565 },
+  firmaFechaMes: { x: 275, y: 565 },
+  firmaFechaAnio: { x: 365, y: 565 },
+  firmaImagen: { x: 115, y: 475 }
 };
 // --- Firma manuscrita en canvas ---
 window.addEventListener("DOMContentLoaded", function () {
