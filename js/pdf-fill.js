@@ -190,7 +190,7 @@ async function generatePDF() {
                         window.location.hostname === 'carmenbarqueropsicologia.es';
     const templateUrl = isProduction 
       ? 'https://www.carmenbarqueropsicologia.es/consentimiento-informado-template.pdf'
-      : './docs/consentimiento-informado-template.pdf';
+      : 'docs/consentimiento-informado-template.pdf';
     
     console.log("🔗 Cargando PDF desde:", templateUrl);
     
@@ -310,42 +310,42 @@ async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
       
       if (datos.nombreApellidos) {
         page1.drawText(datos.nombreApellidos, {
-          x: 85, y: h1 - 258, size: fontSize, font: font, color: color
+          x: 120, y: h1 - 258, size: fontSize, font: font, color: color
         });
         console.log("✓ Nombre escrito:", datos.nombreApellidos);
       }
       
       if (datos.dni) {
         page1.drawText(datos.dni, {
-          x: 70, y: h1 - 277, size: fontSize, font: font, color: color
+          x: 100, y: h1 - 277, size: fontSize, font: font, color: color
         });
         console.log("✓ DNI escrito:", datos.dni);
       }
       
       if (fechaParsed.dia) {
         page1.drawText(fechaParsed.dia, {
-          x: 85, y: h1 - 289, size: fontSize, font: font, color: color
+          x: 100, y: h1 - 289, size: fontSize, font: font, color: color
         });
         console.log("✓ Día escrito:", fechaParsed.dia);
       }
       
       if (fechaParsed.mes) {
         page1.drawText(fechaParsed.mes, {
-          x: 125, y: h1 - 289, size: fontSize, font: font, color: color
+          x: 145, y: h1 - 289, size: fontSize, font: font, color: color
         });
         console.log("✓ Mes escrito:", fechaParsed.mes);
       }
       
       if (fechaParsed.anio) {
         page1.drawText(fechaParsed.anio, {
-          x: 160, y: h1 - 289, size: fontSize, font: font, color: color
+          x: 185, y: h1 - 289, size: fontSize, font: font, color: color
         });
         console.log("✓ Año escrito:", fechaParsed.anio);
       }
       
       if (datos.telefono) {
         page1.drawText(datos.telefono, {
-          x: 120, y: h1 - 307, size: fontSize, font: font, color: color
+          x: 130, y: h1 - 307, size: fontSize, font: font, color: color
         });
         console.log("✓ Teléfono escrito:", datos.telefono);
       }
