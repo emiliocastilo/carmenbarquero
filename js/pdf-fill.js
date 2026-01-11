@@ -325,7 +325,7 @@ async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
       if (datos.nombreApellidos) {
         page1.drawText(datos.nombreApellidos, {
           x: coordenadas.nombre.x, 
-          y: h1 - coordenadas.nombre.y, 
+          y: coordenadas.nombre.y, 
           size: fontSize, font: font, color: color
         });
         console.log("✓ Nombre escrito:", datos.nombreApellidos, "en", coordenadas.nombre);
@@ -334,7 +334,7 @@ async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
       if (datos.dni) {
         page1.drawText(datos.dni, {
           x: coordenadas.dni.x, 
-          y: h1 - coordenadas.dni.y, 
+          y: coordenadas.dni.y, 
           size: fontSize, font: font, color: color
         });
         console.log("✓ DNI escrito:", datos.dni, "en", coordenadas.dni);
@@ -343,7 +343,7 @@ async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
       if (fechaParsed.dia) {
         page1.drawText(fechaParsed.dia, {
           x: coordenadas.dia.x, 
-          y: h1 - coordenadas.dia.y, 
+          y: coordenadas.dia.y, 
           size: fontSize, font: font, color: color
         });
         console.log("✓ Día escrito:", fechaParsed.dia, "en", coordenadas.dia);
@@ -352,7 +352,7 @@ async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
       if (fechaParsed.mes) {
         page1.drawText(fechaParsed.mes, {
           x: coordenadas.mes.x, 
-          y: h1 - coordenadas.mes.y, 
+          y: coordenadas.mes.y, 
           size: fontSize, font: font, color: color
         });
         console.log("✓ Mes escrito:", fechaParsed.mes, "en", coordenadas.mes);
@@ -361,7 +361,7 @@ async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
       if (fechaParsed.anio) {
         page1.drawText(fechaParsed.anio, {
           x: coordenadas.anio.x, 
-          y: h1 - coordenadas.anio.y, 
+          y: coordenadas.anio.y, 
           size: fontSize, font: font, color: color
         });
         console.log("✓ Año escrito:", fechaParsed.anio, "en", coordenadas.anio);
@@ -370,7 +370,7 @@ async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
       if (datos.telefono) {
         page1.drawText(datos.telefono, {
           x: coordenadas.telefono.x, 
-          y: h1 - coordenadas.telefono.y, 
+          y: coordenadas.telefono.y, 
           size: fontSize, font: font, color: color
         });
         console.log("✓ Teléfono escrito:", datos.telefono, "en", coordenadas.telefono);
@@ -389,7 +389,7 @@ async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
       if (datos.lugar) {
         page3.drawText(datos.lugar, {
           x: coordenadas.lugar.x, 
-          y: h3 - coordenadas.lugar.y, 
+          y: coordenadas.lugar.y, 
           size: fontSize, font: font, color: color
         });
         console.log("✓ Lugar escrito:", datos.lugar, "en", coordenadas.lugar);
@@ -402,21 +402,21 @@ async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
       
       page3.drawText(diaActual, {
         x: coordenadas.firmaFechaDia.x, 
-        y: h3 - coordenadas.firmaFechaDia.y, 
+        y: coordenadas.firmaFechaDia.y, 
         size: fontSize, font: font, color: color
       });
       console.log("✓ Día firma escrito:", diaActual, "en", coordenadas.firmaFechaDia);
       
       page3.drawText(mesActual, {
         x: coordenadas.firmaFechaMes.x, 
-        y: h3 - coordenadas.firmaFechaMes.y, 
+        y: coordenadas.firmaFechaMes.y, 
         size: fontSize, font: font, color: color
       });
       console.log("✓ Mes firma escrito:", mesActual, "en", coordenadas.firmaFechaMes);
       
       page3.drawText(anioActual, {
         x: coordenadas.firmaFechaAnio.x, 
-        y: h3 - coordenadas.firmaFechaAnio.y, 
+        y: coordenadas.firmaFechaAnio.y, 
         size: fontSize, font: font, color: color
       });
       console.log("✓ Año firma escrito:", anioActual, "en", coordenadas.firmaFechaAnio);
@@ -457,7 +457,7 @@ async function anadirFirma(pdfDoc) {
       
       page3.drawImage(firmaImage, {
         x: coordenadas.firmaImagen.x,
-        y: h3 - coordenadas.firmaImagen.y,
+        y: coordenadas.firmaImagen.y,
         width: firmaWidth,
         height: firmaHeight,
       });
