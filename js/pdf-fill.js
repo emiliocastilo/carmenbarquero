@@ -198,7 +198,7 @@ async function generatePDF() {
                         window.location.hostname === 'carmenbarqueropsicologia.es';
     const templateUrl = isProduction 
       ? 'https://www.carmenbarqueropsicologia.es/consentimiento-informado-template.pdf'
-      : 'docs/consentimiento-informado-template.pdf';
+      : './docs/consentimiento-informado-template.pdf';
     
     // Cargar el PDF original como plantilla
     const response = await fetch(templateUrl);
@@ -277,7 +277,7 @@ async function rellenarPDFOriginal(pdfDoc, datos, fechaParsed) {
     }
     
   } catch (error) {
-    console.log("Sin campos AcroForm, escribiendo directamente...");
+    console.log("Sin campos AcroForm, escribiendo directamente...", error);
     await escribirDatosDirectamente(pdfDoc, datos, fechaParsed);
   }
 }
@@ -286,76 +286,113 @@ async function rellenarPDFOriginal(pdfDoc, datos, fechaParsed) {
 async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
   const { rgb, StandardFonts } = PDFLib;
   
-  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-  const pages = pdfDoc.getPages();
-  
-  // Página 1: datos personales
-  if (pages.length > 0) {
-    const page1 = pages[0];
-    const { height: h1 } = page1.getSize();
-    const fontSize = 10;
-    const color = rgb(0, 0, 0);
+  try {
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const pages = pdfDoc.getPages();
     
-    // Coordenadas según la calibración anterior
-    page1.drawText(datos.nombreApellidos, {
-      x: 170, y: h1 - 258, size: fontSize, font: font, color: color
-    });
+    console.log("Escribiendo datos directamente. Total de páginas:", pages.length);
+    console.log("Datos a escribir:", { datos, fechaParsed });
     
-    page1.drawText(datos.dni, {
-      x: 120, y: h1 - 277, size: fontSize, font: font, color: color
-    });
+    // Página 1: datos personales
+    if (pages.length > 0) {
+      const page1 = pages[0];
+      const { height: h1, width: w1 } = page1.getSize();
+      const fontSize = 11;
+      const color = rgb(0, 0, 0);
+      
+      console.log("Página 1 - Dimensiones:", { width: w1, height: h1 });
+      
+      // Escribir nombre
+      if (datos.nombreApellidos) {
+        page1.drawText(datos.nombreApellidos, {
+          x: 170, y: h1 - 258, size: fontSize, font: font, color: color
+        });
+        console.log("✓ Nombre escrito:", datos.nombreApellidos);
+      }
+      
+      // Escribir DNI
+      if (datos.dni) {
+        page1.drawText(datos.dni, {
+          x: 120, y: h1 - 277, size: fontSize, font: font, color: color
+        });
+        console.log("✓ DNI escrito:", datos.dni);
+      }
+      
+      // Escribir fecha de nacimiento separada
+      if (fechaParsed.dia) {
+        page1.drawText(fechaParsed.dia, {
+          x: 120, y: h1 - 289, size: fontSize, font: font, color: color
+        });
+        console.log("✓ Día escrito:", fechaParsed.dia);
+      }
+      
+      if (fechaParsed.mes) {
+        page1.drawText(fechaParsed.mes, {
+          x: 170, y: h1 - 289, size: fontSize, font: font, color: color
+        });
+        console.log("✓ Mes escrito:", fechaParsed.mes);
+      }
+      
+      if (fechaParsed.anio) {
+        page1.drawText(fechaParsed.anio, {
+          x: 270, y: h1 - 289, size: fontSize, font: font, color: color
+        });
+        console.log("✓ Año escrito:", fechaParsed.anio);
+      }
+      
+      // Escribir teléfono
+      if (datos.telefono) {
+        page1.drawText(datos.telefono, {
+          x: 170, y: h1 - 307, size: fontSize, font: font, color: color
+        });
+        console.log("✓ Teléfono escrito:", datos.telefono);
+      }
+    }
     
-    page1.drawText(fechaParsed.dia, {
-      x: 120, y: h1 - 289, size: fontSize, font: font, color: color
-    });
+    // Página 3: fecha de firma y firma
+    if (pages.length > 2) {
+      const page3 = pages[2];
+      const { height: h3 } = page3.getSize();
+      const fontSize = 11;
+      const color = rgb(0, 0, 0);
+      
+      console.log("Página 3 - Altura:", h3);
+      
+      // Lugar
+      if (datos.lugar) {
+        page3.drawText(datos.lugar, {
+          x: 115, y: h3 - 274, size: fontSize, font: font, color: color
+        });
+        console.log("✓ Lugar escrito:", datos.lugar);
+      }
+      
+      // Fecha de firma (fecha actual)
+      const hoy = new Date();
+      page3.drawText(hoy.getDate().toString(), {
+        x: 115, y: h3 - 282, size: fontSize, font: font, color: color
+      });
+      console.log("✓ Día de firma escrito:", hoy.getDate());
+      
+      const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", 
+                     "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+      page3.drawText(meses[hoy.getMonth()], {
+        x: 160, y: h3 - 282, size: fontSize, font: font, color: color
+      });
+      console.log("✓ Mes de firma escrito:", meses[hoy.getMonth()]);
+      
+      page3.drawText(hoy.getFullYear().toString(), {
+        x: 280, y: h3 - 282, size: fontSize, font: font, color: color
+      });
+      console.log("✓ Año de firma escrito:", hoy.getFullYear());
+      
+      // Añadir firma
+      await anadirFirma(pdfDoc, page3, h3);
+    }
     
-    page1.drawText(fechaParsed.mes, {
-      x: 170, y: h1 - 289, size: fontSize, font: font, color: color
-    });
-    
-    page1.drawText(fechaParsed.anio, {
-      x: 270, y: h1 - 289, size: fontSize, font: font, color: color
-    });
-    
-    page1.drawText(datos.telefono, {
-      x: 170, y: h1 - 307, size: fontSize, font: font, color: color
-    });
-    
-    console.log("Datos escritos en página 1");
-  }
-  
-  // Página 3: fecha de firma y firma
-  if (pages.length > 2) {
-    const page3 = pages[2];
-    const { height: h3 } = page3.getSize();
-    const fontSize = 10;
-    const color = rgb(0, 0, 0);
-    
-    // Lugar
-    page3.drawText(datos.lugar, {
-      x: 115, y: h3 - 274, size: fontSize, font: font, color: color
-    });
-    
-    // Fecha de firma (fecha actual)
-    const hoy = new Date();
-    page3.drawText(hoy.getDate().toString(), {
-      x: 115, y: h3 - 282, size: fontSize, font: font, color: color
-    });
-    
-    const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", 
-                   "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-    page3.drawText(meses[hoy.getMonth()], {
-      x: 160, y: h3 - 282, size: fontSize, font: font, color: color
-    });
-    
-    page3.drawText(hoy.getFullYear().toString(), {
-      x: 280, y: h3 - 282, size: fontSize, font: font, color: color
-    });
-    
-    // Añadir firma
-    await anadirFirma(pdfDoc, page3, h3);
-    
-    console.log("Datos de firma escritos en página 3");
+    console.log("✓ Todos los datos escritos correctamente");
+  } catch (error) {
+    console.error("Error escribiendo datos directamente:", error);
+    throw error;
   }
 }
 
