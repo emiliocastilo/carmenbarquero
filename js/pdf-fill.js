@@ -14,7 +14,6 @@ const coordenadas = {
   firmaFechaAnio: { x: 365, y: 576 },
   firmaImagen: { x: 115, y: 514 }
 };
-};
 // --- Firma manuscrita en canvas ---
 window.addEventListener("DOMContentLoaded", function () {
   const canvas = document.getElementById("canvas-firma");
