@@ -177,6 +177,15 @@ jobs:
             done
           fi
           
+          # PDFs del formulario
+          if [ -d docs ]; then
+            mkdir -p dist
+            find docs -name "*.pdf" | while read file; do
+              cp "$file" "dist/$(basename "$file")"
+            done
+            echo "✅ PDFs copiados a raíz"
+          fi
+          
           echo "🗺️ PASO 6: Actualizar sitemap"
           if [ -f sitemap.xml ]; then
             sed -i 's|contacto\.html|contacto|g' sitemap.xml

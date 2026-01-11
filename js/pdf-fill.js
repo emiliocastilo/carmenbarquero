@@ -180,9 +180,16 @@ async function generatePDF() {
     };
     
     // Cargar PDF original
-    const response = await fetch("docs/consentimiento-informado-template.pdf");
+    // Detectar si estamos en producción o desarrollo
+    const isProduction = window.location.hostname === 'www.carmenbarqueropsicologia.es' || 
+                        window.location.hostname === 'carmenbarqueropsicologia.es';
+    const pdfUrl = isProduction 
+      ? 'https://www.carmenbarqueropsicologia.es/consentimiento-informado-template.pdf'
+      : 'docs/consentimiento-informado-template.pdf';
+    
+    const response = await fetch(pdfUrl);
     if (!response.ok) {
-      throw new Error("No se pudo cargar el PDF");
+      throw new Error(`No se pudo cargar el PDF: ${response.status}`);
     }
     
     const pdfBytes = await response.arrayBuffer();
