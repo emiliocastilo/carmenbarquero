@@ -1,22 +1,14 @@
 // === Generador de PDF de Consentimiento Informado ===
-// Rellena el PDF original del usuario con datos + firma manuscrita
+// Rellena el PDF original con los datos del formulario
 
+// --- Firma manuscrita en canvas ---
 window.addEventListener("DOMContentLoaded", function () {
-  initCanvasFirma();
-  autoRellenarFecha();
-});
-
-// ==========================================
-// CANVAS - FIRMA MANUSCRITA
-// ==========================================
-
-function initCanvasFirma() {
   const canvas = document.getElementById("canvas-firma");
   if (!canvas) return;
-  
   const ctx = canvas.getContext("2d");
   let dibujando = false;
 
+  // Configurar estilo del trazo
   ctx.strokeStyle = "#1a1a1a";
   ctx.lineWidth = 2;
   ctx.lineCap = "round";
@@ -38,17 +30,16 @@ function initCanvasFirma() {
     ctx.beginPath();
     ctx.moveTo(pos.x, pos.y);
   });
-  
   canvas.addEventListener("mousemove", (e) => {
     if (!dibujando) return;
     const pos = getPos(e);
     ctx.lineTo(pos.x, pos.y);
     ctx.stroke();
   });
-  
   canvas.addEventListener("mouseup", () => (dibujando = false));
   canvas.addEventListener("mouseleave", () => (dibujando = false));
 
+  // Soporte táctil
   canvas.addEventListener("touchstart", (e) => {
     e.preventDefault();
     dibujando = true;
@@ -67,40 +58,28 @@ function initCanvasFirma() {
   
   canvas.addEventListener("touchend", () => (dibujando = false));
 
+  // Botón limpiar
   document.getElementById("limpiar-firma")?.addEventListener("click", function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   });
-}
 
-// ==========================================
-// AUTO-RELLENAR FECHA
-// ==========================================
-
-function autoRellenarFecha() {
+  // Auto-rellenar fecha actual
   const hoy = new Date();
+  const dia = document.getElementById("dia");
+  const mes = document.getElementById("mes");
+  const anio = document.getElementById("anio");
   
-  if (document.getElementById("dia")) {
-    document.getElementById("dia").value = String(hoy.getDate()).padStart(2, '0');
+  if (dia) dia.value = hoy.getDate();
+  if (mes) {
+    const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", 
+                   "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+    mes.value = meses[hoy.getMonth()];
   }
-  
-  if (document.getElementById("mes")) {
-    const meses = [
-      "enero", "febrero", "marzo", "abril", "mayo", "junio",
-      "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
-    ];
-    document.getElementById("mes").value = meses[hoy.getMonth()];
-  }
-  
-  if (document.getElementById("anio")) {
-    document.getElementById("anio").value = hoy.getFullYear();
-  }
-}
+  if (anio) anio.value = hoy.getFullYear();
+});
 
-// ==========================================
-// VALIDACIÓN Y GENERACIÓN
-// ==========================================
-
-function canvasTieneFirma() {
+// Verificar si el canvas tiene firma
+function tieneCanvasFirma() {
   const canvas = document.getElementById("canvas-firma");
   if (!canvas) return false;
   const ctx = canvas.getContext("2d");
@@ -111,6 +90,40 @@ function canvasTieneFirma() {
   return false;
 }
 
+// Parsear fecha en formato dd/mm/yyyy a componentes
+function parsearFecha(fechaStr) {
+  // Limpiar espacios
+  fechaStr = fechaStr.trim();
+  
+  // Intentar parsear formato dd/mm/yyyy
+  const partes = fechaStr.split('/');
+  if (partes.length === 3) {
+    const dia = partes[0].trim();
+    const mesNum = partes[1].trim();
+    const anio = partes[2].trim();
+    
+    // Convertir número de mes a nombre
+    const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", 
+                   "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+    const mesIdx = parseInt(mesNum) - 1;
+    const mesNombre = (mesIdx >= 0 && mesIdx < 12) ? meses[mesIdx] : mesNum;
+    
+    return {
+      dia: dia,
+      mes: mesNombre,
+      anio: anio
+    };
+  }
+  
+  // Si no se puede parsear, devolver el string completo
+  return {
+    dia: "",
+    mes: "",
+    anio: ""
+  };
+}
+
+// Validar formulario
 function validarFormulario() {
   const campos = {
     "nombre-apellidos": "Nombre y apellidos",
@@ -122,40 +135,41 @@ function validarFormulario() {
   
   const errores = [];
   
-  // Limpiar errores previos
-  document.querySelectorAll('.campo-dato input').forEach(input => {
-    input.classList.remove('error');
-  });
-  document.getElementById('errores-validacion').style.display = 'none';
-  
   for (const [id, nombre] of Object.entries(campos)) {
     const input = document.getElementById(id);
     if (!input || !input.value.trim()) {
       errores.push(nombre);
-      if (input) input.classList.add('error');
+      input?.classList.add('campo-error');
+    } else {
+      input?.classList.remove('campo-error');
     }
   }
   
-  if (!canvasTieneFirma()) {
+  if (!tieneCanvasFirma()) {
     errores.push("Firma manuscrita");
   }
   
-  return errores;
-}
-
-async function generatePDF() {
-  const errores = validarFormulario();
+  // Mostrar errores en panel
+  const panelErrores = document.getElementById("errores-validacion");
   if (errores.length > 0) {
-    // Mostrar errores en panel visual en lugar de alert
-    const panelErrores = document.getElementById('errores-validacion');
     panelErrores.innerHTML = `
-      <h4>⚠️ Por favor, complete los siguientes campos:</h4>
+      <strong>⚠️ Faltan campos por completar:</strong>
       <ul>
         ${errores.map(e => `<li>${e}</li>`).join('')}
       </ul>
     `;
     panelErrores.style.display = 'block';
-    panelErrores.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    panelErrores.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } else {
+    panelErrores.style.display = 'none';
+  }
+  
+  return errores.length === 0;
+}
+
+// Función principal para generar PDF
+async function generatePDF() {
+  if (!validarFormulario()) {
     return;
   }
   
@@ -165,179 +179,231 @@ async function generatePDF() {
   btn.disabled = true;
   
   try {
-    const { PDFDocument, rgb, StandardFonts } = PDFLib;
+    const { PDFDocument } = PDFLib;
     
-    // Recolectar datos del formulario
+    // Obtener datos del formulario
     const datos = {
       nombreApellidos: document.getElementById("nombre-apellidos")?.value || "",
       dni: document.getElementById("dni")?.value || "",
       fechaNacimiento: document.getElementById("fecha-nacimiento")?.value || "",
       telefono: document.getElementById("telefono")?.value || "",
       lugar: document.getElementById("lugar")?.value || "",
-      dia: document.getElementById("dia")?.value || "",
-      mes: document.getElementById("mes")?.value || "",
-      anio: document.getElementById("anio")?.value || ""
     };
     
-    // Cargar PDF original
-    // Detectar si estamos en producción o desarrollo
+    // Parsear la fecha de nacimiento
+    const fechaParsed = parsearFecha(datos.fechaNacimiento);
+    
+    // Detectar si es producción o desarrollo
     const isProduction = window.location.hostname === 'www.carmenbarqueropsicologia.es' || 
                         window.location.hostname === 'carmenbarqueropsicologia.es';
-    const pdfUrl = isProduction 
+    const templateUrl = isProduction 
       ? 'https://www.carmenbarqueropsicologia.es/consentimiento-informado-template.pdf'
       : 'docs/consentimiento-informado-template.pdf';
     
-    const response = await fetch(pdfUrl);
+    // Cargar el PDF original como plantilla
+    const response = await fetch(templateUrl);
+    
     if (!response.ok) {
-      throw new Error(`No se pudo cargar el PDF: ${response.status}`);
+      throw new Error("No se pudo cargar el PDF original");
     }
     
     const pdfBytes = await response.arrayBuffer();
     const pdfDoc = await PDFDocument.load(pdfBytes);
     
-    // Escribir datos directamente en el PDF
-    await escribirDatosEnPDF(pdfDoc, datos, StandardFonts, rgb);
+    // Rellenar el PDF
+    await rellenarPDFOriginal(pdfDoc, datos, fechaParsed);
     
-    // Añadir firma
-    await anadirFirma(pdfDoc);
-    
-    // Descargar
+    // Guardar y descargar
     const pdfModificado = await pdfDoc.save();
     descargarPDF(pdfModificado, datos.nombreApellidos);
     mostrarMensajeExito();
     
   } catch (error) {
-    console.error("Error:", error);
-    alert("Error: " + error.message);
+    console.error("Error al generar PDF:", error);
+    const panelErrores = document.getElementById("errores-validacion");
+    panelErrores.innerHTML = `<strong>❌ Error:</strong> ${error.message}`;
+    panelErrores.style.display = 'block';
   } finally {
     btn.innerHTML = textoOriginal;
     btn.disabled = false;
   }
 }
 
-// ==========================================
-// ESCRIBIR DATOS EN PDF
-// ==========================================
-
-async function escribirDatosEnPDF(pdfDoc, datos, StandardFonts, rgb) {
+// Rellenar el PDF original con los datos
+async function rellenarPDFOriginal(pdfDoc, datos, fechaParsed) {
   try {
-    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-    const boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    // Intentar obtener el formulario
+    const form = pdfDoc.getForm();
+    const fields = form.getFields();
     
-    // Primera página - datos del paciente
-    const pagina1 = pdfDoc.getPages()[0];
-    const { height: h1 } = pagina1.getSize();
+    console.log("Campos encontrados en el PDF:", fields.map(f => f.getName()));
     
-    // Posiciones basadas en análisis visual del PDF original
-    // Las líneas están a estos offsets desde la parte superior
-    const posiciones = [
-      { texto: datos.nombreApellidos, x: 207, y: h1 - 258 },   // Nombre y apellidos
-      { texto: datos.dni, x: 156, y: h1 - 277 },              // DNI/NIE
-      { texto: datos.telefono, x: 214, y: h1 - 307 }          // Teléfono de contacto
+    // Mapeo de campos del PDF con los datos
+    const mappeosCampos = [
+      { patrones: ["nombre", "apellidos", "paciente", "persona", "usuario"], valor: datos.nombreApellidos },
+      { patrones: ["dni", "nie", "documento", "identidad"], valor: datos.dni },
+      { patrones: ["nacimiento", "birth"], valor: datos.fechaNacimiento },
+      { patrones: ["telefono", "phone", "movil", "contacto"], valor: datos.telefono },
+      { patrones: ["ciudad", "lugar", "localidad"], valor: datos.lugar },
+      { patrones: ["dia", "day"], valor: fechaParsed.dia },
+      { patrones: ["mes", "month"], valor: fechaParsed.mes },
+      { patrones: ["año", "anio", "year"], valor: fechaParsed.anio }
     ];
-
-    posiciones.forEach(pos => {
-      if (pos.texto) {
-        pagina1.drawText(pos.texto, {
-          x: pos.x,
-          y: pos.y,
-          size: 11,
-          font: font,
-          color: rgb(0, 0, 0)
-        });
+    
+    // Rellenar cada campo encontrado
+    fields.forEach(field => {
+      const nombreCampo = field.getName().toLowerCase();
+      
+      for (const mapeo of mappeosCampos) {
+        if (mapeo.patrones.some(p => nombreCampo.includes(p))) {
+          try {
+            if (typeof field.setText === 'function' && mapeo.valor) {
+              field.setText(mapeo.valor);
+              console.log(`Campo rellenado: ${field.getName()} = ${mapeo.valor}`);
+            }
+          } catch (e) {
+            console.log(`No se pudo rellenar el campo ${field.getName()}`);
+          }
+          break;
+        }
       }
     });
     
-    // Fecha de nacimiento - escribir con "/" 
-    // Usar el campo fecha-nacimiento que ya viene con "/
-    if (datos.fechaNacimiento) {
-      pagina1.drawText(datos.fechaNacimiento, {
-        x: 212, y: h1 - 289, size: 11, font: font, color: rgb(0, 0, 0)
-      });
-    }
-    
-    console.log("✓ Datos escritos en página 1");
-    
-    // Tercera página (última) - fecha y lugar
-    if (pdfDoc.getPageCount() >= 3) {
-      const pagina3 = pdfDoc.getPages()[2];
-      const { height: h3 } = pagina3.getSize();
-      
-      const posicionesFecha = [
-        { texto: datos.lugar, x: 121, y: h3 - 274, label: "Lugar" },
-        { texto: datos.dia, x: 234, y: h3 - 274, label: "Día" },
-        { texto: datos.mes, x: 272, y: h3 - 274, label: "Mes" },
-        { texto: datos.anio, x: 364, y: h3 - 274, label: "Año" }
-      ];
-      
-      posicionesFecha.forEach(pos => {
-        if (pos.texto) {
-          pagina3.drawText(pos.texto, {
-            x: pos.x,
-            y: pos.y,
-            size: 11,
-            font: font,
-            color: rgb(0, 0, 0)
-          });
-        }
-      });
-      
-      console.log("✓ Datos de fecha/lugar escritos en página 3");
+    // Aplanar el formulario
+    try {
+      form.flatten();
+    } catch (e) {
+      console.log("PDF aplanado");
     }
     
   } catch (error) {
-    console.error("Error escribiendo datos:", error);
-    throw error;
+    console.log("Sin campos AcroForm, escribiendo directamente...");
+    await escribirDatosDirectamente(pdfDoc, datos, fechaParsed);
   }
 }
 
-// ==========================================
-// FIRMA Y DESCARGA
-// ==========================================
+// Escribir datos directamente sobre el PDF
+async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
+  const { rgb, StandardFonts } = PDFLib;
+  
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+  const pages = pdfDoc.getPages();
+  
+  // Página 1: datos personales
+  if (pages.length > 0) {
+    const page1 = pages[0];
+    const { height: h1 } = page1.getSize();
+    const fontSize = 10;
+    const color = rgb(0, 0, 0);
+    
+    // Coordenadas según la calibración anterior
+    page1.drawText(datos.nombreApellidos, {
+      x: 170, y: h1 - 258, size: fontSize, font: font, color: color
+    });
+    
+    page1.drawText(datos.dni, {
+      x: 120, y: h1 - 277, size: fontSize, font: font, color: color
+    });
+    
+    page1.drawText(fechaParsed.dia, {
+      x: 120, y: h1 - 289, size: fontSize, font: font, color: color
+    });
+    
+    page1.drawText(fechaParsed.mes, {
+      x: 170, y: h1 - 289, size: fontSize, font: font, color: color
+    });
+    
+    page1.drawText(fechaParsed.anio, {
+      x: 270, y: h1 - 289, size: fontSize, font: font, color: color
+    });
+    
+    page1.drawText(datos.telefono, {
+      x: 170, y: h1 - 307, size: fontSize, font: font, color: color
+    });
+    
+    console.log("Datos escritos en página 1");
+  }
+  
+  // Página 3: fecha de firma y firma
+  if (pages.length > 2) {
+    const page3 = pages[2];
+    const { height: h3 } = page3.getSize();
+    const fontSize = 10;
+    const color = rgb(0, 0, 0);
+    
+    // Lugar
+    page3.drawText(datos.lugar, {
+      x: 115, y: h3 - 274, size: fontSize, font: font, color: color
+    });
+    
+    // Fecha de firma (fecha actual)
+    const hoy = new Date();
+    page3.drawText(hoy.getDate().toString(), {
+      x: 115, y: h3 - 282, size: fontSize, font: font, color: color
+    });
+    
+    const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", 
+                   "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+    page3.drawText(meses[hoy.getMonth()], {
+      x: 160, y: h3 - 282, size: fontSize, font: font, color: color
+    });
+    
+    page3.drawText(hoy.getFullYear().toString(), {
+      x: 280, y: h3 - 282, size: fontSize, font: font, color: color
+    });
+    
+    // Añadir firma
+    await anadirFirma(pdfDoc, page3, h3);
+    
+    console.log("Datos de firma escritos en página 3");
+  }
+}
 
-async function anadirFirma(pdfDoc) {
+// Añadir firma al PDF
+async function anadirFirma(pdfDoc, page, pageHeight) {
   const canvas = document.getElementById("canvas-firma");
-  if (!canvas || !canvasTieneFirma()) return;
+  if (!canvas || !tieneCanvasFirma()) {
+    console.log("No hay firma para añadir");
+    return;
+  }
   
   try {
     const firmaDataUrl = canvas.toDataURL("image/png");
     const firmaBytes = await fetch(firmaDataUrl).then(res => res.arrayBuffer());
     const firmaImage = await pdfDoc.embedPng(firmaBytes);
     
-    // Añadir firma a la última página (página 3)
-    const pages = pdfDoc.getPages();
-    const lastPage = pages[pages.length - 1];
-    const { height: h3 } = lastPage.getSize();
-    
     // Escalar firma
-    const maxWidth = 150;
-    const maxHeight = 50;
+    const maxWidth = 180;
+    const maxHeight = 60;
     const ratio = Math.min(maxWidth / firmaImage.width, maxHeight / firmaImage.height);
-    const fw = firmaImage.width * ratio;
-    const fh = firmaImage.height * ratio;
+    const firmaWidth = firmaImage.width * ratio;
+    const firmaHeight = firmaImage.height * ratio;
     
-    // Posicionar firma en coordenadas verificadas: { x: 115, y: h3 - 347 }
-    lastPage.drawImage(firmaImage, {
+    // Posición de la firma en página 3
+    page.drawImage(firmaImage, {
       x: 115,
-      y: h3 - 373,
-      width: fw,
-      height: fh
+      y: pageHeight - 347,
+      width: firmaWidth,
+      height: firmaHeight,
     });
     
-    console.log("✓ Firma añadida en página 3");
+    console.log("Firma añadida");
   } catch (error) {
-    console.log("Error añadiendo firma:", error);
+    console.log("Error al añadir firma:", error);
   }
 }
 
+// Descargar PDF
 function descargarPDF(pdfBytes, nombrePaciente) {
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = nombrePaciente
+  
+  const nombreArchivo = nombrePaciente 
     ? `consentimiento-${nombrePaciente.replace(/\s+/g, "-").toLowerCase()}.pdf`
     : "consentimiento-informado.pdf";
+  link.download = nombreArchivo;
   
   document.body.appendChild(link);
   link.click();
@@ -345,21 +411,22 @@ function descargarPDF(pdfBytes, nombrePaciente) {
   URL.revokeObjectURL(url);
 }
 
+// Mostrar mensaje de éxito
 function mostrarMensajeExito() {
-  const div = document.createElement("div");
-  div.className = "mensaje-exito";
-  div.innerHTML = `
+  const mensajeDiv = document.createElement("div");
+  mensajeDiv.className = "mensaje-exito";
+  mensajeDiv.innerHTML = `
     <div class="mensaje-exito-content">
       <span class="mensaje-exito-icon">✓</span>
       <p>¡PDF generado correctamente!</p>
-      <p class="mensaje-exito-sub">El documento se ha descargado.</p>
+      <p class="mensaje-exito-sub">El documento se ha descargado en tu dispositivo.</p>
     </div>
   `;
-  document.body.appendChild(div);
+  document.body.appendChild(mensajeDiv);
   
   setTimeout(() => {
-    div.classList.add("mensaje-exito-fade");
-    setTimeout(() => div.remove(), 500);
+    mensajeDiv.classList.add("mensaje-exito-fade");
+    setTimeout(() => mensajeDiv.remove(), 500);
   }, 3000);
 }
 

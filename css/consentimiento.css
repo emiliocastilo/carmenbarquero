@@ -425,9 +425,6 @@
     padding: 1rem 0.7rem;
     margin: 1rem auto;
   }
-    width: auto;
-    min-width: 50px;
-  }
   
   #canvas-firma {
     height: 120px;
