@@ -12,7 +12,7 @@ const coordenadas = {
   firmaFechaDia: { x: 238, y: 565 },
   firmaFechaMes: { x: 275, y: 565 },
   firmaFechaAnio: { x: 365, y: 565 },
-  firmaImagen: { x: 115, y: 475 }
+  firmaImagen: { x: 115, y: 455 }
 };
 // --- Firma manuscrita en canvas ---
 window.addEventListener("DOMContentLoaded", function () {
@@ -76,15 +76,38 @@ window.addEventListener("DOMContentLoaded", function () {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   });
 
-  // Auto-rellenar fecha actual
+  // Poblar selects de fecha de nacimiento
+  const selectDiaNac = document.getElementById("fecha-nacimiento-dia");
+  const selectAnioNac = document.getElementById("fecha-nacimiento-anio");
+
+  if (selectDiaNac) {
+    for (let i = 1; i <= 31; i++) {
+      const option = document.createElement("option");
+      option.value = i.toString().padStart(2, '0');
+      option.textContent = i;
+      selectDiaNac.appendChild(option);
+    }
+  }
+
+  if (selectAnioNac) {
+    const anioActual = new Date().getFullYear();
+    for (let i = anioActual; i >= 1920; i--) {
+      const option = document.createElement("option");
+      option.value = i.toString();
+      option.textContent = i;
+      selectAnioNac.appendChild(option);
+    }
+  }
+
+  // Auto-rellenar fecha actual (para la sección de firmas)
   const hoy = new Date();
   const dia = document.getElementById("dia");
   const mes = document.getElementById("mes");
   const anio = document.getElementById("anio");
-  
+
   if (dia) dia.value = hoy.getDate();
   if (mes) {
-    const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", 
+    const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio",
                    "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
     mes.value = meses[hoy.getMonth()];
   }
@@ -127,13 +150,12 @@ function validarFormulario() {
   const campos = {
     "nombre-apellidos": "Nombre y apellidos",
     "dni": "DNI/NIE",
-    "fecha-nacimiento": "Fecha de nacimiento",
     "telefono": "Teléfono",
     "lugar": "Lugar (ciudad)"
   };
-  
+
   const errores = [];
-  
+
   for (const [id, nombre] of Object.entries(campos)) {
     const input = document.getElementById(id);
     if (!input || !input.value.trim()) {
@@ -142,6 +164,22 @@ function validarFormulario() {
     } else {
       input?.classList.remove('campo-error');
     }
+  }
+
+  // Validar fecha de nacimiento (selects separados)
+  const fechaDia = document.getElementById("fecha-nacimiento-dia");
+  const fechaMes = document.getElementById("fecha-nacimiento-mes");
+  const fechaAnio = document.getElementById("fecha-nacimiento-anio");
+
+  if (!fechaDia?.value || !fechaMes?.value || !fechaAnio?.value) {
+    errores.push("Fecha de nacimiento");
+    fechaDia?.classList.add('campo-error');
+    fechaMes?.classList.add('campo-error');
+    fechaAnio?.classList.add('campo-error');
+  } else {
+    fechaDia?.classList.remove('campo-error');
+    fechaMes?.classList.remove('campo-error');
+    fechaAnio?.classList.remove('campo-error');
   }
   
   if (!tieneCanvasFirma()) {
@@ -188,15 +226,20 @@ async function generatePDF() {
     const datos = {
       nombreApellidos: document.getElementById("nombre-apellidos")?.value || "",
       dni: document.getElementById("dni")?.value || "",
-      fechaNacimiento: document.getElementById("fecha-nacimiento")?.value || "",
       telefono: document.getElementById("telefono")?.value || "",
       lugar: document.getElementById("lugar")?.value || "",
     };
-    
+
     console.log("📋 Datos del formulario:", datos);
-    
-    // Parsear la fecha de nacimiento
-    const fechaParsed = parsearFecha(datos.fechaNacimiento);
+
+    // Obtener fecha de nacimiento de los selects
+    const fechaParsed = {
+      dia: document.getElementById("fecha-nacimiento-dia")?.value || "",
+      mes: document.getElementById("fecha-nacimiento-mes")?.value || "",
+      anio: document.getElementById("fecha-nacimiento-anio")?.value || ""
+    };
+
+    console.log("📅 Fecha de nacimiento:", fechaParsed);
     
     // Detectar si es producción o desarrollo
     const isProduction = window.location.hostname === 'www.carmenbarqueropsicologia.es' || 

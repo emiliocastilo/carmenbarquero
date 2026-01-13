@@ -125,7 +125,8 @@
   color: #333;
 }
 
-.campo-dato input {
+.campo-dato input,
+.campo-dato select {
   flex: 1;
   min-width: 150px;
   padding: 8px 12px;
@@ -134,9 +135,11 @@
   font-size: 1rem;
   font-family: inherit;
   transition: border-color 0.2s, box-shadow 0.2s;
+  background-color: #fff;
 }
 
-.campo-dato input:focus {
+.campo-dato input:focus,
+.campo-dato select:focus {
   outline: none;
   border-color: var(--color-principal, #3a4a5a);
   box-shadow: 0 0 0 3px rgba(58, 74, 90, 0.15);
@@ -144,6 +147,21 @@
 
 .campo-dato input::placeholder {
   color: #999;
+}
+
+.campo-dato .fecha-selects {
+  display: inline-flex;
+  gap: 0.5rem;
+  width: 65%;
+}
+
+.campo-dato .fecha-selects select {
+  min-width: auto;
+  flex: 1;
+}
+
+.campo-dato .fecha-selects select:nth-child(2) {
+  flex: 2;
 }
 
 /* Línea de fecha completa */
@@ -381,10 +399,22 @@
     margin-bottom: 4px;
   }
   
-  .campo-dato input {
+  .campo-dato input,
+  .campo-dato select {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+  }
+
+  .campo-dato .fecha-selects {
+    width: 100%;
+    flex-direction: row;
+  }
+
+  .campo-dato .fecha-selects select {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 6px;
   }
   
   .linea-fecha-completa {
@@ -437,7 +467,10 @@
 }
 
 /* Validación visual - Campos en rojo */
-.campo-dato input.error {
+.campo-dato input.error,
+.campo-dato select.error,
+.campo-dato input.campo-error,
+.campo-dato select.campo-error {
   border: 2px solid #dc3545 !important;
   background-color: #fff5f5;
 }
