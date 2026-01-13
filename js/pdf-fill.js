@@ -438,31 +438,31 @@ async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
         console.log("✓ Lugar escrito:", datos.lugar, "en", coordenadas.lugar);
       }
       
-      const hoy = new Date();
-      const diaActual = hoy.getDate().toString().padStart(2, '0');
-      const mesActual = (hoy.getMonth() + 1).toString().padStart(2, '0');
-      const anioActual = hoy.getFullYear().toString();
-      
-      page3.drawText(diaActual, {
-        x: coordenadas.firmaFechaDia.x, 
-        y: coordenadas.firmaFechaDia.y, 
+      // Obtener fecha de firma directamente del formulario
+      const diaFirma = document.getElementById("dia")?.value || "";
+      const mesFirma = document.getElementById("mes")?.value || "";
+      const anioFirma = document.getElementById("anio")?.value || "";
+
+      page3.drawText(diaFirma, {
+        x: coordenadas.firmaFechaDia.x,
+        y: coordenadas.firmaFechaDia.y,
         size: fontSize, font: font, color: color
       });
-      console.log("✓ Día firma escrito:", diaActual, "en", coordenadas.firmaFechaDia);
-      
-      page3.drawText(mesActual, {
-        x: coordenadas.firmaFechaMes.x, 
-        y: coordenadas.firmaFechaMes.y, 
+      console.log("✓ Día firma escrito:", diaFirma, "en", coordenadas.firmaFechaDia);
+
+      page3.drawText(mesFirma, {
+        x: coordenadas.firmaFechaMes.x,
+        y: coordenadas.firmaFechaMes.y,
         size: fontSize, font: font, color: color
       });
-      console.log("✓ Mes firma escrito:", mesActual, "en", coordenadas.firmaFechaMes);
-      
-      page3.drawText(anioActual, {
-        x: coordenadas.firmaFechaAnio.x, 
-        y: coordenadas.firmaFechaAnio.y, 
+      console.log("✓ Mes firma escrito:", mesFirma, "en", coordenadas.firmaFechaMes);
+
+      page3.drawText(anioFirma, {
+        x: coordenadas.firmaFechaAnio.x,
+        y: coordenadas.firmaFechaAnio.y,
         size: fontSize, font: font, color: color
       });
-      console.log("✓ Año firma escrito:", anioActual, "en", coordenadas.firmaFechaAnio);
+      console.log("✓ Año firma escrito:", anioFirma, "en", coordenadas.firmaFechaAnio);
       
       console.log("✓ Página 3 completada");
     }
