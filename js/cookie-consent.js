@@ -22,7 +22,7 @@
       
       // Consent Mode - Estado por defecto
       gtag('consent', 'default', {
-        'analytics_storage': 'denied',
+        'analytics_storage': 'granted',
         'wait_for_update': 500
       });
 
