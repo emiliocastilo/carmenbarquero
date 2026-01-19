@@ -136,12 +136,15 @@
       const modal = document.getElementById('cookieSettingsModal');
       if (modal) {
         modal.classList.add('show');
-        
-        // Cargar preferencias actuales si existen
+
+        // Cargar preferencias actuales si existen, si no, marcar analytics por defecto
         const consent = this.getConsentStatus();
+        const analyticsCheckbox = document.getElementById('cookie_analytics');
         if (consent) {
-          document.getElementById('cookie_analytics').checked = consent.analytics_storage === 'granted';
-          document.getElementById('cookie_advertising').checked = consent.ad_storage === 'granted';
+          analyticsCheckbox.checked = consent.analytics_storage === 'granted';
+        } else {
+          // Por defecto marcado (coincide con el default 'granted' del consent mode)
+          analyticsCheckbox.checked = true;
         }
       }
     },
