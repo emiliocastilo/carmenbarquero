@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",function(){var e=document.getElementById("modal-exito"),t=e?e.querySelector(".cerrar-modal"):null;window.mostrarModalExito=function(){e&&e.classList.add("visible")},t&&t.addEventListener("click",function(){e.classList.remove("visible")}),e&&e.addEventListener("click",function(t){t.target===e&&e.classList.remove("visible")})});
