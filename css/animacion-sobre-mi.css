@@ -33,7 +33,7 @@
   .info-contenido {
     flex-direction: row;
     gap: 2rem;
-    align-items: flex-start;
+    align-items: flex-end;
   }
 }
 
