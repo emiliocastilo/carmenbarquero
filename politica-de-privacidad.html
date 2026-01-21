@@ -52,63 +52,48 @@
       <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NRQPJ7XJ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <header>
-      <h1 style="position: absolute; left: -9999px;">Política de Privacidad - Carmen Barquero Psicóloga</h1>
-      <div class="icon-container">
-        <a href="index.html" title="Volver al inicio">
-          <picture>
-            <!-- Formato WebP optimizado -->
-            <source 
-              srcset="img/carmen-barquero-psicologa-op.webp" 
-              type="image/webp"
-            />
-            <!-- Fallback PNG para navegadores que no soportan WebP -->
-            <img
-              src="img/carmen-barquero-psicologa-op.jpg"
-              alt="Carmen Barquero - Psicóloga General Sanitaria en Mérida"
-              fetchpriority="high"
-            />
-          </picture>
+
+    <!-- Nueva Navegación -->
+    <nav class="nav-nuevo">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          <h1 class="nav-logo-title">Carmen Barquero</h1>
+          <p class="nav-logo-subtitle">Psicología & Neuropsicología</p>
         </a>
-      </div>
-    </header>
 
-    <!-- Menú superior -->
-    <nav class="menu-superior">
-      <!-- Menú desktop -->
-      <ul class="desktop-menu">
-        <li><a href="index.html">Inicio</a></li>
-        <li class="desktop-dropdown">
-          <span>Servicios</span>
-          <ul class="desktop-submenu">
-            <li><a href="servicios/terapia-individual.html">Terapia Individual</a></li>
-            <li><a href="servicios/terapia-pareja.html">Terapia de Pareja</a></li>
-            <li><a href="servicios/neuropsicologia-clinica.html">Neuropsicología Clínica</a></li>
-          </ul>
-        </li>
-        <li><a href="contacto.html">Contacto</a></li>
-        <li><a href="reserva-cita.html" class="cta-button">Reserva tu cita</a></li>
-      </ul>
+        <!-- Menú Desktop -->
+        <ul class="nav-menu-desktop">
+          <li><a href="index.html">Inicio</a></li>
+          <li class="nav-dropdown">
+            <span>Servicios</span>
+            <ul class="nav-submenu">
+              <li><a href="servicios/terapia-individual.html">Terapia Individual</a></li>
+              <li><a href="servicios/terapia-pareja.html">Terapia de Pareja</a></li>
+              <li><a href="servicios/neuropsicologia-clinica.html">Neuropsicología Clínica</a></li>
+            </ul>
+          </li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="reserva-cita.html" class="nav-cta">Reservar Cita</a></li>
+        </ul>
 
-      <!-- Menú móvil -->
-      <div class="mobile-menu">
-        <button class="menu-open-button" aria-label="Abrir menú de navegación">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
+        <!-- Botón Menú Móvil -->
+        <button class="nav-menu-toggle" id="menu-open" aria-label="Abrir menú">
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
       </div>
     </nav>
 
-    <!-- Overlay del menú móvil -->
+    <!-- Menú Móvil Overlay -->
     <div class="menu-overlay" id="menu-overlay">
       <div class="mobile-menu-container">
-        <button class="menu-close-button" aria-label="Cerrar menú">&times;</button>
+        <button class="menu-close-button" id="menu-close" aria-label="Cerrar menú">&times;</button>
         <ul class="mobile-menu-list">
           <li><a href="index.html">Inicio</a></li>
           <li class="menu-item-with-submenu">
             <button class="menu-toggle" id="servicios-toggle">
-              Servicios 
+              Servicios
               <div class="arrow-down"></div>
             </button>
             <ul class="submenu" id="servicios-submenu">

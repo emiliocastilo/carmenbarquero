@@ -1,23 +1,31 @@
 // Menu Responsive JavaScript
+// Compatible con nueva navegación (.nav-nuevo) y estructura legacy
 
 document.addEventListener('DOMContentLoaded', function() {
-    const menuOpenButton = document.querySelector('.menu-open-button');
-    const menuCloseButton = document.querySelector('.menu-close-button');
+    // Selectores para nueva navegación
+    const navMenuToggle = document.getElementById('menu-open') || document.querySelector('.nav-menu-toggle');
+    const menuCloseButton = document.getElementById('menu-close') || document.querySelector('.menu-close-button');
     const mobileMenuContainer = document.querySelector('.mobile-menu-container');
     const mobileMenuList = document.querySelector('.mobile-menu-list');
-    const menuOverlay = document.querySelector('.menu-overlay');
-    
+    const menuOverlay = document.getElementById('menu-overlay') || document.querySelector('.menu-overlay');
+
+    // Selectores legacy (por si acaso)
+    const menuOpenButtonLegacy = document.querySelector('.menu-open-button');
+
+    // Usar el botón que exista
+    const menuOpenButton = navMenuToggle || menuOpenButtonLegacy;
+
     if (menuOpenButton && menuCloseButton && mobileMenuContainer && mobileMenuList && menuOverlay) {
-        
+
         function openMenu() {
             mobileMenuContainer.classList.add('show');
             menuOverlay.classList.add('show');
             document.body.style.overflow = 'hidden'; // Prevenir scroll del body
-            
+
             // Auto-abrir submenu de servicios siempre que se abra el menú móvil
             autoOpenServiciosSubmenu();
         }
-        
+
         function closeMenu() {
             mobileMenuContainer.classList.remove('show');
             menuOverlay.classList.remove('show');
@@ -30,8 +38,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Cerrar el menú
         menuCloseButton.addEventListener('click', closeMenu);
 
-        // Cerrar el menú al hacer click en el overlay
-        menuOverlay.addEventListener('click', closeMenu);
+        // Cerrar el menú al hacer click en el overlay (pero no en el container)
+        menuOverlay.addEventListener('click', function(e) {
+            if (e.target === menuOverlay) {
+                closeMenu();
+            }
+        });
 
         // Cerrar el menú al hacer click en un enlace
         const menuLinks = mobileMenuList.querySelectorAll('a');
@@ -53,12 +65,12 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Función para abrir automáticamente el submenu de servicios
     function autoOpenServiciosSubmenu() {
         const serviciosToggle = document.getElementById('servicios-toggle');
         const serviciosSubmenu = document.getElementById('servicios-submenu');
-        
+
         if (serviciosToggle && serviciosSubmenu) {
             // Pequeño delay para que la animación del menú principal se vea primero
             setTimeout(() => {

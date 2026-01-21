@@ -1,72 +1,171 @@
 /* base.css */
+
+/* Importar Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+
 :root {
-  --color-principal: #739caa;
-  --color-secundario: #7d8a97;
-  --color-fondo: #ffffff;
-  --color-texto: #2c2c2c;
-  --fuente-principal: "Source Sans Pro", sans-serif;
-  --color-icono-azul: #739caa;
-  --color-icono-marron: #d5bb96;
+  /* Nuevos colores del diseño */
+  --color-primary: #6B8E9B;      /* Azul apagado principal */
+  --color-secondary: #D4B483;    /* Dorado/Tan */
+  --color-bg-light: #FDFBF7;     /* Fondo cálido */
+  --color-bg-white: #FFFFFF;
+  --color-text: #1f2937;         /* Texto oscuro */
+  --color-text-light: #6b7280;   /* Texto gris */
+  --color-text-lighter: #9ca3af;
+  --color-border: #e5e7eb;
+
+  /* Variables legacy (para compatibilidad) */
+  --color-principal: #6B8E9B;
+  --color-secundario: #D4B483;
+  --color-fondo: #FDFBF7;
+  --color-texto: #1f2937;
+  --color-icono-azul: #6B8E9B;
+  --color-icono-marron: #D4B483;
+  --color-accent: #D4B483;
+
+  /* Tipografías */
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Lato', sans-serif;
+  --fuente-principal: 'Lato', sans-serif;
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
 }
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: var(--fuente-principal);
-  background-color: var(--color-fondo);
-  color: var(--color-texto);
+  font-family: var(--font-body);
+  background-color: var(--color-bg-light);
+  color: var(--color-text);
   line-height: 1.6;
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
 h3 {
-  color: var(--color-principal);
-  font-size: 1.5rem;
+  color: var(--color-primary);
+  font-size: 1.25rem;
   margin-bottom: 1rem;
 }
+
 ul {
   padding-left: 1.2rem;
 }
+
 li {
   margin-bottom: 0.5rem;
 }
+
 a {
-  color: var(--color-principal);
-  text-decoration: underline;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s;
 }
+
+a:hover {
+  color: var(--color-secondary);
+}
+
+/* Botones */
 .btn {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background-color: var(--color-principal);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background-color: var(--color-primary);
   color: white;
   text-decoration: none;
-  border-radius: 6px;
-  margin-top: 1rem;
+  border-radius: var(--radius-md);
   border: none;
   cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 4px 14px rgba(107, 142, 155, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
+
 .btn:hover {
-  background-color: #2d3a48;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(107, 142, 155, 0.4);
+  background-color: #5a7a85;
+  color: white;
 }
+
+.btn-secondary {
+  background: white;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: var(--color-text);
+}
+
 /* Estilos para formulario de contacto */
 form.form-contact {
   max-width: 400px;
 }
+
 .form-group {
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
 }
+
 .form-group label {
   min-width: 110px;
   max-width: 110px;
   margin-right: 1rem;
   font-weight: 600;
-  color: var(--color-principal);
+  color: var(--color-primary);
 }
+
 .form-group input, .form-group select, .form-group textarea {
-  flex: 1;  
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  flex: 1;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   font-size: 1rem;
-  padding: 0.5rem;
+  padding: 0.75rem;
+  font-family: var(--font-body);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(107, 142, 155, 0.1);
 }
 
 /* Estilos específicos para checkbox */
@@ -86,14 +185,14 @@ form.form-contact {
 .form-group.checkbox-group .checkbox-label {
   font-size: 0.9rem;
   line-height: 1.4;
-  color: #555;
+  color: var(--color-text-light);
   margin-bottom: 0;
   min-width: auto;
   max-width: none;
 }
 
 .form-group.checkbox-group .checkbox-label a {
-  color: var(--color-accent, #e8b665);
+  color: var(--color-secondary);
   text-decoration: underline;
 }
 
@@ -103,7 +202,7 @@ form.form-contact {
     display: block;
     margin-bottom: 1.5rem;
   }
-  
+
   .form-group label {
     display: block;
     min-width: auto;
@@ -111,60 +210,59 @@ form.form-contact {
     margin-right: 0;
     margin-bottom: 0.5rem;
     font-weight: 600;
-    color: var(--color-principal);
+    color: var(--color-primary);
     font-size: 1rem;
   }
-  
+
   .form-group input, .form-group select, .form-group textarea {
     width: 100%;
     box-sizing: border-box;
     padding: 0.75rem;
-    font-size: 16px; /* Para evitar zoom en iOS */
-    border: 2px solid #ddd;
-    border-radius: 8px;
+    font-size: 16px;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
     transition: border-color 0.2s ease;
   }
-  
+
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-    border-color: var(--color-accent, #e8b665);
+    border-color: var(--color-primary);
     outline: none;
   }
-  
+
   form.form-contact {
     max-width: 100%;
     padding: 0;
   }
-  
+
   .btn.btn-enviar-formulario {
     width: 100%;
     padding: 1rem;
     font-size: 1.1rem;
     margin-top: 1rem;
   }
-  
-  /* Estilos específicos para checkbox en móvil */
+
   .form-group.checkbox-group {
     display: flex;
     align-items: flex-start;
     margin-bottom: 1.5rem;
   }
-  
+
   .form-group.checkbox-group input[type="checkbox"] {
     width: auto;
     margin-right: 0.75rem;
     margin-top: 0.2rem;
     flex-shrink: 0;
   }
-  
+
   .form-group.checkbox-group .checkbox-label {
     font-size: 0.9rem;
     line-height: 1.4;
-    color: #555;
+    color: var(--color-text-light);
     margin-bottom: 0;
   }
-  
+
   .form-group.checkbox-group .checkbox-label a {
-    color: var(--color-accent, #e8b665);
+    color: var(--color-secondary);
     text-decoration: underline;
   }
 }
@@ -173,7 +271,7 @@ form.form-contact {
 .alerta-formulario {
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
-  border-radius: 5px;
+  border-radius: var(--radius-sm);
   font-size: 0.9rem;
   line-height: 1.4;
   animation: slideIn 0.3s ease-out;
@@ -185,21 +283,21 @@ form.form-contact {
 }
 
 .alerta-error {
-  background-color: #fee;
-  border: 1px solid #fcc;
-  color: #c33;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
 }
 
 .alerta-exito {
-  background-color: #efe;
-  border: 1px solid #cfc;
-  color: #363;
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #16a34a;
 }
 
 .alerta-info {
-  background-color: #eef;
-  border: 1px solid #ccf;
-  color: #336;
+  background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #2563eb;
 }
 
 @keyframes slideIn {
@@ -211,4 +309,24 @@ form.form-contact {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Sección label (para encabezados de sección) */
+.section-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.section-divider {
+  width: 48px;
+  height: 4px;
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
+  margin: 1rem auto;
 }

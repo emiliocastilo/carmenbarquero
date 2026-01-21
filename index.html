@@ -58,22 +58,6 @@
     <link rel="stylesheet" href="css/menu-superior.css" />
     <link rel="stylesheet" href="css/menu-responsive.css" />
     
-    <!-- CSS crítico inline para FCP más rápido -->
-    <style>
-      /* CSS crítico inline */
-      @font-face{font-family:"Chetta Vissto";src:url("fonts/chetta-vissto/ChettaVissto.woff2") format("woff2"),url("fonts/chetta-vissto/ChettaVissto.woff") format("woff");font-weight:normal;font-style:normal;font-display:swap}
-      @font-face{font-family:"Caviar Dreams";src:url("fonts/caviar_dreams/CaviarDreams.ttf") format("truetype");font-weight:normal;font-style:normal;font-display:swap}
-      :root{--color-principal:#3a4a5a;--color-secundario:#e8f4fd;--color-acento:#00bcd4;--color-texto:#333;--color-blanco:#ffffff}
-      *{margin:0;padding:0;box-sizing:border-box}
-      body{font-family:"Caviar Dreams",sans-serif;line-height:1.6;color:var(--color-texto);background-color:var(--color-blanco)}
-      .logo{width:120px;height:120px;border-radius:50%;object-fit:cover}
-      h1{font-family:"Chetta Vissto",serif;font-size:2rem;color:var(--color-principal)}
-      header{text-align:center;padding:1rem}
-      /* CSS crítico del modal para evitar FOUC */
-      .modal-content{background-color:#fefefe;margin:15% auto;padding:20px;border:1px solid #888;width:80%;max-width:600px;border-radius:10px}
-      .close{color:#aaa;float:right;font-size:28px;font-weight:bold;cursor:pointer}
-      .close:hover{color:black}
-    </style>
     
     <!-- Cookie Consent CSS -->
     <link rel="stylesheet" href="css/cookie-consent.css" />
@@ -165,69 +149,6 @@
       }
     </script>
 
-    <!-- PERFORMANCE OPTIMIZATIONS -->
-    <!-- Preload imagen crítica del hero -->
-    <link rel="preload" as="image" href="img/home.jpeg" />
-    
-    <!-- Critical CSS inline para hero section y layout básico -->
-    <style>
-      /* Critical CSS - Hero Section y layout básico */
-      .hero-section {
-        width: 100vw;
-        height: 70vh;
-        min-height: 500px;
-        background-image: url('img/home.jpeg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        text-align: center;
-        position: relative;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-      }
-      .hero-content {
-        max-width: 800px;
-        padding: 2rem;
-        z-index: 2;
-      }
-      .hero-title {
-        font-size: clamp(2.5rem, 8vw, 5rem);
-        font-weight: 700;
-        margin: 0 0 1rem 0;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        letter-spacing: 1px;
-      }
-      .hero-slogan {
-        font-size: clamp(1.2rem, 4vw, 2.5rem);
-        margin: 0;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        font-style: italic;
-      }
-      @media (max-width: 768px) {
-        .hero-section {
-          height: 40vh;
-          min-height: 300px;
-          background-attachment: scroll;
-        }
-        .hero-content {
-          padding: 1.5rem;
-        }
-      }
-      /* Basic layout para evitar FOUC */
-      body {
-        margin: 0;
-        font-family: "Source Sans Pro", sans-serif;
-        background-color: #ffffff;
-        color: #2c2c2c;
-        line-height: 1.6;
-        scroll-behavior: smooth;
-      }
-    </style>
 
     <title>Carmen Barquero - Psicóloga General Sanitaria Mérida</title>
     <!-- CSS no crítico con media queries -->
@@ -306,84 +227,95 @@
       <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NRQPJ7XJ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <header>
-      <h1 style="position: absolute; left: -9999px;">Carmen Barquero Psicóloga en Mérida</h1>
-      <div class="icon-container">
-        <picture>
-          <!-- Formato WebP optimizado -->
-          <source 
-            srcset="img/carmen-barquero-psicologa-op.webp" 
-            type="image/webp"
-          />
-          <!-- Fallback PNG para navegadores que no soportan WebP -->
-          <img
-            src="img/carmen-barquero-psicologa-op.jpg"
-            alt="Carmen Barquero - Psicóloga General Sanitaria en Mérida"
-            fetchpriority="high"
-            width="400"
-            height="400"
-            loading="eager"
-          />
-        </picture>
-      </div>
-    </header>
-    <nav class="menu-superior">
-      <ul class="desktop-menu">
-        <li><a href="index.html" class="active">Inicio</a></li>
-        <li class="desktop-dropdown">
-          <span>Servicios</span>
-          <ul class="desktop-submenu">
-            <li><a href="servicios/terapia-individual.html">Terapia Individual</a></li>
-            <li><a href="servicios/terapia-pareja.html">Terapia de Pareja</a></li>
-            <li><a href="servicios/neuropsicologia-clinica.html">Neuropsicología Clínica</a></li>
-          </ul>
-        </li>
-        <li><a href="contacto.html">Contacto</a></li>
-        <li><a href="reserva-cita.html" class="cta-button">Reserva tu cita</a></li>
-      </ul>
-      <div class="mobile-menu">
-        <button id="menu-open" class="menu-open-button" aria-label="Abrir menú">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
+    <!-- Nueva Navegación -->
+    <nav class="nav-nuevo">
+      <div class="nav-container">
+        <a href="index.html" class="nav-logo">
+          <h1 class="nav-logo-title">Carmen Barquero</h1>
+          <p class="nav-logo-subtitle">Psicología & Neuropsicología</p>
+        </a>
+
+        <!-- Menú Desktop -->
+        <ul class="nav-menu-desktop">
+          <li><a href="index.html" class="active">Inicio</a></li>
+          <li class="nav-dropdown">
+            <span>Servicios</span>
+            <ul class="nav-submenu">
+              <li><a href="servicios/terapia-individual.html">Terapia Individual</a></li>
+              <li><a href="servicios/terapia-pareja.html">Terapia de Pareja</a></li>
+              <li><a href="servicios/neuropsicologia-clinica.html">Neuropsicología Clínica</a></li>
+            </ul>
+          </li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="reserva-cita.html" class="nav-cta">Reservar Cita</a></li>
+        </ul>
+
+        <!-- Botón Menú Móvil -->
+        <button class="nav-menu-toggle" id="menu-open" aria-label="Abrir menú">
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
-        <div id="menu-overlay" class="menu-overlay"></div>
-        <div id="mobile-menu-container" class="mobile-menu-container">
-          <button id="menu-close" class="menu-close-button" aria-label="Cerrar menú"></button>
-          <ul id="mobile-menu-list" class="mobile-menu-list">
-            <li><a href="index.html" class="active">Inicio</a></li>
-            <li class="menu-item-with-submenu">
-              <button class="menu-toggle" id="servicios-toggle">
-                Servicios 
-                <div class="arrow-down"></div>
-              </button>
-              <ul class="submenu" id="servicios-submenu">
-                <li><a href="servicios/terapia-individual.html">Terapia Individual</a></li>
-                <li><a href="servicios/terapia-pareja.html">Terapia de Pareja</a></li>
-                <li><a href="servicios/neuropsicologia-clinica.html">Neuropsicología Clínica</a></li>
-              </ul>
-            </li>
-            <li><a href="contacto.html">Contacto</a></li>
-            <li><a href="reserva-cita.html" class="cta-button">Reserva tu cita</a></li>
-          </ul>
-        </div>
       </div>
     </nav>
+
+    <!-- Menú Móvil Overlay -->
+    <div class="menu-overlay" id="menu-overlay">
+      <div class="mobile-menu-container">
+        <button class="menu-close-button" id="menu-close" aria-label="Cerrar menú">&times;</button>
+        <ul class="mobile-menu-list">
+          <li><a href="index.html" class="active">Inicio</a></li>
+          <li class="menu-item-with-submenu">
+            <button class="menu-toggle" id="servicios-toggle">
+              Servicios
+              <div class="arrow-down"></div>
+            </button>
+            <ul class="submenu" id="servicios-submenu">
+              <li><a href="servicios/terapia-individual.html">Terapia Individual</a></li>
+              <li><a href="servicios/terapia-pareja.html">Terapia de Pareja</a></li>
+              <li><a href="servicios/neuropsicologia-clinica.html">Neuropsicología Clínica</a></li>
+            </ul>
+          </li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="reserva-cita.html" class="cta-button">Reserva tu cita</a></li>
+        </ul>
+      </div>
+    </div>
+
     <main>
       <!-- Sección Hero Principal -->
       <section class="hero-section">
-        <div class="hero-content">
-          <h1 class="hero-title">Psicología Mérida</h1>
-          <p class="hero-slogan font-chetta-vissto">"Contigo en el camino, hasta el equilibrio"</p>
+        <div class="hero-container">
+          <!-- Avatar circular -->
+          <div class="hero-avatar">
+            <picture>
+              <img
+                src="img/carmen-barquero-psicologa-op.jpg"
+                alt="Carmen Barquero - Psicóloga"
+                class="hero-avatar-img"
+                width="160"
+                height="160"
+                fetchpriority="high"
+              />
+            </picture>
+          </div>
+
+          <h2 class="hero-title">Encuentra tu equilibrio</h2>
+          <p class="hero-slogan">Espacio seguro para el cuidado de tu salud mental. Psicología sanitaria y neuropsicología adaptada a tus necesidades.</p>
+
+          <div class="hero-buttons">
+            <a href="reserva-cita.html" class="btn btn-primary">Reservar Cita</a>
+            <a href="#sobre-mi" class="btn btn-secondary">Saber más</a>
+          </div>
         </div>
       </section>
       
       <!-- Sección Sobre Mi -->
       <section>
         <div class="contenido info-contenedor" id="sobre-mi">
-          <h2>Sobre Mí</h2>
           <div class="info-contenido">
             <div id="sobreMiTexto" class="sobre-mi-texto-contenido">
+              <h2>Sobre Mí</h2>
               <h3>Mi Enfoque Terapéutico</h3>
               <p class="font-caviar-dreams">
                 Acompaño a personas en su crecimiento personal para alcanzar un

@@ -50,10 +50,6 @@
   z-index: 4002;
 }
 
-.menu-close-button:before {
-  content: '×';
-}
-
 /* Contenedor del menú móvil */
 .mobile-menu-container {
   position: fixed;
