@@ -244,9 +244,13 @@ async function generatePDF() {
     // Detectar si es producción o desarrollo
     const isProduction = window.location.hostname === 'www.carmenbarqueropsicologia.es' || 
                         window.location.hostname === 'carmenbarqueropsicologia.es';
-    const templateUrl = isProduction 
-      ? 'https://www.carmenbarqueropsicologia.es/consentimiento-informado-template.pdf'
-      : 'docs/consentimiento-informado-template.pdf';
+    const usarAnterior = window.PLANTILLA_PDF === 'anterior';
+    const baseUrl = isProduction
+      ? 'https://www.carmenbarqueropsicologia.es/'
+      : 'docs/';
+    const templateUrl = baseUrl + (usarAnterior
+      ? 'consentimiento-informado-template-old.pdf'
+      : 'consentimiento-informado-template.pdf');
     
     console.log("🔗 Cargando PDF desde:", templateUrl);
     
