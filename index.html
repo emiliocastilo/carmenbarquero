@@ -74,8 +74,9 @@
     <!-- Cookie Consent CSS -->
     <link rel="stylesheet" href="css/cookie-consent.css" />
     
-    <!-- Footer CSS -->
-    <link rel="stylesheet" href="css/footer.css" />
+    <!-- Footer CSS: diferido, el footer está bajo el pliegue y no debe bloquear el render -->
+    <link rel="stylesheet" href="css/footer.css" media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href="css/footer.css" /></noscript>
     
     <!-- Meta tags adicionales para mejor indexación -->
     <meta name="theme-color" content="#3a4a5a" />
@@ -252,14 +253,14 @@
     </style>
 
     <title>Psicóloga Online | Carmen Barquero — Terapia Online en toda España</title>
-    <!-- CSS no crítico con media queries -->
+    <!-- Layout de la sección "Sobre mí": carga bloqueante para evitar reflow/CLS -->
+    <link rel="stylesheet" href="css/animacion-sobre-mi.css" />
+    <!-- CSS no crítico con media queries (botón flotante: no afecta al layout) -->
     <link rel="stylesheet" href="css/whatsapp-float.css" media="print" onload="this.media='all'" />
-    <link rel="stylesheet" href="css/animacion-sobre-mi.css" media="print" onload="this.media='all'" />
-    
+
     <!-- Fallback para navegadores sin JS -->
     <noscript>
       <link rel="stylesheet" href="css/whatsapp-float.css" />
-      <link rel="stylesheet" href="css/animacion-sobre-mi.css" />
     </noscript>
     
     <!-- Favicon completo con todas las resoluciones -->
@@ -399,7 +400,7 @@
         <div class="contenido info-contenedor" id="sobre-mi">
           <h2>Sobre Mí</h2>
           <div class="info-contenido">
-            <div id="sobreMiTexto" class="sobre-mi-texto-contenido">
+            <div class="sobre-mi-texto-contenido">
               <h3>Mi Enfoque Terapéutico</h3>
               <p class="font-caviar-dreams">
                 Acompaño a personas en su crecimiento personal para alcanzar un
