@@ -4,7 +4,10 @@
   width: 100vw;
   height: 70vh;
   min-height: 500px;
-  background-image: url('../img/home.jpeg');
+  background-color: #5f7c88; /* respaldo legible si la imagen no carga */
+  background-image: url('../img/home.jpeg'); /* respaldo navegadores sin image-set */
+  background-image: -webkit-image-set(url('../img/home.webp') 1x);
+  background-image: image-set(url('../img/home.webp') 1x);
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
@@ -17,11 +20,6 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-}
-
-/* Soporte para WebP en navegadores compatibles */
-.webp .hero-section {
-  background-image: url('../img/home.webp');
 }
 
 .hero-content {
@@ -459,7 +457,7 @@ footer {
 }
 
 .beneficio-card h4 {
-  color: #00bcd4;
+  color: #00798a; /* cian oscurecido: contraste AA sobre fondo claro */
   font-size: 0.95rem;
   margin: 0 0 1rem 0;
   font-weight: normal;
@@ -511,7 +509,7 @@ footer {
 }
 
 .paso h4 {
-  color: #00bcd4;
+  color: #00798a; /* cian oscurecido: contraste AA sobre fondo #f9f7f4 */
   font-size: 0.9rem;
   margin: 0 0 1rem 0;
   font-weight: normal;

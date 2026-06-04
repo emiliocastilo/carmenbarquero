@@ -38,10 +38,6 @@
     <meta name="twitter:description" content="Terapia psicológica online por videollamada en toda España: ansiedad, autoestima, depresión y terapia de pareja. Psicóloga General Sanitaria colegiada." />
     <meta name="twitter:image" content="https://www.carmenbarqueropsicologia.es/img/carmen-barquero-psicologa-op.webp" />
     
-    <!-- Preload crítico para el logo -->
-    <link rel="preload" as="image" href="img/carmen-barquero-psicologa-op.webp" />
-    <link rel="preload" as="image" href="img/carmen.webp" />
-    
     <!-- Preload CSS crítico para faster rendering -->
     <link rel="preload" as="style" href="css/fonts.css" />
     <link rel="preload" as="style" href="css/base.css" />
@@ -182,8 +178,8 @@
     </script>
 
     <!-- PERFORMANCE OPTIMIZATIONS -->
-    <!-- Preload imagen crítica del hero -->
-    <link rel="preload" as="image" href="img/home.jpeg" />
+    <!-- Preload imagen crítica del hero (LCP) -->
+    <link rel="preload" as="image" href="img/home.webp" type="image/webp" fetchpriority="high" />
     
     <!-- Critical CSS inline para hero section y layout básico -->
     <style>
@@ -192,7 +188,10 @@
         width: 100vw;
         height: 70vh;
         min-height: 500px;
-        background-image: url('img/home.jpeg');
+        background-color: #5f7c88; /* respaldo legible si la imagen no carga */
+        background-image: url('img/home.jpeg'); /* respaldo navegadores sin image-set */
+        background-image: -webkit-image-set(url('img/home.webp') 1x);
+        background-image: image-set(url('img/home.webp') 1x);
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -311,17 +310,8 @@
       });
     </script>
     
-    <!-- Detección optimizada de soporte WebP -->
-    <script>
-      // Detección WebP más eficiente
-      !function(){
-        var e=new Image;
-        e.onload=e.onerror=function(){
-          2===e.height&&document.documentElement.classList.add('webp')
-        },
-        e.src='data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA'
-      }();
-    </script>
+    <!-- WebP se sirve directamente vía image-set() en el CSS del hero, con JPEG de respaldo automático -->
+
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
@@ -441,7 +431,7 @@
                   src="img/carmen-barquero-psicologa-op.jpg"
                   alt="Carmen Barquero - Psicóloga especialista en terapia individual y neuropsicología"
                   width="400"
-                  height="auto"
+                  height="533"
                   loading="lazy"
                   style="max-width: 100%; height: auto;"
                 />
@@ -663,7 +653,7 @@
       rel="noopener"
       aria-label="WhatsApp"
     >
-      <img src="img/social/whatsapp.png" alt="WhatsApp" width="50" />
+      <img src="img/social/whatsapp.png" alt="WhatsApp" width="50" height="50" />
     </a>
 
     <!-- Banner de Consentimiento de Cookies - RGPD Compliant -->

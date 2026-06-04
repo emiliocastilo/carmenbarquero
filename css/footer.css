@@ -22,7 +22,7 @@ footer > div {
 }
 
 .footer-links a {
-  color: #00bcd4;
+  color: #4dd0e1; /* cian aclarado: contraste AA sobre footer oscuro */
   text-decoration: none;
   transition: color 0.3s;
 }
@@ -52,7 +52,7 @@ footer > div {
 }
 
 .footer-nap strong {
-  color: #00bcd4;
+  color: #4dd0e1; /* cian aclarado: contraste AA sobre footer oscuro */
 }
 
 .footer-nap a {
