@@ -40,6 +40,7 @@ jobs:
             
             # Navegación SIN .html
             sed -i 's|href="index\.html"|href="https://www.carmenbarqueropsicologia.es/"|g' "$file"
+            sed -i 's|href="psicologia-online\.html"|href="https://www.carmenbarqueropsicologia.es/psicologia-online"|g' "$file"
             sed -i 's|href="contacto\.html"|href="https://www.carmenbarqueropsicologia.es/contacto"|g' "$file"
             sed -i 's|href="reserva-cita\.html"|href="https://www.carmenbarqueropsicologia.es/reserva-cita"|g' "$file"
             sed -i 's|href="servicios/terapia-individual\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/terapia-individual"|g' "$file"
@@ -55,6 +56,7 @@ jobs:
             sed -i 's|href="../reserva-cita\.html"|href="https://www.carmenbarqueropsicologia.es/reserva-cita"|g' "$file"
             sed -i 's|href="../consentimientoinformado\.html"|href="https://www.carmenbarqueropsicologia.es/consentimientoinformado"|g' "$file"
             sed -i 's|href="../politica-privacidad\.html"|href="https://www.carmenbarqueropsicologia.es/politica-privacidad"|g' "$file"
+            sed -i 's|href="../psicologia-online\.html"|href="https://www.carmenbarqueropsicologia.es/psicologia-online"|g' "$file"
             sed -i 's|href="../index\.html"|href="https://www.carmenbarqueropsicologia.es/"|g' "$file"
             
             # Enlaces entre servicios (desde servicios/ a servicios/)
@@ -63,6 +65,7 @@ jobs:
             sed -i 's|href="neuropsicologia-clinica\.html"|href="https://www.carmenbarqueropsicologia.es/servicios/neuropsicologia-clinica"|g' "$file"
             
             # Canonical links - remover .html
+            sed -i 's|/psicologia-online\.html"|/psicologia-online"|g' "$file"
             sed -i 's|/contacto\.html"|/contacto"|g' "$file"
             sed -i 's|/reserva-cita\.html"|/reserva-cita"|g' "$file"
             sed -i 's|/consentimientoinformado\.html"|/consentimientoinformado"|g' "$file"
@@ -196,6 +199,7 @@ jobs:
           
           echo "🗺️ PASO 6: Actualizar sitemap"
           if [ -f sitemap.xml ]; then
+            sed -i 's|psicologia-online\.html|psicologia-online|g' sitemap.xml
             sed -i 's|contacto\.html|contacto|g' sitemap.xml
             sed -i 's|reserva-cita\.html|reserva-cita|g' sitemap.xml
             sed -i 's|terapia-individual\.html|terapia-individual|g' sitemap.xml

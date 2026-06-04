@@ -10,6 +10,7 @@ Disallow: /.github/
 
 # Allow important pages
 Allow: /index.html
+Allow: /psicologia-online
 Allow: /contacto.html
 Allow: /reserva-cita.html
 Allow: /servicios/
