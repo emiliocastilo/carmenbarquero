@@ -422,14 +422,14 @@
             </div>
             <div class="foto">
               <picture>
-                <!-- Imagen WebP optimizada -->
-                <source 
-                  srcset="img/carmen.webp" 
+                <!-- WebP responsivo: el navegador elige según ancho y densidad de pantalla -->
+                <source
                   type="image/webp"
+                  srcset="img/carmen-480.webp 480w, img/carmen-720.webp 720w"
+                  sizes="(min-width: 768px) 280px, 90vw"
                 />
-                <!-- Fallback JPG -->
-                <img 
-                  src="img/carmen-barquero-psicologa-op.jpg"
+                <img
+                  src="img/carmen-720.webp"
                   alt="Carmen Barquero - Psicóloga especialista en terapia individual y neuropsicología"
                   width="400"
                   height="533"
