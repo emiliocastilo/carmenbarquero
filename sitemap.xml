@@ -84,12 +84,4 @@
     <priority>0.3</priority>
   </url>
 
-  <!-- Consentimiento informado -->
-  <url>
-    <loc>https://www.carmenbarqueropsicologia.es/consentimientoinformado</loc>
-    <lastmod>2024-12-18</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-
 </urlset>
