@@ -1,0 +1,19 @@
+consentimientoinformado-pareja.html
+  s_8604e9b56b4c26::t_da709e63c33bc4 161
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "6b2db7a853e5287f6e9a9b5408fd0d1e841f48c8",
+  "prompts": {},
+  "sessions": {
+    "s_8604e9b56b4c26": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8b453121-4127-4e14-9423-fa15714915ff",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Emilio <emiliojcg@ext.massimodutti.com>"
+    }
+  }
+}
