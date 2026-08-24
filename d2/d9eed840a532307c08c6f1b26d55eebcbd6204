@@ -1,0 +1,39 @@
+.github/workflows/build-inline.yml
+  s_17537e78eea40d::t_540858ad24c06b 218
+contacto.html
+  s_17537e78eea40d::t_46125519484b42 71-111
+index.html
+  s_17537e78eea40d::t_3e80b2ff480be5 99-107,109-111,113-131,133-142,144-180,182-210,212-248,251-252,254
+llms.txt
+  s_17537e78eea40d::t_1b415adfe38c97 1-66
+psicologia-online.html
+  s_17537e78eea40d::t_2b2276b40c12f5 88-122,127-144,149-206,208-210
+reserva-cita.html
+  s_17537e78eea40d::t_046e80dd608dde 73-105
+robots.txt
+  s_17537e78eea40d::t_ed18957d3712f4 8-69
+servicios/neuropsicologia-clinica.html
+  s_17537e78eea40d::t_923e47b45e1a7b 142-222
+servicios/terapia-individual.html
+  s_17537e78eea40d::t_0a458cfa98c715 150-231
+servicios/terapia-pareja.html
+  s_17537e78eea40d::t_4701810dd0d358 158-237
+sitemap.xml
+  s_17537e78eea40d::t_6c605dcf067c06 10,18,26,34,42,50,58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "d2d9eed840a532307c08c6f1b26d55eebcbd6204",
+  "prompts": {},
+  "sessions": {
+    "s_17537e78eea40d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e3ed9ff6-ef4e-4aa8-8b8b-fb13f33373a4",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Emilio <emiliojcg@ext.massimodutti.com>"
+    }
+  }
+}
