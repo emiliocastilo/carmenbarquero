@@ -1,0 +1,19 @@
+docs/ficha-maestra-directorios.md
+  s_17537e78eea40d::t_e135e11ef1a09a 1-156
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "f87a8c8f60c777c7bb01506cdf716a97d0a78e3b",
+  "prompts": {},
+  "sessions": {
+    "s_17537e78eea40d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e3ed9ff6-ef4e-4aa8-8b8b-fb13f33373a4",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Emilio <emiliojcg@ext.massimodutti.com>"
+    }
+  }
+}
