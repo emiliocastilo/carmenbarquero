@@ -96,85 +96,162 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ProfilePage",
-        "dateCreated": "2025-10-23T12:34:00+01:00",
-        "dateModified": "2025-10-30T09:00:00+01:00",
-        "mainEntity": {
-          "@type": "Person",
-          "name": "Carmen Barquero",
-          "alternateName": "Carmen Barquero Psicología",
-          "jobTitle": "Psicóloga General Sanitaria",
-          "description": "Psicóloga online colegiada, con base en Mérida. Ofrece terapia psicológica por videollamada en toda España: terapia individual, terapia de pareja y neuropsicología.",
-          "knowsAbout": ["Psicología online", "Terapia online", "Terapia individual online", "Terapia de pareja online", "Ansiedad", "Autoestima", "Depresión", "Neuropsicología clínica"],
-          "areaServed": {
-            "@type": "Country",
-            "name": "España"
-          },
-          "image": "https://www.carmenbarqueropsicologia.es/img/carmen.webp",
-          "url": "https://www.carmenbarqueropsicologia.es/",
-          "worksFor": {
-            "@type": "Organization",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://www.carmenbarqueropsicologia.es/#website",
+            "url": "https://www.carmenbarqueropsicologia.es/",
             "name": "Carmen Barquero Psicología",
-            "url": "https://www.carmenbarqueropsicologia.es/"
+            "description": "Terapia psicológica online por videollamada en toda España: terapia individual, terapia de pareja y neuropsicología clínica.",
+            "inLanguage": "es-ES",
+            "publisher": { "@id": "https://www.carmenbarqueropsicologia.es/#carmen-barquero" }
           },
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Mérida",
-            "addressRegion": "Extremadura",
-            "postalCode": "06800",
-            "addressCountry": "ES"
-          },
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "contactType": "Cita o información",
-            "telephone": "+34 647 855 165",
+          {
+            "@type": ["Organization", "MedicalBusiness"],
+            "@id": "https://www.carmenbarqueropsicologia.es/#organizacion",
+            "name": "Carmen Barquero Psicología",
+            "url": "https://www.carmenbarqueropsicologia.es/",
+            "description": "Consulta de psicología online. Sesiones por videollamada en toda España, sin atención presencial.",
+            "logo": "https://www.carmenbarqueropsicologia.es/img/carmen-barquero-psicologa-op.webp",
+            "image": "https://www.carmenbarqueropsicologia.es/img/carmen.webp",
+            "telephone": "+34647855165",
             "email": "carmenbarqueropsicologia@gmail.com",
-            "areaServed": "ES",
-            "availableLanguage": "Spanish"
+            "priceRange": "€€",
+            "founder": { "@id": "https://www.carmenbarqueropsicologia.es/#carmen-barquero" },
+            "employee": { "@id": "https://www.carmenbarqueropsicologia.es/#carmen-barquero" },
+            "sameAs": ["https://www.instagram.com/psicologia.carmenbarquero"],
+            "areaServed": { "@type": "Country", "name": "España" },
+            "availableLanguage": { "@type": "Language", "name": "Español", "alternateName": "es" },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Mérida",
+              "addressRegion": "Extremadura",
+              "postalCode": "06800",
+              "addressCountry": "ES"
+            }
           },
-          "hasOfferCatalog": {
-            "@type": "OfferCatalog",
-            "name": "Servicios de Psicología Online",
-            "itemListElement": [
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Terapia Individual Online",
-                  "description": "Terapia psicológica online personalizada para adultos y adolescentes por videollamada",
-                  "areaServed": { "@type": "Country", "name": "España" },
-                  "availableChannel": {
-                    "@type": "ServiceChannel",
-                    "serviceType": "Videollamada",
-                    "availableLanguage": "Spanish"
-                  }
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Terapia de Pareja Online",
-                  "description": "Terapia de pareja online por videollamada para mejorar la comunicación y resolver conflictos",
-                  "areaServed": { "@type": "Country", "name": "España" },
-                  "availableChannel": {
-                    "@type": "ServiceChannel",
-                    "serviceType": "Videollamada",
-                    "availableLanguage": "Spanish"
-                  }
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Neuropsicología Clínica",
-                  "description": "Evaluación y rehabilitación neuropsicológica, también en modalidad online"
-                }
+          {
+            "@type": "ProfilePage",
+            "@id": "https://www.carmenbarqueropsicologia.es/#profilepage",
+            "url": "https://www.carmenbarqueropsicologia.es/",
+            "name": "Carmen Barquero, Psicóloga Online",
+            "isPartOf": { "@id": "https://www.carmenbarqueropsicologia.es/#website" },
+            "inLanguage": "es-ES",
+            "dateCreated": "2025-10-23T12:34:00+01:00",
+            "dateModified": "2026-08-24T09:00:00+02:00",
+            "mainEntity": { "@id": "https://www.carmenbarqueropsicologia.es/#carmen-barquero" }
+          },
+          {
+            "@type": ["Person", "Psychologist"],
+            "@id": "https://www.carmenbarqueropsicologia.es/#carmen-barquero",
+            "name": "Carmen Barquero",
+            "alternateName": "Carmen Barquero Psicología",
+            "jobTitle": "Psicóloga General Sanitaria",
+            "description": "Psicóloga General Sanitaria colegiada (nº EX-02658), con base en Mérida. Ofrece terapia psicológica online por videollamada en toda España: terapia individual, terapia de pareja y neuropsicología clínica. No atiende en consulta presencial.",
+            "knowsAbout": ["Psicología online", "Terapia online", "Terapia individual online", "Terapia de pareja online", "Ansiedad", "Autoestima", "Depresión", "Dependencia emocional", "Duelo", "Neuropsicología clínica"],
+            "knowsLanguage": { "@type": "Language", "name": "Español", "alternateName": "es" },
+            "areaServed": { "@type": "Country", "name": "España" },
+            "image": "https://www.carmenbarqueropsicologia.es/img/carmen.webp",
+            "url": "https://www.carmenbarqueropsicologia.es/",
+            "mainEntityOfPage": { "@id": "https://www.carmenbarqueropsicologia.es/#profilepage" },
+            "sameAs": ["https://www.instagram.com/psicologia.carmenbarquero"],
+            "identifier": {
+              "@type": "PropertyValue",
+              "name": "Número de colegiada",
+              "value": "EX-02658"
+            },
+            "hasCredential": {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "Colegiación profesional",
+              "name": "Psicóloga General Sanitaria — colegiada nº EX-02658",
+              "recognizedBy": {
+                "@type": "Organization",
+                "name": "Colegio Oficial de la Psicología de Extremadura"
               }
-            ]
+            },
+            "worksFor": { "@id": "https://www.carmenbarqueropsicologia.es/#organizacion" },
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Mérida",
+              "addressRegion": "Extremadura",
+              "postalCode": "06800",
+              "addressCountry": "ES"
+            },
+            "telephone": "+34647855165",
+            "email": "carmenbarqueropsicologia@gmail.com",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "Cita o información",
+              "telephone": "+34647855165",
+              "email": "carmenbarqueropsicologia@gmail.com",
+              "areaServed": "ES",
+              "availableLanguage": "Spanish"
+            },
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Servicios de Psicología Online",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://www.carmenbarqueropsicologia.es/servicios/terapia-individual#servicio",
+                    "name": "Terapia Individual Online",
+                    "serviceType": "Terapia psicológica individual online",
+                    "description": "Terapia psicológica online personalizada para adultos y adolescentes por videollamada. Ansiedad, depresión, autoestima, dependencia emocional y duelo.",
+                    "url": "https://www.carmenbarqueropsicologia.es/servicios/terapia-individual",
+                    "provider": { "@id": "https://www.carmenbarqueropsicologia.es/#carmen-barquero" },
+                    "areaServed": { "@type": "Country", "name": "España" },
+                    "availableChannel": {
+                      "@type": "ServiceChannel",
+                      "serviceType": "Videollamada",
+                      "serviceUrl": "https://www.carmenbarqueropsicologia.es/reserva-cita",
+                      "availableLanguage": "Spanish"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://www.carmenbarqueropsicologia.es/servicios/terapia-pareja#servicio",
+                    "name": "Terapia de Pareja Online",
+                    "serviceType": "Terapia de pareja online",
+                    "description": "Terapia de pareja online por videollamada para mejorar la comunicación y resolver conflictos.",
+                    "url": "https://www.carmenbarqueropsicologia.es/servicios/terapia-pareja",
+                    "provider": { "@id": "https://www.carmenbarqueropsicologia.es/#carmen-barquero" },
+                    "areaServed": { "@type": "Country", "name": "España" },
+                    "availableChannel": {
+                      "@type": "ServiceChannel",
+                      "serviceType": "Videollamada",
+                      "serviceUrl": "https://www.carmenbarqueropsicologia.es/reserva-cita",
+                      "availableLanguage": "Spanish"
+                    }
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "@id": "https://www.carmenbarqueropsicologia.es/servicios/neuropsicologia-clinica#servicio",
+                    "name": "Neuropsicología Clínica",
+                    "serviceType": "Evaluación y rehabilitación neuropsicológica",
+                    "description": "Evaluación y rehabilitación neuropsicológica, también en modalidad online por videollamada.",
+                    "url": "https://www.carmenbarqueropsicologia.es/servicios/neuropsicologia-clinica",
+                    "provider": { "@id": "https://www.carmenbarqueropsicologia.es/#carmen-barquero" },
+                    "areaServed": { "@type": "Country", "name": "España" },
+                    "availableChannel": {
+                      "@type": "ServiceChannel",
+                      "serviceType": "Videollamada",
+                      "serviceUrl": "https://www.carmenbarqueropsicologia.es/reserva-cita",
+                      "availableLanguage": "Spanish"
+                    }
+                  }
+                }
+              ]
+            }
           }
-        }
+        ]
       }
     </script>
 

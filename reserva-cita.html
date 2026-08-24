@@ -70,26 +70,39 @@
 
     <!-- Schema.org para SEO -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Reserva de Cita Psicológica",
-        "provider": {
-          "@type": "Person",
-          "name": "Carmen Barquero",
-          "jobTitle": "Psicóloga General Sanitaria"
-        },
-        "serviceType": "Terapia psicológica online",
-        "areaServed": {
-          "@type": "Country",
-          "name": "España"
-        },
-        "availableChannel": {
-          "@type": "ServiceChannel",
-          "serviceType": "Videollamada",
-          "availableLanguage": "Spanish"
-        }
-      }
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Reserva de Cita Psicológica",
+  "provider": {
+    "@type": [
+      "Person",
+      "Psychologist"
+    ],
+    "name": "Carmen Barquero",
+    "jobTitle": "Psicóloga General Sanitaria",
+    "@id": "https://www.carmenbarqueropsicologia.es/#carmen-barquero",
+    "identifier": {
+      "@type": "PropertyValue",
+      "name": "Número de colegiada",
+      "value": "EX-02658"
+    },
+    "sameAs": [
+      "https://www.instagram.com/psicologia.carmenbarquero"
+    ],
+    "url": "https://www.carmenbarqueropsicologia.es/"
+  },
+  "serviceType": "Terapia psicológica online",
+  "areaServed": {
+    "@type": "Country",
+    "name": "España"
+  },
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceType": "Videollamada",
+    "availableLanguage": "Spanish"
+  }
+}
     </script>
   </head>
   <body>

@@ -85,117 +85,129 @@
 
     <!-- Schema.org: Servicio de psicología online -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "name": "Psicología Online",
-        "serviceType": "Terapia psicológica online",
-        "description": "Terapia psicológica online por videollamada en toda España: terapia individual, terapia de pareja e intervención en ansiedad, autoestima y depresión.",
-        "provider": {
-          "@type": "Person",
-          "name": "Carmen Barquero",
-          "jobTitle": "Psicóloga General Sanitaria",
-          "url": "https://www.carmenbarqueropsicologia.es/"
-        },
-        "areaServed": {
-          "@type": "Country",
-          "name": "España"
-        },
-        "availableChannel": {
-          "@type": "ServiceChannel",
-          "serviceType": "Videollamada",
-          "availableLanguage": "Spanish",
-          "serviceUrl": "https://www.carmenbarqueropsicologia.es/reserva-cita"
-        }
-      }
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Psicología Online",
+  "serviceType": "Terapia psicológica online",
+  "description": "Terapia psicológica online por videollamada en toda España: terapia individual, terapia de pareja e intervención en ansiedad, autoestima y depresión.",
+  "provider": {
+    "@type": [
+      "Person",
+      "Psychologist"
+    ],
+    "name": "Carmen Barquero",
+    "jobTitle": "Psicóloga General Sanitaria",
+    "url": "https://www.carmenbarqueropsicologia.es/",
+    "@id": "https://www.carmenbarqueropsicologia.es/#carmen-barquero",
+    "identifier": {
+      "@type": "PropertyValue",
+      "name": "Número de colegiada",
+      "value": "EX-02658"
+    },
+    "sameAs": [
+      "https://www.instagram.com/psicologia.carmenbarquero"
+    ]
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "España"
+  },
+  "availableChannel": {
+    "@type": "ServiceChannel",
+    "serviceType": "Videollamada",
+    "availableLanguage": "Spanish",
+    "serviceUrl": "https://www.carmenbarqueropsicologia.es/reserva-cita"
+  }
+}
     </script>
 
     <!-- Schema.org: Migas de pan -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Inicio",
-            "item": "https://www.carmenbarqueropsicologia.es/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Psicología Online",
-            "item": "https://www.carmenbarqueropsicologia.es/psicologia-online"
-          }
-        ]
-      }
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": "https://www.carmenbarqueropsicologia.es/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Psicología Online",
+      "item": "https://www.carmenbarqueropsicologia.es/psicologia-online"
+    }
+  ]
+}
     </script>
 
     <!-- Schema.org: Preguntas frecuentes -->
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "¿La terapia online es tan eficaz como la presencial?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Sí. La evidencia científica muestra que la terapia psicológica online por videollamada obtiene resultados equivalentes a la presencial en la mayoría de motivos de consulta, como ansiedad, depresión o problemas de autoestima. Lo importante es el vínculo terapéutico y el trabajo conjunto, que se mantienen igual a través de la pantalla."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "¿Cómo son las sesiones de psicología online?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Las sesiones se realizan por videollamada, en directo, con una duración aproximada de 60 minutos. Solo necesitas un dispositivo con cámara y conexión a internet, y un espacio tranquilo donde puedas hablar con privacidad. Recibirás un enlace para conectarte a la hora acordada."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "¿Desde dónde puedo hacer terapia online?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Desde cualquier lugar de España. Al ser terapia online, puedes conectarte desde tu casa o desde donde te sientas cómodo, sin desplazamientos y adaptándolo a tu horario. Soy psicóloga colegiada en Mérida y atiendo siempre online."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "¿Es confidencial y segura la terapia online?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Totalmente. Las sesiones están protegidas por el secreto profesional, igual que en consulta presencial, y se realizan a través de plataformas de videollamada seguras. Todo lo que compartes es confidencial y se trata conforme a la normativa de protección de datos (RGPD)."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "¿Qué necesito para mi sesión online?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Un ordenador, tablet o móvil con cámara y micrófono, conexión a internet estable y un lugar tranquilo donde puedas hablar sin interrupciones. No necesitas instalar nada complicado: te facilito un enlace para conectarte."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "¿Qué puedo trabajar en psicología online?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Prácticamente lo mismo que en terapia presencial: ansiedad y estrés, depresión, autoestima, dependencia emocional, gestión emocional, duelo, transiciones vitales y terapia de pareja, entre otros. En la primera sesión valoramos tu situación y definimos juntos los objetivos."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "¿Cómo reservo mi primera sesión de terapia online?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Puedes reservar a través del formulario de la web, por WhatsApp o por teléfono en el 647 855 165. Acordamos día y hora, y recibirás el enlace para tu videollamada."
-            }
-          }
-        ]
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿La terapia online es tan eficaz como la presencial?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. La evidencia científica muestra que la terapia psicológica online por videollamada obtiene resultados equivalentes a la presencial en la mayoría de motivos de consulta, como ansiedad, depresión o problemas de autoestima. Lo importante es el vínculo terapéutico y el trabajo conjunto, que se mantienen igual a través de la pantalla."
       }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo son las sesiones de psicología online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Las sesiones se realizan por videollamada, en directo, con una duración aproximada de 60 minutos. Solo necesitas un dispositivo con cámara y conexión a internet, y un espacio tranquilo donde puedas hablar con privacidad. Recibirás un enlace para conectarte a la hora acordada."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Desde dónde puedo hacer terapia online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Desde cualquier lugar de España. Al ser terapia online, puedes conectarte desde tu casa o desde donde te sientas cómodo, sin desplazamientos y adaptándolo a tu horario. Soy psicóloga colegiada en Mérida y atiendo siempre online."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Es confidencial y segura la terapia online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Totalmente. Las sesiones están protegidas por el secreto profesional, igual que en consulta presencial, y se realizan a través de plataformas de videollamada seguras. Todo lo que compartes es confidencial y se trata conforme a la normativa de protección de datos (RGPD)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué necesito para mi sesión online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un ordenador, tablet o móvil con cámara y micrófono, conexión a internet estable y un lugar tranquilo donde puedas hablar sin interrupciones. No necesitas instalar nada complicado: te facilito un enlace para conectarte."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué puedo trabajar en psicología online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Prácticamente lo mismo que en terapia presencial: ansiedad y estrés, depresión, autoestima, dependencia emocional, gestión emocional, duelo, transiciones vitales y terapia de pareja, entre otros. En la primera sesión valoramos tu situación y definimos juntos los objetivos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo reservo mi primera sesión de terapia online?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Puedes reservar a través del formulario de la web, por WhatsApp o por teléfono en el 647 855 165. Acordamos día y hora, y recibirás el enlace para tu videollamada."
+      }
+    }
+  ]
+}
     </script>
   </head>
   <body>

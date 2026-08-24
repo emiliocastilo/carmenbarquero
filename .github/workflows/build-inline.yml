@@ -215,6 +215,7 @@ jobs:
           
           # Copiar archivos de configuración
           [ -f robots.txt ] && cp robots.txt dist/
+          [ -f llms.txt ] && cp llms.txt dist/
           [ -f CNAME ] && cp CNAME dist/
           [ -f favicon.ico ] && cp favicon.ico dist/
           
