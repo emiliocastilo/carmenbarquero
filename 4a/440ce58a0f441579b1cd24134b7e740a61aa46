@@ -1,0 +1,43 @@
+aviso-legal.html
+  s_17537e78eea40d::t_e21ab9d086b107 292-293,296
+consentimientoinformado-pareja.html
+  s_17537e78eea40d::t_0a527fb470286e 304-305,308
+consentimientoinformado.html
+  s_17537e78eea40d::t_c629c6169425ce 247-248,251
+contacto.html
+  s_17537e78eea40d::t_4aeab187ca2b5f 255-256,259
+ficha-clinica.html
+  s_17537e78eea40d::t_89d8fbf139134b 248-249,252
+index.html
+  s_17537e78eea40d::t_32b1f304eb5653 497,696-697,700
+politica-cookies.html
+  s_17537e78eea40d::t_a9e3d3cbdd6a36 286-287,290
+politica-de-privacidad.html
+  s_17537e78eea40d::t_fc2351fdfa3715 324-325,328
+psicologia-online.html
+  s_17537e78eea40d::t_b4165b12f8146e 294,494-495,498
+reserva-cita.html
+  s_17537e78eea40d::t_f2e0d810b0c4f1 308-309,312
+servicios/neuropsicologia-clinica.html
+  s_17537e78eea40d::t_26830404fa9fbe 471-472,475
+servicios/terapia-individual.html
+  s_17537e78eea40d::t_5c1d7c5ac4a1a1 493-494,497
+servicios/terapia-pareja.html
+  s_17537e78eea40d::t_674643a6079c46 494-495,498
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "4a440ce58a0f441579b1cd24134b7e740a61aa46",
+  "prompts": {},
+  "sessions": {
+    "s_17537e78eea40d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e3ed9ff6-ef4e-4aa8-8b8b-fb13f33373a4",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Emilio <emiliojcg@ext.massimodutti.com>"
+    }
+  }
+}
