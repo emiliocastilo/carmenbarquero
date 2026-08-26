@@ -267,7 +267,10 @@ async function generatePDF() {
     
     // Rellenar el PDF
     await rellenarPDFOriginal(pdfDoc, datos, fechaParsed);
-    
+
+    // Adjuntar los datos en formato estructurado (JSON) para que otra app pueda recuperarlos
+    await adjuntarDatosEstructurados(pdfDoc, datos, fechaParsed);
+
     // Guardar y descargar
     const pdfModificado = await pdfDoc.save();
     console.log("✓ PDF guardado, size:", pdfModificado.length, "bytes");
@@ -513,6 +516,40 @@ async function anadirFirma(pdfDoc) {
     }
   } catch (error) {
     console.log("❌ Error al añadir firma:", error);
+  }
+}
+
+// Adjuntar datos estructurados (JSON) embebidos en el PDF para recuperación programática
+async function adjuntarDatosEstructurados(pdfDoc, datos, fechaParsed) {
+  try {
+    const diaFirma = document.getElementById("dia")?.value || "";
+    const mesFirma = document.getElementById("mes")?.value || "";
+    const anioFirma = document.getElementById("anio")?.value || "";
+
+    const datosEstructurados = {
+      tipo: "consentimiento-individual",
+      version: 1,
+      nombreApellidos: datos.nombreApellidos,
+      dni: datos.dni,
+      fechaNacimiento: `${fechaParsed.dia}/${fechaParsed.mes}/${fechaParsed.anio}`,
+      telefono: datos.telefono,
+      lugar: datos.lugar,
+      fechaFirma: `${diaFirma}/${mesFirma}/${anioFirma}`,
+      generadoEl: new Date().toISOString()
+    };
+
+    await pdfDoc.attach(
+      new TextEncoder().encode(JSON.stringify(datosEstructurados, null, 2)),
+      "datos-consentimiento.json",
+      {
+        mimeType: "application/json",
+        description: "Datos estructurados del consentimiento informado"
+      }
+    );
+
+    console.log("✓ Datos estructurados adjuntados al PDF:", datosEstructurados);
+  } catch (error) {
+    console.log("⚠️ No se pudieron adjuntar los datos estructurados:", error);
   }
 }
 

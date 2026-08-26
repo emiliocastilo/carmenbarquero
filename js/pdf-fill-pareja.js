@@ -249,6 +249,9 @@ async function generatePDF() {
 
     await rellenarPDFOriginal(pdfDoc, datos1, datos2, fecha1, fecha2);
 
+    // Adjuntar los datos en formato estructurado (JSON) para que otra app pueda recuperarlos
+    await adjuntarDatosEstructurados(pdfDoc, datos1, datos2, fecha1, fecha2);
+
     const pdfModificado = await pdfDoc.save();
     descargarPDF(pdfModificado, datos1.nombreApellidos);
     mostrarMensajeExito();
@@ -380,6 +383,49 @@ async function embedFirma(pdfDoc, canvasId, coords) {
 async function anadirFirmas(pdfDoc) {
   await embedFirma(pdfDoc, "canvas-firma-1", coordenadasPareja.firmaImagen1);
   await embedFirma(pdfDoc, "canvas-firma-2", coordenadasPareja.firmaImagen2);
+}
+
+// Adjuntar datos estructurados (JSON) embebidos en el PDF para recuperación programática
+async function adjuntarDatosEstructurados(pdfDoc, datos1, datos2, fecha1, fecha2) {
+  try {
+    const diaFirma = document.getElementById("dia")?.value || "";
+    const mesFirma = document.getElementById("mes")?.value || "";
+    const anioFirma = document.getElementById("anio")?.value || "";
+    const lugar = document.getElementById("lugar")?.value || "";
+
+    const datosEstructurados = {
+      tipo: "consentimiento-pareja",
+      version: 1,
+      lugar,
+      fechaFirma: `${diaFirma}/${mesFirma}/${anioFirma}`,
+      persona1: {
+        nombreApellidos: datos1.nombreApellidos,
+        dni: datos1.dni,
+        fechaNacimiento: `${fecha1.dia}/${fecha1.mes}/${fecha1.anio}`,
+        telefono: datos1.telefono
+      },
+      persona2: {
+        nombreApellidos: datos2.nombreApellidos,
+        dni: datos2.dni,
+        fechaNacimiento: `${fecha2.dia}/${fecha2.mes}/${fecha2.anio}`,
+        telefono: datos2.telefono
+      },
+      generadoEl: new Date().toISOString()
+    };
+
+    await pdfDoc.attach(
+      new TextEncoder().encode(JSON.stringify(datosEstructurados, null, 2)),
+      "datos-consentimiento-pareja.json",
+      {
+        mimeType: "application/json",
+        description: "Datos estructurados del consentimiento informado de pareja"
+      }
+    );
+
+    console.log("✓ Datos estructurados adjuntados al PDF:", datosEstructurados);
+  } catch (error) {
+    console.log("⚠️ No se pudieron adjuntar los datos estructurados:", error);
+  }
 }
 
 function descargarPDF(pdfBytes, nombrePaciente) {
