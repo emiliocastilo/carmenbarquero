@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <!-- ⚠️ IMPORTANTE: Cookie Consent ANTES de GTM para Consent Mode v2 -->
-    <script src="js/cookie-consent.js"></script>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-NRQPJ7XJ');</script>
-    <!-- End Google Tag Manager -->
+    <!-- Sin analítica en esta página: el paciente introduce datos de salud, DNI y firma -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
@@ -22,19 +14,12 @@
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/consentimiento.css" />
     <link rel="stylesheet" href="css/footer.css" />
-    <!-- Cookie Consent CSS -->
-    <link rel="stylesheet" href="css/cookie-consent.css" />
     <!-- Librería pdf-lib para rellenar el PDF original -->
-    <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+    <script src="js/pdf-lib.min.js"></script>
     <script>window.PLANTILLA_PDF = 'anterior';</script>
     <script src="js/pdf-fill.js" defer></script>
   </head>
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NRQPJ7XJ" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
     <main>
       <form id="form-datos-paciente">
         <div class="folio-consentimiento">
@@ -157,83 +142,6 @@
         </button>
       </div>
 
-    <!-- Banner de Consentimiento de Cookies - RGPD Compliant -->
-    <div id="cookieConsentBanner" class="cookie-consent-banner">
-      <div class="cookie-consent-content">
-        <div class="cookie-consent-text">
-          <strong>🍪 Este sitio web utiliza cookies</strong>
-          <p>
-            Utilizamos cookies propias y de terceros para mejorar tu experiencia de navegación,
-            analizar el tráfico del sitio web y personalizar el contenido. Al hacer clic en
-            <strong>"Aceptar todas"</strong>, consientes el uso de todas las cookies.
-            Puedes gestionar tus preferencias en
-            <strong>"Configurar cookies"</strong> o consultar más información en nuestra
-            <a href="politica-cookies.html" target="_blank">política de cookies</a>.
-          </p>
-        </div>
-        <div class="cookie-consent-buttons">
-          <button id="acceptAllCookies" class="cookie-consent-btn cookie-consent-btn-accept">
-            Aceptar todas
-          </button>
-          <button id="rejectAllCookies" class="cookie-consent-btn cookie-consent-btn-reject">
-            Rechazar opcionales
-          </button>
-          <button id="cookieSettings" class="cookie-consent-btn cookie-consent-btn-settings">
-            Configurar cookies
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal de Configuración de Cookies -->
-    <div id="cookieSettingsModal" class="cookie-settings-modal">
-      <div class="cookie-settings-content">
-        <div class="cookie-settings-header">
-          <h2>Configuración de Cookies</h2>
-          <button id="closeSettingsModal" class="cookie-settings-close" aria-label="Cerrar">×</button>
-        </div>
-
-        <div class="cookie-category">
-          <div class="cookie-category-header">
-            <h3 class="cookie-category-title">Cookies Necesarias</h3>
-            <label class="cookie-toggle">
-              <input type="checkbox" checked disabled>
-              <span class="cookie-toggle-slider"></span>
-            </label>
-          </div>
-          <p class="cookie-category-description">
-            Estas cookies son esenciales para el funcionamiento básico del sitio web.
-            No pueden ser desactivadas. Se utilizan para mantener la sesión y recordar
-            tus preferencias de consentimiento.
-          </p>
-        </div>
-
-        <div class="cookie-category">
-          <div class="cookie-category-header">
-            <h3 class="cookie-category-title">
-              Cookies Analíticas (Google Analytics)
-              <span class="cookie-info-icon" title="Ayudan a entender cómo interactúan los usuarios con el sitio">i</span>
-            </h3>
-            <label class="cookie-toggle">
-              <input type="checkbox" id="cookie_analytics">
-              <span class="cookie-toggle-slider"></span>
-            </label>
-          </div>
-          <p class="cookie-category-description">
-            Recopilan información sobre cómo utilizas el sitio web (páginas visitadas,
-            tiempo de permanencia). Estos datos nos ayudan a mejorar el rendimiento y
-            la experiencia del usuario. Proveedor: Google Analytics.
-          </p>
-        </div>
-
-        <div class="cookie-settings-footer">
-          <button id="saveCustomPreferences" class="cookie-consent-btn cookie-consent-btn-accept">
-            Guardar preferencias
-          </button>
-        </div>
-      </div>
-    </div>
-
     <!-- Footer -->
     <footer>
       <div>
@@ -241,6 +149,7 @@
           <a href="aviso-legal.html">Aviso Legal</a>
           <a href="politica-de-privacidad.html">Política de Privacidad</a>
           <a href="politica-cookies.html">Política de Cookies</a>
+          <a href="politica-cookies.html" data-cookie-settings>Configurar cookies</a>
         </div>
 
         <!-- NAP - Name, Address, Phone -->
