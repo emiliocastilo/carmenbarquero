@@ -45,10 +45,14 @@
   line-height: 1.6;
 }
 
+.cookie-table-wrapper {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
 .cookie-table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.5rem 0;
   font-size: 0.95rem;
 }
 
@@ -63,6 +67,32 @@
 .cookie-table td {
   padding: 0.75rem;
   border-bottom: 1px solid #e0e0e0;
+}
+
+.button-container {
+  margin: 1.5rem 0;
+}
+
+.btn-manage-cookies {
+  background: var(--color-principal);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-manage-cookies:hover {
+  background: #2c3e50;
+}
+
+.btn-manage-cookies:focus-visible {
+  outline: 3px solid #0097a7;
+  outline-offset: 2px;
 }
 
 .logo {

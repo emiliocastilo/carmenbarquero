@@ -97,6 +97,19 @@ form.form-contact {
   text-decoration: underline;
 }
 
+/* Información básica de protección de datos junto al formulario (primera capa) */
+.info-proteccion-datos {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #555;
+  margin: 0 0 1rem;
+}
+
+.info-proteccion-datos a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 /* Estilos responsive para formularios en móvil */
 @media (max-width: 768px) {
   .form-group {
