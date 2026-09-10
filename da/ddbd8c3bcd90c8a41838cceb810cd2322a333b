@@ -1,0 +1,55 @@
+aviso-legal.html
+  s_ed7a5a41da9c2a::t_75e5b9aa5f0b4f 4-5,107,134,136-137,139-156,205-208,264-267,270-289,296-297,310
+consentimientoinformado-pareja.html
+  s_ed7a5a41da9c2a::t_89960a3affa5e9 4,17,209
+consentimientoinformado.html
+  s_ed7a5a41da9c2a::t_5673235364b7d2 4,18,151
+contacto.html
+  s_ed7a5a41da9c2a::t_f560ac89103251 4-5,238
+css/base.css
+  s_ed7a5a41da9c2a::t_bc96960ed6711d 100-112
+css/cookie-consent.css
+  s_ed7a5a41da9c2a::t_0e4c470d2529a0 44-49,51,55,82-84,87-92,95-100,103,106,108,111-115,118-124,185-189,213,219-225,271-273,291-296,298-300,305,309-312,327-330
+css/politica-cookies.css
+  s_ed7a5a41da9c2a::t_84e17f6fea08c9 48-52,72-97
+css/source-sans-pro.css
+  s_ed7a5a41da9c2a::t_8dbdef1d91fe20 1-19
+ficha-clinica.html
+  s_ed7a5a41da9c2a::t_f54c807b48afd7 4,18,152
+index.html
+  s_ed7a5a41da9c2a::t_c57abc758ca248 4-5,66,69,356-357,359,677
+js/cookie-consent.js
+  s_ed7a5a41da9c2a::t_63e33b901e12e1 2-10,24-28,31-32,34-35,37,40,43-48,52,57-58,66,68-81,83-199,220-223,225-228,231,233-237,239,242-243,245-254,262-263,283,285-290,292-293,295-299,301-315,317-319,321-326,333-334,337-342
+js/pdf-lib.min.js
+  s_ed7a5a41da9c2a::t_8edf5b0fa4f4e8 1-16
+politica-cookies.html
+  s_ed7a5a41da9c2a::t_19df911e72cf46 4-5,108-110,112-115,120-122,125-127,129-130,133-154,156-159,161-188,190-193,197-206,209-214,217,219-221,223,225-226,229,231,234-236,242-244,247,249-252,257-258,267,279
+politica-de-privacidad.html
+  s_ed7a5a41da9c2a::t_4af4c2ea4c295e 4-5,119,137-138,145-147,149-171,173-186,188-190,192,194-195,197,199,201-202,204,206-208,210-212,214-215,217-237,239,241,243,251,255,257,259-261,263,268,270,272-273,275,277,279-282,284,289,291-292,294,313-317,347
+psicologia-online.html
+  s_ed7a5a41da9c2a::t_bc031b13967b48 4-5,70,474
+reserva-cita.html
+  s_ed7a5a41da9c2a::t_5322e4a5cb6e62 4-5,263-275,304
+servicios/neuropsicologia-clinica.html
+  s_ed7a5a41da9c2a::t_9b1d804616f689 4-5,69,451
+servicios/terapia-individual.html
+  s_ed7a5a41da9c2a::t_632ae0fea32d64 4-5,69,473
+servicios/terapia-pareja.html
+  s_ed7a5a41da9c2a::t_4813d374a9aadb 4-5,69,474
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "daddbd8c3bcd90c8a41838cceb810cd2322a333b",
+  "prompts": {},
+  "sessions": {
+    "s_ed7a5a41da9c2a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "df0e7615-f328-463d-a7f6-25ccd2091f8e",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Emilio <emiliojcg@ext.massimodutti.com>"
+    }
+  }
+}
