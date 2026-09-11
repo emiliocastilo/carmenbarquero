@@ -1,18 +1,36 @@
 // === Generador de PDF de Consentimiento Informado ===
 // Rellena el PDF original con los datos del formulario
 // Coordenadas calibradas para escribir datos en el PDF
+// Página 1 (datos de la persona) es idéntica entre la plantilla actual (60€) y la anterior (50€)
 const coordenadas = {
-  nombre: { x: 210, y: 581 },
-  dni: { x: 158, y: 566 },
-  dia: { x: 212, y: 550 },
-  mes: { x: 242, y: 550 },
-  anio: { x: 272, y: 550 },
-  telefono: { x: 215, y: 535 },
-  lugar: { x: 124, y: 565 },
-  firmaFechaDia: { x: 238, y: 565 },
-  firmaFechaMes: { x: 275, y: 565 },
-  firmaFechaAnio: { x: 365, y: 565 },
-  firmaImagen: { x: 115, y: 455 }
+  nombre: { x: 158, y: 581 },
+  apellidos: { x: 162, y: 566 },
+  dni: { x: 157, y: 550 },
+  dia: { x: 213, y: 535 },
+  mes: { x: 245, y: 535 },
+  anio: { x: 276, y: 535 },
+  telefono: { x: 216, y: 519 },
+  email: { x: 200, y: 504 },
+  domicilio: { x: 163, y: 488 },
+  codigoPostal: { x: 178, y: 473 }
+};
+
+// Página 3 (firma) difiere entre plantillas por el distinto texto de cada una
+const coordenadasFirmaPorPlantilla = {
+  actual: {
+    lugar: { x: 123, y: 579 },
+    firmaFechaDia: { x: 235, y: 579 },
+    firmaFechaMes: { x: 273, y: 579 },
+    firmaFechaAnio: { x: 366, y: 579 },
+    firmaImagen: { x: 115, y: 470 }
+  },
+  anterior: {
+    lugar: { x: 123, y: 553 },
+    firmaFechaDia: { x: 235, y: 553 },
+    firmaFechaMes: { x: 273, y: 553 },
+    firmaFechaAnio: { x: 366, y: 553 },
+    firmaImagen: { x: 115, y: 444 }
+  }
 };
 // --- Firma manuscrita en canvas ---
 window.addEventListener("DOMContentLoaded", function () {
@@ -148,9 +166,13 @@ function parsearFecha(fechaStr) {
 // Validar formulario
 function validarFormulario() {
   const campos = {
-    "nombre-apellidos": "Nombre y apellidos",
+    "nombre": "Nombre",
+    "apellidos": "Apellidos",
     "dni": "DNI/NIE",
     "telefono": "Teléfono",
+    "email": "Correo electrónico",
+    "domicilio": "Domicilio",
+    "codigo-postal": "Código postal",
     "lugar": "Lugar (ciudad)"
   };
 
@@ -224,11 +246,16 @@ async function generatePDF() {
     
     // Obtener datos del formulario
     const datos = {
-      nombreApellidos: document.getElementById("nombre-apellidos")?.value || "",
+      nombre: document.getElementById("nombre")?.value || "",
+      apellidos: document.getElementById("apellidos")?.value || "",
       dni: document.getElementById("dni")?.value || "",
       telefono: document.getElementById("telefono")?.value || "",
+      email: document.getElementById("email")?.value || "",
+      domicilio: document.getElementById("domicilio")?.value || "",
+      codigoPostal: document.getElementById("codigo-postal")?.value || "",
       lugar: document.getElementById("lugar")?.value || "",
     };
+    datos.nombreApellidos = `${datos.nombre} ${datos.apellidos}`.trim();
 
     console.log("📋 Datos del formulario:", datos);
 
@@ -266,7 +293,8 @@ async function generatePDF() {
     console.log("✓ PDF cargado correctamente");
     
     // Rellenar el PDF
-    await rellenarPDFOriginal(pdfDoc, datos, fechaParsed);
+    const coordenadasFirma = usarAnterior ? coordenadasFirmaPorPlantilla.anterior : coordenadasFirmaPorPlantilla.actual;
+    await rellenarPDFOriginal(pdfDoc, datos, fechaParsed, coordenadasFirma);
 
     // Adjuntar los datos en formato estructurado (JSON) para que otra app pueda recuperarlos
     await adjuntarDatosEstructurados(pdfDoc, datos, fechaParsed);
@@ -290,190 +318,99 @@ async function generatePDF() {
 }
 
 // Rellenar el PDF original con los datos
-async function rellenarPDFOriginal(pdfDoc, datos, fechaParsed) {
+async function rellenarPDFOriginal(pdfDoc, datos, fechaParsed, coordenadasFirma) {
   try {
-    // Intentar obtener el formulario
-    const form = pdfDoc.getForm();
-    const fields = form.getFields();
-    
-    console.log("🔍 Campos encontrados en el PDF:", fields.map(f => f.getName()));
-    
-    if (fields.length > 0) {
-      // Hay campos AcroForm, rellenarlos
-      const mappeosCampos = [
-        { patrones: ["nombre", "apellidos", "paciente", "persona", "usuario"], valor: datos.nombreApellidos },
-        { patrones: ["dni", "nie", "documento", "identidad"], valor: datos.dni },
-        { patrones: ["nacimiento", "birth"], valor: datos.fechaNacimiento },
-        { patrones: ["telefono", "phone", "movil", "contacto"], valor: datos.telefono },
-        { patrones: ["ciudad", "lugar", "localidad"], valor: datos.lugar },
-        { patrones: ["dia", "day"], valor: fechaParsed.dia },
-        { patrones: ["mes", "month"], valor: fechaParsed.mes },
-        { patrones: ["año", "anio", "year"], valor: fechaParsed.anio }
-      ];
-      
-      fields.forEach(field => {
-        const nombreCampo = field.getName().toLowerCase();
-        
-        for (const mapeo of mappeosCampos) {
-          if (mapeo.patrones.some(p => nombreCampo.includes(p))) {
-            try {
-              if (typeof field.setText === 'function' && mapeo.valor) {
-                field.setText(mapeo.valor);
-                console.log(`✓ Campo rellenado: ${field.getName()} = ${mapeo.valor}`);
-              }
-            } catch (e) {
-              console.log(`⚠️ No se pudo rellenar el campo ${field.getName()}`);
-            }
-            break;
-          }
-        }
-      });
-      
-      try {
-        form.flatten();
-        console.log("✓ Formulario aplanado");
-      } catch (e) {
-        console.log("⚠️ No se pudo aplanar el formulario");
-      }
-    } else {
-      // Sin campos AcroForm, escribir directamente
-      console.log("📝 Sin campos AcroForm, escribiendo directamente...");
-      await escribirDatosDirectamente(pdfDoc, datos, fechaParsed);
-    }
-    
-    // Añadir firma en cualquier caso
-    await anadirFirma(pdfDoc);
-    
+    // Estos PDF no usan campos AcroForm: se escribe el texto directamente sobre el documento
+    await escribirDatosDirectamente(pdfDoc, datos, fechaParsed, coordenadasFirma);
+    await anadirFirma(pdfDoc, coordenadasFirma);
   } catch (error) {
     console.error("❌ Error en rellenarPDFOriginal:", error);
-    console.log("📝 Intentando escribir directamente...");
-    await escribirDatosDirectamente(pdfDoc, datos, fechaParsed);
-    await anadirFirma(pdfDoc);
+    throw error;
   }
 }
 
 // Escribir datos directamente sobre el PDF
-async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
+async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed, coordenadasFirma) {
   const { rgb, StandardFonts } = PDFLib;
-  
+
   try {
     const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
     const pages = pdfDoc.getPages();
-    
+
     console.log("📄 Total de páginas:", pages.length);
-    
+
     // Página 1: datos personales
     if (pages.length > 0) {
       const page1 = pages[0];
       const { height: h1, width: w1 } = page1.getSize();
       const fontSize = 11;
       const color = rgb(0, 0, 0);
-      
+
       console.log("📐 Página 1 - Dimensiones:", { width: w1, height: h1 });
       console.log("📍 Usando coordenadas:", coordenadas);
-      
-      if (datos.nombreApellidos) {
-        page1.drawText(datos.nombreApellidos, {
-          x: coordenadas.nombre.x, 
-          y: coordenadas.nombre.y, 
-          size: fontSize, font: font, color: color
-        });
-        console.log("✓ Nombre escrito:", datos.nombreApellidos, "en", coordenadas.nombre);
-      }
-      
-      if (datos.dni) {
-        page1.drawText(datos.dni, {
-          x: coordenadas.dni.x, 
-          y: coordenadas.dni.y, 
-          size: fontSize, font: font, color: color
-        });
-        console.log("✓ DNI escrito:", datos.dni, "en", coordenadas.dni);
-      }
-      
-      if (fechaParsed.dia) {
-        page1.drawText(fechaParsed.dia, {
-          x: coordenadas.dia.x, 
-          y: coordenadas.dia.y, 
-          size: fontSize, font: font, color: color
-        });
-        console.log("✓ Día escrito:", fechaParsed.dia, "en", coordenadas.dia);
-      }
-      
-      if (fechaParsed.mes) {
-        page1.drawText(fechaParsed.mes, {
-          x: coordenadas.mes.x, 
-          y: coordenadas.mes.y, 
-          size: fontSize, font: font, color: color
-        });
-        console.log("✓ Mes escrito:", fechaParsed.mes, "en", coordenadas.mes);
-      }
-      
-      if (fechaParsed.anio) {
-        page1.drawText(fechaParsed.anio, {
-          x: coordenadas.anio.x, 
-          y: coordenadas.anio.y, 
-          size: fontSize, font: font, color: color
-        });
-        console.log("✓ Año escrito:", fechaParsed.anio, "en", coordenadas.anio);
-      }
-      
-      if (datos.telefono) {
-        page1.drawText(datos.telefono, {
-          x: coordenadas.telefono.x, 
-          y: coordenadas.telefono.y, 
-          size: fontSize, font: font, color: color
-        });
-        console.log("✓ Teléfono escrito:", datos.telefono, "en", coordenadas.telefono);
-      }
-      
+
+      const draw1 = (text, coords) => {
+        if (text) page1.drawText(text, { x: coords.x, y: coords.y, size: fontSize, font, color });
+      };
+
+      draw1(datos.nombre, coordenadas.nombre);
+      draw1(datos.apellidos, coordenadas.apellidos);
+      draw1(datos.dni, coordenadas.dni);
+      draw1(fechaParsed.dia, coordenadas.dia);
+      draw1(fechaParsed.mes, coordenadas.mes);
+      draw1(fechaParsed.anio, coordenadas.anio);
+      draw1(datos.telefono, coordenadas.telefono);
+      draw1(datos.email, coordenadas.email);
+      draw1(datos.domicilio, coordenadas.domicilio);
+      draw1(datos.codigoPostal, coordenadas.codigoPostal);
+
       console.log("✓ Página 1 completada");
     }
-    
+
     // Página 3: fecha de firma y firma
     if (pages.length > 2) {
       const page3 = pages[2];
-      const { height: h3 } = page3.getSize();
       const fontSize = 11;
       const color = rgb(0, 0, 0);
-      
+
       if (datos.lugar) {
         page3.drawText(datos.lugar, {
-          x: coordenadas.lugar.x, 
-          y: coordenadas.lugar.y, 
+          x: coordenadasFirma.lugar.x,
+          y: coordenadasFirma.lugar.y,
           size: fontSize, font: font, color: color
         });
-        console.log("✓ Lugar escrito:", datos.lugar, "en", coordenadas.lugar);
+        console.log("✓ Lugar escrito:", datos.lugar, "en", coordenadasFirma.lugar);
       }
-      
+
       // Obtener fecha de firma directamente del formulario
       const diaFirma = document.getElementById("dia")?.value || "";
       const mesFirma = document.getElementById("mes")?.value || "";
       const anioFirma = document.getElementById("anio")?.value || "";
 
       page3.drawText(diaFirma, {
-        x: coordenadas.firmaFechaDia.x,
-        y: coordenadas.firmaFechaDia.y,
+        x: coordenadasFirma.firmaFechaDia.x,
+        y: coordenadasFirma.firmaFechaDia.y,
         size: fontSize, font: font, color: color
       });
-      console.log("✓ Día firma escrito:", diaFirma, "en", coordenadas.firmaFechaDia);
+      console.log("✓ Día firma escrito:", diaFirma, "en", coordenadasFirma.firmaFechaDia);
 
       page3.drawText(mesFirma, {
-        x: coordenadas.firmaFechaMes.x,
-        y: coordenadas.firmaFechaMes.y,
+        x: coordenadasFirma.firmaFechaMes.x,
+        y: coordenadasFirma.firmaFechaMes.y,
         size: fontSize, font: font, color: color
       });
-      console.log("✓ Mes firma escrito:", mesFirma, "en", coordenadas.firmaFechaMes);
+      console.log("✓ Mes firma escrito:", mesFirma, "en", coordenadasFirma.firmaFechaMes);
 
       page3.drawText(anioFirma, {
-        x: coordenadas.firmaFechaAnio.x,
-        y: coordenadas.firmaFechaAnio.y,
+        x: coordenadasFirma.firmaFechaAnio.x,
+        y: coordenadasFirma.firmaFechaAnio.y,
         size: fontSize, font: font, color: color
       });
-      console.log("✓ Año firma escrito:", anioFirma, "en", coordenadas.firmaFechaAnio);
-      
+      console.log("✓ Año firma escrito:", anioFirma, "en", coordenadasFirma.firmaFechaAnio);
+
       console.log("✓ Página 3 completada");
     }
-    
+
     console.log("✓✓✓ Todos los datos escritos correctamente ✓✓✓");
   } catch (error) {
     console.error("❌ Error escribiendo datos directamente:", error);
@@ -482,37 +419,36 @@ async function escribirDatosDirectamente(pdfDoc, datos, fechaParsed) {
 }
 
 // Añadir firma al PDF
-async function anadirFirma(pdfDoc) {
+async function anadirFirma(pdfDoc, coordenadasFirma) {
   const canvas = document.getElementById("canvas-firma");
   if (!canvas || !tieneCanvasFirma()) {
     console.log("⚠️ No hay firma para añadir");
     return;
   }
-  
+
   try {
     const firmaDataUrl = canvas.toDataURL("image/png");
     const firmaBytes = await fetch(firmaDataUrl).then(res => res.arrayBuffer());
     const firmaImage = await pdfDoc.embedPng(firmaBytes);
-    
+
     const pages = pdfDoc.getPages();
     if (pages.length > 2) {
       const page3 = pages[2];
-      const { height: h3 } = page3.getSize();
-      
+
       const maxWidth = 180;
       const maxHeight = 60;
       const ratio = Math.min(maxWidth / firmaImage.width, maxHeight / firmaImage.height);
       const firmaWidth = firmaImage.width * ratio;
       const firmaHeight = firmaImage.height * ratio;
-      
+
       page3.drawImage(firmaImage, {
-        x: coordenadas.firmaImagen.x,
-        y: coordenadas.firmaImagen.y,
+        x: coordenadasFirma.firmaImagen.x,
+        y: coordenadasFirma.firmaImagen.y,
         width: firmaWidth,
         height: firmaHeight,
       });
-      
-      console.log("✓ Firma añadida al PDF en", coordenadas.firmaImagen);
+
+      console.log("✓ Firma añadida al PDF en", coordenadasFirma.firmaImagen);
     }
   } catch (error) {
     console.log("❌ Error al añadir firma:", error);
@@ -528,11 +464,16 @@ async function adjuntarDatosEstructurados(pdfDoc, datos, fechaParsed) {
 
     const datosEstructurados = {
       tipo: "consentimiento-individual",
-      version: 1,
+      version: 2,
+      nombre: datos.nombre,
+      apellidos: datos.apellidos,
       nombreApellidos: datos.nombreApellidos,
       dni: datos.dni,
       fechaNacimiento: `${fechaParsed.dia}/${fechaParsed.mes}/${fechaParsed.anio}`,
       telefono: datos.telefono,
+      email: datos.email,
+      domicilio: datos.domicilio,
+      codigoPostal: datos.codigoPostal,
       lugar: datos.lugar,
       fechaFirma: `${diaFirma}/${mesFirma}/${anioFirma}`,
       generadoEl: new Date().toISOString()

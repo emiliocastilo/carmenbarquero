@@ -1,27 +1,35 @@
 // === Generador de PDF de Consentimiento Informado - Terapia de Pareja ===
 const coordenadasPareja = {
   // Página 1 - Persona 1
-  nombre1:       { x: 210, y: 581 },
-  dni1:          { x: 158, y: 566 },
-  dia1:          { x: 212, y: 551 },
-  mes1:          { x: 242, y: 551 },
-  anio1:         { x: 272, y: 551 },
-  telefono1:     { x: 215, y: 536 },
+  nombre1:       { x: 159, y: 527 },
+  apellidos1:    { x: 162, y: 512 },
+  dni1:          { x: 157, y: 497 },
+  dia1:          { x: 213, y: 481 },
+  mes1:          { x: 245, y: 481 },
+  anio1:         { x: 276, y: 481 },
+  telefono1:     { x: 216, y: 466 },
+  email1:        { x: 195, y: 450 },
+  domicilio1:    { x: 160, y: 435 },
+  codigoPostal1: { x: 180, y: 419 },
   // Página 1 - Persona 2
-  nombre2:       { x: 210, y: 486 },
-  dni2:          { x: 158, y: 471 },
-  dia2:          { x: 212, y: 455 },
-  mes2:          { x: 242, y: 455 },
-  anio2:         { x: 272, y: 455 },
-  telefono2:     { x: 215, y: 438 },
+  nombre2:       { x: 159, y: 368 },
+  apellidos2:    { x: 162, y: 353 },
+  dni2:          { x: 157, y: 337 },
+  dia2:          { x: 213, y: 322 },
+  mes2:          { x: 245, y: 322 },
+  anio2:         { x: 276, y: 322 },
+  telefono2:     { x: 216, y: 307 },
+  email2:        { x: 195, y: 291 },
+  domicilio2:    { x: 160, y: 276 },
+  codigoPostal2: { x: 180, y: 260 },
   // Página 3 - Fecha de firma (línea "En __, a __ de...")
-  lugar:         { x: 124, y: 598 },
-  firmaFechaDia: { x: 238, y: 598 },
-  firmaFechaMes: { x: 275, y: 598 },
-  firmaFechaAnio:{ x: 365, y: 598 },
+  lugar:         { x: 123, y: 612 },
+  firmaFechaDia: { x: 235, y: 612 },
+  firmaFechaMes: { x: 273, y: 612 },
+  firmaFechaAnio:{ x: 366, y: 612 },
   // Página 3 - Firmas lado a lado
-  firmaImagen1:  { x: 80,  y: 455 },
-  firmaImagen2:  { x: 310, y: 455 },
+  firmaImagen1:  { x: 80,  y: 503 },
+  firmaImagen2:  { x: 310, y: 503 },
 };
 
 function setupCanvas(canvasId, limpiarId) {
@@ -140,13 +148,21 @@ function tieneCanvasFirma(canvasId) {
 
 function validarFormulario() {
   const campos = {
-    "nombre-apellidos-1": "Nombre y apellidos (persona 1)",
-    "dni-1":              "DNI/NIE (persona 1)",
-    "telefono-1":         "Teléfono (persona 1)",
-    "nombre-apellidos-2": "Nombre y apellidos (persona 2)",
-    "dni-2":              "DNI/NIE (persona 2)",
-    "telefono-2":         "Teléfono (persona 2)",
-    "lugar":              "Lugar (ciudad)",
+    "nombre-1":        "Nombre (persona 1)",
+    "apellidos-1":     "Apellidos (persona 1)",
+    "dni-1":           "DNI/NIE (persona 1)",
+    "telefono-1":      "Teléfono (persona 1)",
+    "email-1":         "Correo electrónico (persona 1)",
+    "domicilio-1":     "Domicilio (persona 1)",
+    "codigo-postal-1": "Código postal (persona 1)",
+    "nombre-2":        "Nombre (persona 2)",
+    "apellidos-2":     "Apellidos (persona 2)",
+    "dni-2":           "DNI/NIE (persona 2)",
+    "telefono-2":      "Teléfono (persona 2)",
+    "email-2":         "Correo electrónico (persona 2)",
+    "domicilio-2":     "Domicilio (persona 2)",
+    "codigo-postal-2": "Código postal (persona 2)",
+    "lugar":           "Lugar (ciudad)",
   };
 
   const errores = [];
@@ -213,20 +229,30 @@ async function generatePDF() {
     const { PDFDocument } = PDFLib;
 
     const datos1 = {
-      nombreApellidos: document.getElementById("nombre-apellidos-1")?.value || "",
-      dni:             document.getElementById("dni-1")?.value || "",
-      telefono:        document.getElementById("telefono-1")?.value || "",
+      nombre:       document.getElementById("nombre-1")?.value || "",
+      apellidos:    document.getElementById("apellidos-1")?.value || "",
+      dni:          document.getElementById("dni-1")?.value || "",
+      telefono:     document.getElementById("telefono-1")?.value || "",
+      email:        document.getElementById("email-1")?.value || "",
+      domicilio:    document.getElementById("domicilio-1")?.value || "",
+      codigoPostal: document.getElementById("codigo-postal-1")?.value || "",
     };
+    datos1.nombreApellidos = `${datos1.nombre} ${datos1.apellidos}`.trim();
     const fecha1 = {
       dia:  document.getElementById("fecha-nacimiento-dia-1")?.value || "",
       mes:  document.getElementById("fecha-nacimiento-mes-1")?.value || "",
       anio: document.getElementById("fecha-nacimiento-anio-1")?.value || "",
     };
     const datos2 = {
-      nombreApellidos: document.getElementById("nombre-apellidos-2")?.value || "",
-      dni:             document.getElementById("dni-2")?.value || "",
-      telefono:        document.getElementById("telefono-2")?.value || "",
+      nombre:       document.getElementById("nombre-2")?.value || "",
+      apellidos:    document.getElementById("apellidos-2")?.value || "",
+      dni:          document.getElementById("dni-2")?.value || "",
+      telefono:     document.getElementById("telefono-2")?.value || "",
+      email:        document.getElementById("email-2")?.value || "",
+      domicilio:    document.getElementById("domicilio-2")?.value || "",
+      codigoPostal: document.getElementById("codigo-postal-2")?.value || "",
     };
+    datos2.nombreApellidos = `${datos2.nombre} ${datos2.apellidos}`.trim();
     const fecha2 = {
       dia:  document.getElementById("fecha-nacimiento-dia-2")?.value || "",
       mes:  document.getElementById("fecha-nacimiento-mes-2")?.value || "",
@@ -268,28 +294,9 @@ async function generatePDF() {
 }
 
 async function rellenarPDFOriginal(pdfDoc, datos1, datos2, fecha1, fecha2) {
-  try {
-    const form   = pdfDoc.getForm();
-    const fields = form.getFields();
-    console.log("🔍 Campos AcroForm:", fields.map(f => f.getName()));
-
-    if (fields.length > 0) {
-      // Intentar rellenar AcroForm si los tiene
-      fields.forEach(field => {
-        try { field.setText && field.setText(""); } catch (e) {}
-      });
-      try { form.flatten(); } catch (e) {}
-    }
-
-    // Siempre escribir directamente (el PDF de pareja no tiene AcroForm)
-    await escribirDatosDirectamente(pdfDoc, datos1, datos2, fecha1, fecha2);
-    await anadirFirmas(pdfDoc);
-
-  } catch (error) {
-    console.error("❌ Error en rellenarPDFOriginal:", error);
-    await escribirDatosDirectamente(pdfDoc, datos1, datos2, fecha1, fecha2);
-    await anadirFirmas(pdfDoc);
-  }
+  // Este PDF no usa campos AcroForm: se escribe el texto directamente sobre el documento
+  await escribirDatosDirectamente(pdfDoc, datos1, datos2, fecha1, fecha2);
+  await anadirFirmas(pdfDoc);
 }
 
 async function escribirDatosDirectamente(pdfDoc, datos1, datos2, fecha1, fecha2) {
@@ -309,19 +316,27 @@ async function escribirDatosDirectamente(pdfDoc, datos1, datos2, fecha1, fecha2)
       if (text) page1.drawText(text, { x: coords.x, y: coords.y, size: fontSize, font, color });
     };
 
-    drawIfValue(datos1.nombreApellidos, coordenadasPareja.nombre1);
+    drawIfValue(datos1.nombre,          coordenadasPareja.nombre1);
+    drawIfValue(datos1.apellidos,       coordenadasPareja.apellidos1);
     drawIfValue(datos1.dni,             coordenadasPareja.dni1);
     drawIfValue(fecha1.dia,             coordenadasPareja.dia1);
     drawIfValue(fecha1.mes,             coordenadasPareja.mes1);
     drawIfValue(fecha1.anio,            coordenadasPareja.anio1);
     drawIfValue(datos1.telefono,        coordenadasPareja.telefono1);
+    drawIfValue(datos1.email,           coordenadasPareja.email1);
+    drawIfValue(datos1.domicilio,       coordenadasPareja.domicilio1);
+    drawIfValue(datos1.codigoPostal,    coordenadasPareja.codigoPostal1);
 
-    drawIfValue(datos2.nombreApellidos, coordenadasPareja.nombre2);
+    drawIfValue(datos2.nombre,          coordenadasPareja.nombre2);
+    drawIfValue(datos2.apellidos,       coordenadasPareja.apellidos2);
     drawIfValue(datos2.dni,             coordenadasPareja.dni2);
     drawIfValue(fecha2.dia,             coordenadasPareja.dia2);
     drawIfValue(fecha2.mes,             coordenadasPareja.mes2);
     drawIfValue(fecha2.anio,            coordenadasPareja.anio2);
     drawIfValue(datos2.telefono,        coordenadasPareja.telefono2);
+    drawIfValue(datos2.email,           coordenadasPareja.email2);
+    drawIfValue(datos2.domicilio,       coordenadasPareja.domicilio2);
+    drawIfValue(datos2.codigoPostal,    coordenadasPareja.codigoPostal2);
 
     console.log("✓ Página 1 completada");
   }
@@ -395,20 +410,30 @@ async function adjuntarDatosEstructurados(pdfDoc, datos1, datos2, fecha1, fecha2
 
     const datosEstructurados = {
       tipo: "consentimiento-pareja",
-      version: 1,
+      version: 2,
       lugar,
       fechaFirma: `${diaFirma}/${mesFirma}/${anioFirma}`,
       persona1: {
+        nombre: datos1.nombre,
+        apellidos: datos1.apellidos,
         nombreApellidos: datos1.nombreApellidos,
         dni: datos1.dni,
         fechaNacimiento: `${fecha1.dia}/${fecha1.mes}/${fecha1.anio}`,
-        telefono: datos1.telefono
+        telefono: datos1.telefono,
+        email: datos1.email,
+        domicilio: datos1.domicilio,
+        codigoPostal: datos1.codigoPostal
       },
       persona2: {
+        nombre: datos2.nombre,
+        apellidos: datos2.apellidos,
         nombreApellidos: datos2.nombreApellidos,
         dni: datos2.dni,
         fechaNacimiento: `${fecha2.dia}/${fecha2.mes}/${fecha2.anio}`,
-        telefono: datos2.telefono
+        telefono: datos2.telefono,
+        email: datos2.email,
+        domicilio: datos2.domicilio,
+        codigoPostal: datos2.codigoPostal
       },
       generadoEl: new Date().toISOString()
     };
