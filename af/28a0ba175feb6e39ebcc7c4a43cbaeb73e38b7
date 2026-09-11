@@ -1,0 +1,21 @@
+js/pdf-fill-pareja.js
+  s_93b47c6d356fa8::t_b29a268f0db637 252-254,388-430
+js/pdf-fill.js
+  s_93b47c6d356fa8::t_67e1d48f2de496 270-273,522-555
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "af28a0ba175feb6e39ebcc7c4a43cbaeb73e38b7",
+  "prompts": {},
+  "sessions": {
+    "s_93b47c6d356fa8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "410b1182-2969-4542-bcba-2169bb70e66b",
+        "model": "unknown"
+      },
+      "human_author": "Emilio <emiliojcg@ext.massimodutti.com>"
+    }
+  }
+}
